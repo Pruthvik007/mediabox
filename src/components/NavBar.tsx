@@ -1,25 +1,26 @@
 import { Link } from "react-router-dom";
 import ThemeToggle from "./common/ThemeToggle";
+import { CONSTANTS } from "../helpers/Constants";
 
 const tabItems = [
   {
     name: "Movies",
-    path: "/media/movies/discover",
+    path: `/${CONSTANTS.ENV.BASE_URL}/media/movies/discover`,
   },
   {
     name: "TV Series",
-    path: "/media/shows/discover",
+    path: `/${CONSTANTS.ENV.BASE_URL}/media/shows/discover`,
   },
   {
     name: "Search",
-    path: "/search",
+    path: `/${CONSTANTS.ENV.BASE_URL}/search`,
   },
 ];
 const NavBar = () => {
   return (
     <div className="navbar bg-neutral px-1 py-0">
       <div className="flex-1">
-        <Link className="btn btn-ghost text-xl py-0" to="/">
+        <Link className="btn btn-ghost text-xl py-0" to="/movies-and-series/">
           MediaBox
         </Link>
       </div>

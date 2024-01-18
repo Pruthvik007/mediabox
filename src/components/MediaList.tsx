@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { MediaType, Movie, Show } from "../types/TmdbTypes";
 import MediaCard from "./MediaCard";
 import Skeleton from "./common/Skeleton";
+import { CONSTANTS } from "../helpers/Constants";
 
 const MediaList = ({
   mediaList,
@@ -15,7 +16,10 @@ const MediaList = ({
   return (
     <>
       {mediaList?.map((media) => (
-        <Link to={`/details/${mediaType}/${media.id}`} key={media.id}>
+        <Link
+          to={`/${CONSTANTS.ENV.BASE_URL}/details/${mediaType}/${media.id}`}
+          key={media.id}
+        >
           <MediaCard media={media} />
         </Link>
       ))}

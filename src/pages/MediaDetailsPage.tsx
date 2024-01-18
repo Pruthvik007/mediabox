@@ -6,6 +6,7 @@ import BackDrop from "../components/common/BackDrop";
 import { useMediaDetails, useRecommendations } from "../hooks/TmdbQueries";
 import { MediaType } from "../types/TmdbTypes";
 import ErrorPage from "./ErrorPage";
+import { CONSTANTS } from "../helpers/Constants";
 
 const MediaDetailsPage = () => {
   const { id, mediaType } = useParams();
@@ -43,7 +44,7 @@ const MediaDetailsPage = () => {
             </div>
           </div>
         )}
-      <BackButton to="/" />
+      <BackButton to={`/${CONSTANTS.ENV.BASE_URL}`} />
     </div>
   );
 };
