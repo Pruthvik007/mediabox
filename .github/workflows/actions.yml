@@ -32,5 +32,7 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
+        with:
+          token: ${{ secrets.GH_TOKEN }}
       - name: Set TMDB_API_KEY environment variable
-        run: echo "TMDB_API_KEY=${{ secrets.TMDB_API_KEY }}" >> $GITHUB_ENV
+        run: echo "TMDB_API_KEY=${{ secrets.VITE_TMDB_API_KEY }}" >> $GITHUB_ENV
