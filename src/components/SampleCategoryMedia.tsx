@@ -29,7 +29,7 @@ const SampleCategoryMedia = ({ category }: SampleCategoryMediaProps) => {
           <MediaSelector mediaType={mediaType} setMediaType={setMediaType} />
         </div>
         <button
-          onClick={() => navigate(`/media/${mediaType}/${category}`)}
+          onClick={() => navigate(`/${CONSTANTS.ENV.BASE_URL}/media/${mediaType}/${category}`)}
           className="btn btn-active btn-primary btn-sm md:btn-sm lg:btn-md"
         >
           View More
