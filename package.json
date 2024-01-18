@@ -1,7 +1,6 @@
 {
   "name": "movies-and-series",
   "version": "0.0.0",
-  "homepage": "https://Pruthvik007.github.io/Movies-And-Series/",
   "private": true,
   "type": "module",
   "scripts": {
