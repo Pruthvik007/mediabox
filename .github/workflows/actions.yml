@@ -49,3 +49,5 @@ jobs:
         with:
           github_token: ${{ secrets.GH_TOKEN }}
           publish_dir: ./dist
+        env:
+          VITE_TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
