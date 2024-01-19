@@ -19,7 +19,8 @@ export const CONSTANTS = {
     TMDB_API_IMAGE_URL: "https://image.tmdb.org/t/p/",
   },
   YOUTUBE_VIDEO_URL: "https://www.youtube.com/embed/",
-  VIDSRC_URL: "https://vidsrc.xyz/embed/movie?tmdb=",
+  VIDSRC_MOVIE_URL: "https://vidsrc.xyz/embed/movie?tmdb=",
+  VIDSRC_SHOW_URL: "https://vidsrc.xyz/embed/show?tmdb=",
 };
 
 export type CategoryType =

@@ -7,17 +7,16 @@ type MediaCardProps = {
 };
 const MediaCard = ({ media }: MediaCardProps) => {
   const imagePath = media.poster_path ? media.poster_path : media.backdrop_path;
+  const alt = (media as Movie).title
+    ? (media as Movie).title
+    : (media as Show).name;
   const [isLoading, setIsLoading] = useState(true);
   return (
     <div className="card-sm md:card-md lg:card-lg overflow-y-clip relative">
       {imagePath ? (
         <img
           src={CONSTANTS.ENV.TMDB_API_IMAGE_URL + posterSize.lg + imagePath}
-          alt={
-            (media as Movie).title
-              ? (media as Movie).title
-              : (media as Show).name
-          }
+          alt={alt}
           style={{
             filter: `${isLoading ? "blur(20px)" : ""}`,
             transition: "1s filter linear",
@@ -37,7 +36,12 @@ const MediaCard = ({ media }: MediaCardProps) => {
           sizes="(max-width: 300px) 300px, (max-width: 768px) 768px, 1280px"
         />
       ) : (
-        <Skeleton />
+        <div className="relative">
+          <Skeleton />
+          <p className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            {alt}
+          </p>
+        </div>
       )}
       {media.vote_average !== 0 && (
         <div className="absolute top-1 right-1">

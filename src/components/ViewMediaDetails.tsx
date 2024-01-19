@@ -13,23 +13,27 @@ import Modal from "./common/Modal";
 import Rating from "./common/Rating";
 const Genres = ({ genres }: { genres: Genre[] }) => {
   return (
-    <div className="flex flex-col items-center md:flex-row md:items-center gap-3 bg-base-100 p-3 rounded-xl">
-      <p className="text-xl font-bold text-white">Genres:</p>
-      <div
-        id="genres"
-        className="inline-flex justify-center md:justify-start rounded-md shadow-sm gap-2 bg-base-100"
-        role="group"
-      >
-        {genres.map((genre) => (
-          <button
-            disabled
-            key={genre.id}
-            type="button"
-            className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
-          >
-            {genre.name}
-          </button>
-        ))}
+    <div
+      id="genres"
+      className="flex flex-col items-center md:flex-row bg-base-100 rounded-xl"
+    >
+      <p className="text-xl font-bold text-white pl-3">Genres:</p>
+      <div className="max-w-full overflow-x-auto p-3">
+        <div
+          className="flex flex-row justify-start rounded-md shadow-sm gap-2"
+          role="group"
+        >
+          {genres.map((genre) => (
+            <button
+              disabled
+              key={genre.id}
+              type="button"
+              className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
+            >
+              {genre.name}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -43,23 +47,25 @@ const ProductionCompanies = ({
   return (
     <div
       id="production_companies"
-      className="flex flex-col items-center md:flex-row md:items-center gap-3 bg-base-100 p-3 rounded-xl overflow-x-auto"
+      className="flex flex-col items-center md:flex-row md:items-center bg-base-100 rounded-xl"
     >
-      <p className="text-xl font-bold text-white">Production Companies:</p>
-      <div
-        className="justify-center md:justify-start rounded-md shadow-sm flex flex-row gap-3"
-        role="group"
-      >
-        {mediaDetails.production_companies.map((company) => (
-          <button
-            disabled
-            key={company.id}
-            type="button"
-            className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
-          >
-            {company.name}
-          </button>
-        ))}
+      <p className="text-xl font-bold text-white pl-3">Production Companies:</p>
+      <div className="max-w-full overflow-x-auto p-3">
+        <div
+          className="flex flex-row justify-start rounded-md shadow-sm gap-2"
+          role="group"
+        >
+          {mediaDetails.production_companies.map((company) => (
+            <button
+              disabled
+              key={company.id}
+              type="button"
+              className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
+            >
+              {company.name}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -93,10 +99,12 @@ const VideoModalContent = ({
   name,
   id,
   type = "VIDEO",
+  mediaType,
 }: {
   name: string;
   id: string;
   type?: "VIDEO" | "MEDIA";
+  mediaType?: MediaType;
 }) => {
   return (
     <div>
@@ -112,7 +120,9 @@ const VideoModalContent = ({
             src={
               (type === "VIDEO"
                 ? CONSTANTS.YOUTUBE_VIDEO_URL
-                : CONSTANTS.VIDSRC_URL) + id
+                : mediaType === "MOVIES"
+                ? CONSTANTS.VIDSRC_MOVIE_URL
+                : CONSTANTS.VIDSRC_SHOW_URL) + id
             }
             allowFullScreen
           ></iframe>
@@ -152,6 +162,26 @@ const BasicDetails = ({
       id: trailerData ? trailerData.key : "",
     };
   }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const WatchMedia = () => {
+    return (
+      <button
+        onClick={() =>
+          openModal(
+            <VideoModalContent
+              name="Watch At VidSrc"
+              id={mediaDetails.id.toString()}
+              type="MEDIA"
+              mediaType={mediaType}
+            />
+          )
+        }
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
+      >
+        {mediaType === "MOVIES" ? "Watch Movie" : "Watch Show"}
+      </button>
+    );
+  };
   return (
     <div className="flex flex-col gap-3 bg-neutral p-3 rounded-xl max-w-full">
       <MediaTitle
@@ -174,22 +204,7 @@ const BasicDetails = ({
         >
           Play Trailer
         </button>
-        {mediaType === "MOVIES" && (
-          <button
-            onClick={() =>
-              openModal(
-                <VideoModalContent
-                  name="Watch At VidSrc"
-                  id={mediaDetails.id.toString()}
-                  type="MEDIA"
-                />
-              )
-            }
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
-          >
-            Watch Movie
-          </button>
-        )}
+        {/* <WatchMedia /> */}
       </div>
       <div className="flex flex-col gap-3">
         <Genres genres={mediaDetails.genres} />
@@ -207,7 +222,7 @@ const ViewMediaDetails = ({
   mediaDetails: MediaDetails;
 }) => {
   return (
-    <div className="rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col items-center md:flex-row md:items-start gap-5 text-center md:text-left p-3">
+    <div className="rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col items-center md:flex-row gap-5 text-center md:text-left p-3">
       <div className="flex flex-col items-center">
         <div className="card-lg">
           <img
