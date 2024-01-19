@@ -1,6 +1,7 @@
 {
   "name": "movies-and-series",
   "version": "0.0.0",
+  "homepage": "https://pruthvik007.github.io/movies-and-series/",
   "private": false,
   "type": "module",
   "scripts": {
@@ -12,8 +13,6 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-infinite-scroll-component": "^6.1.0",
-    "react-lazy-load-image-component": "^1.6.0",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.20.1"
   },
