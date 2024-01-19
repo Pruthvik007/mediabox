@@ -50,7 +50,7 @@ const Modal = () => {
         <div
           id="default-modal"
           tabIndex={-1}
-          className="w-screen h-screen bg-opacity-70 bg-neutral-content p-5 fixed top-0 flex justify-center items-center overflow-y-auto overflow-x-hidden right-0 left-0 z-50 md:inset-0 max-h-full"
+          className="w-screen h-screen bg-opacity-70 bg-base-300 p-5 fixed top-0 flex justify-center items-center overflow-y-auto overflow-x-hidden right-0 left-0 z-50 md:inset-0 max-h-full"
         >
           <div className="relative rounded-lg shadow bg-neutral p-2 w-full max-w-2xl max-h-full">
             {modalContent}

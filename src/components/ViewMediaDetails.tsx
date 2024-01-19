@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { ModalContext } from "../context/ModalContext";
-import { CONSTANTS } from "../helpers/Constants";
+import { CONSTANTS, posterSize } from "../helpers/Constants";
 import { useVideos } from "../hooks/TmdbQueries";
 import {
   Genre,
@@ -89,7 +89,15 @@ const MediaTitle = ({
   );
 };
 
-const VideoModalContent = ({ name, id }: { name: string; id: string }) => {
+const VideoModalContent = ({
+  name,
+  id,
+  type = "VIDEO",
+}: {
+  name: string;
+  id: string;
+  type?: "VIDEO" | "MEDIA";
+}) => {
   return (
     <div>
       <Modal.Header>
@@ -101,12 +109,17 @@ const VideoModalContent = ({ name, id }: { name: string; id: string }) => {
         {id.length > 0 && (
           <iframe
             className="w-full h-80"
-            src={CONSTANTS.YOUTUBE_VIDEO_URL + id}
+            src={
+              (type === "VIDEO"
+                ? CONSTANTS.YOUTUBE_VIDEO_URL
+                : CONSTANTS.VIDSRC_URL) + id
+            }
+            allowFullScreen
           ></iframe>
         )}
         {id.length === 0 && (
           <p className="text-xl font-bold text-red-500 text-center">
-            No Trailer Available
+            Video Not Available
           </p>
         )}
       </Modal.Body>
@@ -161,6 +174,22 @@ const BasicDetails = ({
         >
           Play Trailer
         </button>
+        {mediaType === "MOVIES" && (
+          <button
+            onClick={() =>
+              openModal(
+                <VideoModalContent
+                  name="Watch At VidSrc"
+                  id={mediaDetails.id.toString()}
+                  type="MEDIA"
+                />
+              )
+            }
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
+          >
+            Watch Movie
+          </button>
+        )}
       </div>
       <div className="flex flex-col gap-3">
         <Genres genres={mediaDetails.genres} />
@@ -183,7 +212,11 @@ const ViewMediaDetails = ({
         <div className="card-lg">
           <img
             className="rounded-xl"
-            src={CONSTANTS.ENV.TMDB_API_IMAGE_URL + mediaDetails?.poster_path}
+            src={
+              CONSTANTS.ENV.TMDB_API_IMAGE_URL +
+              posterSize.original +
+              mediaDetails?.poster_path
+            }
           />
         </div>
         <div className="flex flex-row justify-center">

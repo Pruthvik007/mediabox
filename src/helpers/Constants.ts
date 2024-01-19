@@ -16,9 +16,10 @@ export const CONSTANTS = {
     TMDB_API_KEY: import.meta.env.VITE_TMDB_API_KEY,
     BASE_URL: "movies-and-series",
     TMDB_API_BASE_URL: "https://api.themoviedb.org/3/",
-    TMDB_API_IMAGE_URL: "https://image.tmdb.org/t/p/original",
+    TMDB_API_IMAGE_URL: "https://image.tmdb.org/t/p/",
   },
   YOUTUBE_VIDEO_URL: "https://www.youtube.com/embed/",
+  VIDSRC_URL: "https://vidsrc.xyz/embed/movie?tmdb=",
 };
 
 export type CategoryType =
@@ -99,4 +100,11 @@ export const QUERY_TYPE = {
   INCLUDE_ADULT: "include_adult",
   QUERY: "query",
   WITH_GENRES: "with_genres",
+};
+
+export const posterSize = {
+  sm: "w92",
+  md: "w185",
+  lg: "w500",
+  original: "original",
 };
