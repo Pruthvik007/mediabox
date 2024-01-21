@@ -18,7 +18,7 @@ const tabItems = [
 ];
 const NavBar = () => {
   return (
-    <div className="navbar bg-neutral px-1 py-0">
+    <div className="navbar bg-neutral px-1 py-0 overflow-x-auto">
       <div className="flex-1">
         <Link className="btn btn-ghost text-xl py-0" to="/movies-and-series/">
           MediaBox

@@ -11,6 +11,7 @@ import {
 } from "../types/TmdbTypes";
 import Modal from "./common/Modal";
 import Rating from "./common/Rating";
+import TmdbImage from "./common/TmdbImage";
 const Genres = ({ genres }: { genres: Genre[] }) => {
   return (
     <div
@@ -162,28 +163,27 @@ const BasicDetails = ({
       id: trailerData ? trailerData.key : "",
     };
   }
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const WatchMedia = () => {
-    return (
-      <button
-        onClick={() =>
-          openModal(
-            <VideoModalContent
-              name="Watch At VidSrc"
-              id={mediaDetails.id.toString()}
-              type="MEDIA"
-              mediaType={mediaType}
-            />
-          )
-        }
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
-      >
-        {mediaType === "MOVIES" ? "Watch Movie" : "Watch Show"}
-      </button>
-    );
-  };
+  // const WatchMedia = () => {
+  //   return (
+  //     <button
+  //       onClick={() =>
+  //         openModal(
+  //           <VideoModalContent
+  //             name="Watch At VidSrc"
+  //             id={mediaDetails.id.toString()}
+  //             type="MEDIA"
+  //             mediaType={mediaType}
+  //           />
+  //         )
+  //       }
+  //       className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
+  //     >
+  //       {mediaType === "MOVIES" ? "Watch Movie" : "Watch Show"}
+  //     </button>
+  //   );
+  // };
   return (
-    <div className="flex flex-col gap-3 bg-neutral p-3 rounded-xl max-w-full">
+    <div className="flex flex-col gap-3 bg-neutral p-3 rounded-xl max-w-full overflow-x-auto">
       <MediaTitle
         mediaDetails={mediaDetails}
         mediaType={mediaType as MediaType}
@@ -194,9 +194,9 @@ const BasicDetails = ({
             "{mediaDetails.tagline}"
           </p>
         )}
-      <blockquote className="text-xl italic font-semibold text-gray-900 dark:text-white">
+      <div className="text-xl italic font-semibold text-gray-900 dark:text-white">
         <p>{mediaDetails.overview}</p>
-      </blockquote>
+      </div>
       <div className="flex flex-row gap-3 justify-center md:justify-start">
         <button
           onClick={() => openModal(<VideoModalContent {...trailer} />)}
@@ -206,7 +206,7 @@ const BasicDetails = ({
         </button>
         {/* <WatchMedia /> */}
       </div>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 lg:flex-row">
         <Genres genres={mediaDetails.genres} />
         <ProductionCompanies mediaDetails={mediaDetails} />
       </div>
@@ -222,25 +222,22 @@ const ViewMediaDetails = ({
   mediaDetails: MediaDetails;
 }) => {
   return (
-    <div className="rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col items-center md:flex-row gap-5 text-center md:text-left p-3">
-      <div className="flex flex-col items-center">
-        <div className="card-lg">
-          <img
-            className="rounded-xl"
-            src={
-              CONSTANTS.ENV.TMDB_API_IMAGE_URL +
-              posterSize.original +
-              mediaDetails?.poster_path
-            }
-          />
-        </div>
-        <div className="flex flex-row justify-center">
-          <Rating
-            actualRating={Number((mediaDetails.vote_average / 2).toFixed(1))}
-            totalRating={5}
-            displayText
-          />
-        </div>
+    <div className="rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col items-start md:flex-row gap-5 text-center md:text-left p-3">
+      <div className="flex flex-col">
+        <TmdbImage
+          className="card-lg md:card-lg"
+          imagePath={
+            CONSTANTS.ENV.TMDB_API_IMAGE_URL +
+            posterSize.original +
+            mediaDetails?.poster_path
+          }
+          alt={mediaDetails?.id.toString()}
+        />
+        <Rating
+          actualRating={Number((mediaDetails.vote_average / 2).toFixed(1))}
+          totalRating={5}
+          displayText={`${mediaDetails.vote_average.toFixed(1)} / 10`}
+        />
       </div>
       {mediaDetails && (
         <BasicDetails mediaDetails={mediaDetails} mediaType={mediaType} />

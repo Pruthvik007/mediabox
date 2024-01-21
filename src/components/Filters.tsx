@@ -17,7 +17,7 @@ const Filters = ({
   classNames?: string;
 }) => {
   const [query, setQuery] = useState("");
-  const debouncedQueryValue = useDebounce<string>(query, 500);
+  const debouncedQueryValue = useDebounce<string>(query, 700);
   useEffect(() => {
     setParams({ ...params, query: debouncedQueryValue });
   }, [debouncedQueryValue]);

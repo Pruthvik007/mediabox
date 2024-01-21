@@ -32,7 +32,7 @@ const SearchPage = () => {
   return (
     <div className="container px-3">
       <p className="text-3xl font-bold text-center py-3">
-        Search For Movies And TV Shows
+        Search For Movies And TV Series
       </p>
       <Filters
         classNames="mb-5"

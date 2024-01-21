@@ -17,15 +17,15 @@ const Star = ({ color }: StarProps) => {
 const Rating = ({
   actualRating,
   totalRating,
-  displayText = false,
+  displayText,
 }: {
   actualRating: number;
   totalRating: number;
-  displayText?: boolean;
+  displayText?: string;
 }) => {
   return (
     <>
-      <div className="flex flex-row items-center flex-wrap justify-center">
+      <div className="flex flex-row items-center flex-wrap justify-center gap-1">
         <div className="flex flex-row">
           {Array.from({ length: totalRating }).map((_, index) => (
             <Star
@@ -38,11 +38,7 @@ const Rating = ({
             />
           ))}
         </div>
-        {displayText && (
-          <p className="text-sm ms-1">
-            {actualRating} out of {totalRating}
-          </p>
-        )}
+        {displayText && <p className="text-sm ms-1">{displayText}</p>}
       </div>
     </>
   );
