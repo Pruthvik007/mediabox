@@ -222,7 +222,7 @@ const ViewMediaDetails = ({
   mediaDetails: MediaDetails;
 }) => {
   return (
-    <div className="rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col items-start md:flex-row gap-5 text-center md:text-left p-3">
+    <div className="rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col items-center md:flex-row gap-5 text-center md:text-left p-3">
       <div className="flex flex-col">
         <TmdbImage
           className="card-lg md:card-lg"
