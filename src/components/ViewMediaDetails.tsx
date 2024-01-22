@@ -29,7 +29,7 @@ const Genres = ({ genres }: { genres: Genre[] }) => {
               disabled
               key={genre.id}
               type="button"
-              className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
+              className="px-4 py-2 text-sm font-medium bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
             >
               {genre.name}
             </button>
@@ -61,7 +61,7 @@ const ProductionCompanies = ({
               disabled
               key={company.id}
               type="button"
-              className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
+              className="px-4 py-2 text-sm font-medium bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
             >
               {company.name}
             </button>
@@ -81,7 +81,7 @@ const MediaTitle = ({
 }) => {
   return (
     <>
-      {mediaType === "MOVIES" ? (
+      {mediaType.toUpperCase() === "MOVIES" ? (
         <p className="text-3xl text-white">
           {(mediaDetails as MovieDetails).original_title} (
           {(mediaDetails as MovieDetails).release_date.split("-")[0]})
@@ -110,9 +110,7 @@ const VideoModalContent = ({
   return (
     <div>
       <Modal.Header>
-        <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-          {name}
-        </h3>
+        <h3 className="text-xl font-semibold text">{name}</h3>
       </Modal.Header>
       <Modal.Body>
         {id.length > 0 && (
@@ -190,11 +188,11 @@ const BasicDetails = ({
       />
       {mediaDetails.tagline !== undefined &&
         mediaDetails.tagline.length > 0 && (
-          <p className="text-xl italic font-semibold text-gray-900 dark:text-white">
+          <p className="text-md md:text-lg italic font-semibold text">
             "{mediaDetails.tagline}"
           </p>
         )}
-      <div className="text-xl italic font-semibold text-gray-900 dark:text-white">
+      <div className="text-lg md:text-xl italic font-semibold text">
         <p>{mediaDetails.overview}</p>
       </div>
       <div className="flex flex-row gap-3 justify-center md:justify-start">

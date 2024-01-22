@@ -8,7 +8,7 @@ const ModalHeader = ({ children }: { children: ReactNode }) => {
       {children}
       <button
         type="button"
-        className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+        className="text-gray-400 bg-transparent hover:bg-gray-200 rounded-lg ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
         data-modal-hide="default-modal"
         onClick={closeModal}
       >
@@ -33,7 +33,7 @@ const ModalFooter = ({ children }: { children: React.ReactNode }) => {
       {children}
       <button
         type="button"
-        className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+        className="text-gray-400 bg-transparent hover:bg-gray-200 rounded-lg ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
         onClick={closeModal}
       >
         <span>Close</span>

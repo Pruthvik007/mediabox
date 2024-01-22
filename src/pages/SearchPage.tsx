@@ -31,7 +31,7 @@ const SearchPage = () => {
   if (error) return <ErrorPage />;
   return (
     <div className="container px-3">
-      <p className="text-3xl font-bold text-center py-3">
+      <p className="text-2xl md:text-3xl font-bold text-center py-3 text-neutral-content">
         Search For Movies And TV Series
       </p>
       <Filters

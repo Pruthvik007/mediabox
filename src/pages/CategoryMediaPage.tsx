@@ -53,7 +53,7 @@ const CategoryMedia = () => {
   }
   return (
     <div className="p-3 flex flex-col">
-      <p className="text-3xl font-bold text-center py-3">
+      <p className="text-3xl font-bold text-center py-3 text-neutral-content">
         {`${
           CONSTANTS.CATEGORIES[
             category.toUpperCase() as keyof typeof CONSTANTS.CATEGORIES

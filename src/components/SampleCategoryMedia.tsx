@@ -23,13 +23,17 @@ const SampleCategoryMedia = ({ category }: SampleCategoryMediaProps) => {
     <div className="flex flex-col gap-3 p-3 bg-neutral rounded-xl">
       <div className="w-full flex flex-row place-content-between items-center">
         <div className="flex flex-row gap-4  items-center">
-          <p className="text-xl md:text-2xl font-bold text-center text-gray-900 dark:text-white">
+          <p className="text-sm md:text-md font-bold text-center text">
             {CONSTANTS.CATEGORIES[category]}
           </p>
           <MediaSelector mediaType={mediaType} setMediaType={setMediaType} />
         </div>
         <button
-          onClick={() => navigate(`/${CONSTANTS.ENV.BASE_URL}/media/${mediaType}/${category}`)}
+          onClick={() =>
+            navigate(
+              `/${CONSTANTS.ENV.BASE_URL}/media/${mediaType}/${category}`
+            )
+          }
           className="btn btn-active btn-primary btn-sm md:btn-sm lg:btn-md"
         >
           View More
