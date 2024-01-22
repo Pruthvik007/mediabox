@@ -6,6 +6,7 @@ const ThemeToggle = () => {
         type="checkbox"
         className="theme-controller sr-only"
         value="night"
+        aria-labelledby="themeController"
       />
       <label htmlFor="themeController" className="swap swap-rotate">
         <svg
