@@ -12,6 +12,8 @@ import {
   SearchMediaParamsType,
 } from "../types/TmdbTypes";
 
+const ONE_DAY = 1000 * 60 * 60 * 24;
+
 export const useSampleMedia = (
   mediaType: MediaType,
   category: CategoryType
@@ -23,7 +25,7 @@ export const useSampleMedia = (
         END_POINT_OF_MEDIA_OF_CATEGORY[mediaType][category]
       ),
     {
-      keepPreviousData: true,
+      staleTime: ONE_DAY,
     }
   );
 };
@@ -47,6 +49,8 @@ export const useInfiniteMedia = (
       );
     },
     getNextPageParam: (lastPage) => lastPage.page + 1,
+    keepPreviousData: true,
+    staleTime: ONE_DAY,
   });
 };
 
@@ -70,10 +74,7 @@ export const useRecommendations = (mediaType: MediaType, mediaId: string) => {
           ? END_POINT_OF.MOVIE_RECOMENDATIONS
           : END_POINT_OF.SHOW_RECOMENDATIONS,
         mediaId
-      ),
-    {
-      keepPreviousData: false,
-    }
+      )
   );
 };
 
@@ -93,6 +94,8 @@ export const useSearchResults = (
     },
     enabled: params.query.length > 0,
     getNextPageParam: (lastPage) => lastPage.page + 1,
+    keepPreviousData: true,
+    staleTime: 1000 * 60 * 60 * 24,
   });
 };
 

@@ -103,9 +103,17 @@ export const QUERY_TYPE = {
   WITH_GENRES: "with_genres",
 };
 
-export const posterSize = {
-  sm: "w92",
-  md: "w185",
-  lg: "w500",
-  original: "original",
+export const ImageSize = {
+  POSTER: {
+    sm: "w92",
+    md: "w185",
+    lg: "w500",
+    original: "original",
+  },
+  BACKDROP: {
+    sm: "w300",
+    md: "w780",
+    lg: "w1280",
+    original: "original",
+  },
 };

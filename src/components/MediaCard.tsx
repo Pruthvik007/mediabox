@@ -10,7 +10,9 @@ const MediaCard = ({ media }: MediaCardProps) => {
     : (media as Show).name;
   return (
     <div className="relative">
-      <TmdbImage imagePath={imagePath} alt={alt} />
+      <div className="card-sm md:card-md lg:card-lg overflow-y-clip">
+        <TmdbImage imagePath={imagePath} alt={alt} />
+      </div>
       {media.vote_average !== 0 && (
         <div className="absolute top-1 right-1">
           <div className="badge badge-xs sm:badge-sm md:badge-md lg:badge-lg badge-neutral">

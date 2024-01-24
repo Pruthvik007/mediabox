@@ -68,7 +68,7 @@ const CategoryMedia = () => {
           setParams={setParams}
         />
       )}
-      <div className="flex flex-wrap gap-3 justify-center bg-neutral p-3">
+      <div className="flex flex-wrap justify-around bg-neutral gap-0.5">
         {data?.pages.map((page, i) => (
           <React.Fragment key={i}>
             <MediaList

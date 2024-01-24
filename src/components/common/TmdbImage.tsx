@@ -1,24 +1,26 @@
 import { useState } from "react";
-import { CONSTANTS, posterSize } from "../../helpers/Constants";
+import { CONSTANTS, ImageSize } from "../../helpers/Constants";
 import Skeleton from "./Skeleton";
 
 const TmdbImage = ({
   imagePath,
   alt,
-  className = "",
+  imageType = "POSTER",
 }: {
   imagePath: string;
   alt: string;
-  className?: string;
+  imageType?: keyof typeof ImageSize;
 }) => {
   const [isLoading, setIsLoading] = useState(true);
   return (
-    <div
-      className={`card-sm md:card-md lg:card-lg overflow-y-clip ${className}`}
-    >
+    <>
       {imagePath ? (
         <img
-          src={CONSTANTS.ENV.TMDB_API_IMAGE_URL + posterSize.lg + imagePath}
+          src={
+            CONSTANTS.ENV.TMDB_API_IMAGE_URL +
+            ImageSize[imageType].lg +
+            imagePath
+          }
           alt={alt}
           style={{
             filter: `${isLoading ? "blur(20px)" : ""}`,
@@ -31,11 +33,17 @@ const TmdbImage = ({
           height="100%"
           width="100%"
           srcSet={`${
-            CONSTANTS.ENV.TMDB_API_IMAGE_URL + posterSize.sm + imagePath
+            CONSTANTS.ENV.TMDB_API_IMAGE_URL +
+            ImageSize[imageType].sm +
+            imagePath
           } 300w, ${
-            CONSTANTS.ENV.TMDB_API_IMAGE_URL + posterSize.md + imagePath
+            CONSTANTS.ENV.TMDB_API_IMAGE_URL +
+            ImageSize[imageType].md +
+            imagePath
           } 768w, ${
-            CONSTANTS.ENV.TMDB_API_IMAGE_URL + posterSize.lg + imagePath
+            CONSTANTS.ENV.TMDB_API_IMAGE_URL +
+            ImageSize[imageType].lg +
+            imagePath
           } 1280w`}
           sizes="(max-width: 300px) 300px, (max-width: 768px) 768px, 1280px"
         />
@@ -47,7 +55,7 @@ const TmdbImage = ({
           </p>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

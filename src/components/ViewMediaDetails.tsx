@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { ModalContext } from "../context/ModalContext";
-import { CONSTANTS, posterSize } from "../helpers/Constants";
+import { CONSTANTS } from "../helpers/Constants";
 import { useVideos } from "../hooks/TmdbQueries";
 import {
   Genre,
@@ -16,10 +16,10 @@ const Genres = ({ genres }: { genres: Genre[] }) => {
   return (
     <div
       id="genres"
-      className="flex flex-col items-center md:flex-row bg-base-100 rounded-xl"
+      className="flex flex-col items-center md:flex-row bg-base-100 rounded-xl p-3 gap-x-2"
     >
-      <p className="text-xl font-bold text-white pl-3">Genres:</p>
-      <div className="max-w-full overflow-x-auto p-3">
+      <p className="text-xl font-bold text-white">Genres:</p>
+      <div className="max-w-full overflow-x-auto">
         <div
           className="flex flex-row justify-start rounded-md shadow-sm gap-2"
           role="group"
@@ -48,10 +48,10 @@ const ProductionCompanies = ({
   return (
     <div
       id="production_companies"
-      className="flex flex-col items-center md:flex-row md:items-center bg-base-100 rounded-xl"
+      className="flex flex-col items-center md:flex-row bg-base-100 rounded-xl p-3 gap-x-2"
     >
-      <p className="text-xl font-bold text-white pl-3">Production Companies:</p>
-      <div className="max-w-full overflow-x-auto p-3">
+      <p className="text-xl font-bold text-white">Production Companies:</p>
+      <div className="max-w-full overflow-x-auto">
         <div
           className="flex flex-row justify-start rounded-md shadow-sm gap-2"
           role="group"
@@ -154,7 +154,8 @@ const BasicDetails = ({
       (result) =>
         result.official &&
         result.site === "YouTube" &&
-        result.type === "Trailer"
+        result.type === "Trailer" &&
+        result.name === "Official Trailer"
     )[0];
     trailer = {
       name: trailerData ? trailerData.name : "",
@@ -220,17 +221,14 @@ const ViewMediaDetails = ({
   mediaDetails: MediaDetails;
 }) => {
   return (
-    <div className="rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col items-center md:flex-row gap-5 text-center md:text-left p-3">
+    <div className="rounded-lg shadow flex flex-col items-center md:flex-row gap-5 text-center md:text-left justify-center p-5 bg-base-100">
       <div className="flex flex-col">
-        <TmdbImage
-          className="card-lg md:card-lg"
-          imagePath={
-            CONSTANTS.ENV.TMDB_API_IMAGE_URL +
-            posterSize.original +
-            mediaDetails?.poster_path
-          }
-          alt={mediaDetails?.id.toString()}
-        />
+        <div className="card-lg">
+          <TmdbImage
+            imagePath={mediaDetails?.poster_path}
+            alt={mediaDetails?.id.toString()}
+          />
+        </div>
         <Rating
           actualRating={Number((mediaDetails.vote_average / 2).toFixed(1))}
           totalRating={5}
