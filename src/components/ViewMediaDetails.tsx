@@ -162,25 +162,25 @@ const BasicDetails = ({
       id: trailerData ? trailerData.key : "",
     };
   }
-  // const WatchMedia = () => {
-  //   return (
-  //     <button
-  //       onClick={() =>
-  //         openModal(
-  //           <VideoModalContent
-  //             name="Watch At VidSrc"
-  //             id={mediaDetails.id.toString()}
-  //             type="MEDIA"
-  //             mediaType={mediaType}
-  //           />
-  //         )
-  //       }
-  //       className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
-  //     >
-  //       {mediaType === "MOVIES" ? "Watch Movie" : "Watch Show"}
-  //     </button>
-  //   );
-  // };
+  const WatchMedia = () => {
+    return (
+      <button
+        onClick={() =>
+          openModal(
+            <VideoModalContent
+              name="Watch At VidSrc"
+              id={mediaDetails.id.toString()}
+              type="MEDIA"
+              mediaType={mediaType}
+            />
+          )
+        }
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
+      >
+        {mediaType === "MOVIES" ? "Watch Movie" : "Watch Show"}
+      </button>
+    );
+  };
   return (
     <div className="flex flex-col gap-3 bg-neutral p-3 rounded-xl max-w-full overflow-x-auto">
       <MediaTitle
@@ -203,7 +203,7 @@ const BasicDetails = ({
         >
           Play Trailer
         </button>
-        {/* <WatchMedia /> */}
+        <WatchMedia />
       </div>
       <div className="flex flex-col gap-3 lg:flex-row">
         <Genres genres={mediaDetails.genres} />
