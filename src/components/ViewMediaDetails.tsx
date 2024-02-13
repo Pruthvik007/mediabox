@@ -16,12 +16,12 @@ const Genres = ({ genres }: { genres: Genre[] }) => {
   return (
     <div
       id="genres"
-      className="flex flex-col items-center md:flex-row bg-base-100 rounded-xl p-3 gap-x-2"
+      className="flex flex-col items-center md:flex-row bg-base-100 rounded-xl p-3 gap-x-2 overflow-x-auto"
     >
       <p className="text-xl font-bold text-white">Genres:</p>
       <div className="max-w-full overflow-x-auto">
         <div
-          className="flex flex-row justify-start rounded-md shadow-sm gap-2"
+          className="flex flex-row justify-start rounded-md shadow-sm gap-2 p-2"
           role="group"
         >
           {genres.map((genre) => (
@@ -48,12 +48,12 @@ const ProductionCompanies = ({
   return (
     <div
       id="production_companies"
-      className="flex flex-col items-center md:flex-row bg-base-100 rounded-xl p-3 gap-x-2"
+      className="flex flex-col items-center md:flex-row bg-base-100 rounded-xl p-3 gap-x-2 overflow-x-auto"
     >
       <p className="text-xl font-bold text-white">Production Companies:</p>
       <div className="max-w-full overflow-x-auto">
         <div
-          className="flex flex-row justify-start rounded-md shadow-sm gap-2"
+          className="flex flex-row justify-start rounded-md shadow-sm gap-2 p-2"
           role="group"
         >
           {mediaDetails.production_companies.map((company) => (
@@ -182,7 +182,7 @@ const BasicDetails = ({
     );
   };
   return (
-    <div className="flex flex-col gap-3 bg-neutral p-3 rounded-xl max-w-full overflow-x-auto">
+    <div className="flex flex-col gap-3 bg-neutral p-3 rounded-xl max-w-full">
       <MediaTitle
         mediaDetails={mediaDetails}
         mediaType={mediaType as MediaType}
@@ -205,7 +205,7 @@ const BasicDetails = ({
         </button>
         <WatchMedia />
       </div>
-      <div className="flex flex-col gap-3 lg:flex-row">
+      <div className="flex flex-col gap-3 lg:flex-row max-w-6xl">
         <Genres genres={mediaDetails.genres} />
         <ProductionCompanies mediaDetails={mediaDetails} />
       </div>
