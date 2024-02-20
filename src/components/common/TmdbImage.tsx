@@ -18,7 +18,7 @@ const TmdbImage = ({
         <img
           src={
             CONSTANTS.ENV.TMDB_API_IMAGE_URL +
-            ImageSize[imageType].lg +
+            ImageSize[imageType].sm +
             imagePath
           }
           alt={alt}
