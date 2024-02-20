@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import AdvancedFilters from "../components/AdvancedFilters";
 import MediaList from "../components/MediaList";
@@ -8,8 +8,9 @@ import { useInfiniteMedia } from "../hooks/TmdbQueries";
 import { CategoryMediaParamsType, MediaType } from "../types/TmdbTypes";
 import ErrorPage from "./ErrorPage";
 import PageNotFound from "./PageNotFound";
-import useInfiniteScroll from "../hooks/useInfiniteScroll";
+import { useInView } from "react-intersection-observer";
 const CategoryMedia = () => {
+  const { ref, inView } = useInView();
   const { mediaType, category } = useParams();
   const isValidMedia =
     mediaType !== undefined &&
@@ -25,24 +26,13 @@ const CategoryMedia = () => {
     year: "",
   });
 
-  const {
-    data,
-    error,
-    fetchNextPage,
-    hasNextPage,
-    isFetching,
-    isFetchingNextPage,
-  } = useInfiniteMedia(
-    mediaType as MediaType,
-    category as CategoryType,
-    params
-  );
-
-  useInfiniteScroll(() => {
-    if (hasNextPage) {
+  const { data, error, fetchNextPage, isFetching, isFetchingNextPage } =
+    useInfiniteMedia(mediaType as MediaType, category as CategoryType, params);
+  useEffect(() => {
+    if (inView) {
       fetchNextPage();
     }
-  });
+  }, [inView, fetchNextPage]);
 
   if (!isValidMedia) {
     return <PageNotFound />;
@@ -79,6 +69,7 @@ const CategoryMedia = () => {
           </React.Fragment>
         ))}
       </div>
+      <div id="observer" ref={ref}></div>
       <ScrollToTopButton />
     </div>
   );

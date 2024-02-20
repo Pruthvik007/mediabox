@@ -86,3 +86,13 @@
 .text {
   @apply text-neutral-content dark:text-white;
 }
+
+::-webkit-scrollbar {
+  width: 2px;
+  background-color: #5b5b5b;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #000000;
+  border-radius: 10px;
+}

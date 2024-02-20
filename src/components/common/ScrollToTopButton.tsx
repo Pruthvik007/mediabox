@@ -33,7 +33,7 @@ const ScrollToTopButton = () => {
           color="secondary"
           aria-label="add"
         >
-          Move To Top
+          &#9650;
         </button>
       )}
     </React.Fragment>
