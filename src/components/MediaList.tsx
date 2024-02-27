@@ -1,17 +1,17 @@
 import { Link } from "react-router-dom";
-import { MediaType, Movie, Show } from "../types/TmdbTypes";
+import { CONSTANTS } from "../helpers/Constants";
+import { Media, MediaType } from "../types/TmdbTypes";
 import MediaCard from "./MediaCard";
 import Skeleton from "./common/Skeleton";
-import { CONSTANTS } from "../helpers/Constants";
 
 const MediaList = ({
   mediaList,
   mediaType,
   isLoading,
 }: {
-  mediaList: (Movie | Show)[] | undefined;
+  mediaList: Media[] | undefined;
   mediaType: MediaType;
-  isLoading: boolean;
+  isLoading?: boolean;
 }) => {
   return (
     <>

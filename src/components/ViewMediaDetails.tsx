@@ -4,6 +4,7 @@ import { CONSTANTS } from "../helpers/Constants";
 import { useVideos } from "../hooks/TmdbQueries";
 import {
   Genre,
+  Media,
   MediaDetails,
   MediaType,
   MovieDetails,
@@ -12,6 +13,7 @@ import {
 import Modal from "./common/Modal";
 import Rating from "./common/Rating";
 import TmdbImage from "./common/TmdbImage";
+import useWatchList from "../hooks/useWatchList";
 const Genres = ({ genres }: { genres: Genre[] }) => {
   return (
     <div
@@ -81,7 +83,7 @@ const MediaTitle = ({
 }) => {
   return (
     <>
-      {mediaType.toUpperCase() === "MOVIES" ? (
+      {mediaType === "movies" ? (
         <p className="text-3xl text-white">
           {(mediaDetails as MovieDetails).original_title} (
           {(mediaDetails as MovieDetails).release_date.split("-")[0]})
@@ -119,7 +121,7 @@ const VideoModalContent = ({
             src={
               (type === "VIDEO"
                 ? CONSTANTS.YOUTUBE_VIDEO_URL
-                : mediaType === "MOVIES"
+                : mediaType === "movies"
                 ? CONSTANTS.VIDSRC_MOVIE_URL
                 : CONSTANTS.VIDSRC_SHOW_URL) + id
             }
@@ -143,6 +145,11 @@ const BasicDetails = ({
   mediaType: MediaType;
   mediaDetails: MediaDetails;
 }) => {
+  const {
+    addMediaToWatchList,
+    removeMediaFromWatchList,
+    isMediaPresentInWatchlist,
+  } = useWatchList();
   const { openModal } = useContext(ModalContext);
   const videosData = useVideos(mediaType, mediaDetails.id.toString());
   let trailer = {
@@ -177,8 +184,33 @@ const BasicDetails = ({
         }
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
       >
-        {mediaType === "MOVIES" ? "Watch Movie" : "Watch Show"}
+        {mediaType === "movies" ? "Watch Movie" : "Watch Show"}
       </button>
+    );
+  };
+  const WatchlistButtons = () => {
+    return (
+      <>
+        {isMediaPresentInWatchlist(mediaDetails.id, mediaType) ? (
+          <button
+            onClick={() =>
+              removeMediaFromWatchList(mediaDetails as Media, mediaType)
+            }
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg"
+          >
+            Remove From Watchlist
+          </button>
+        ) : (
+          <button
+            onClick={() =>
+              addMediaToWatchList(mediaDetails as Media, mediaType)
+            }
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
+          >
+            Add To Watchlist
+          </button>
+        )}
+      </>
     );
   };
   return (
@@ -204,6 +236,7 @@ const BasicDetails = ({
           Play Trailer
         </button>
         <WatchMedia />
+        <WatchlistButtons />
       </div>
       <div className="flex flex-col gap-3 lg:flex-row max-w-6xl">
         <Genres genres={mediaDetails.genres} />

@@ -3,23 +3,28 @@ import { MediaType } from "../types/TmdbTypes";
 type MediaSelectorProps = {
   mediaType: MediaType;
   setMediaType: (mediaType: MediaType) => void;
+  className?: string;
 };
-const MediaSelector = ({ mediaType, setMediaType }: MediaSelectorProps) => {
+const MediaSelector = ({
+  mediaType,
+  setMediaType,
+  className,
+}: MediaSelectorProps) => {
   return (
-    <div className="flex gap-2">
+    <div className={`flex gap-2 ${className}`}>
       <button
         className={`btn hover:btn-info btn-sm lg:btn-md ${
-          mediaType === "MOVIES" ? "btn-primary" : "btn-neutral"
+          mediaType === "movies" ? "btn-primary" : "btn-neutral"
         }`}
-        onClick={() => setMediaType("MOVIES")}
+        onClick={() => setMediaType("movies")}
       >
         Movies
       </button>
       <button
         className={`btn hover:btn-info btn-sm lg:btn-md ${
-          mediaType === "SHOWS" ? "btn-primary" : "btn-neutral"
+          mediaType === "shows" ? "btn-primary" : "btn-neutral"
         }`}
-        onClick={() => setMediaType("SHOWS")}
+        onClick={() => setMediaType("shows")}
       >
         Series
       </button>

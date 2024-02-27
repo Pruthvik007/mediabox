@@ -5,6 +5,7 @@ import BackDrop from "./components/common/BackDrop.tsx";
 const PageNotFound = React.lazy(() => import("./pages/PageNotFound.tsx"));
 const MediaDetailsPage = React.lazy(() => import("./pages/MediaDetailsPage"));
 const SearchPage = React.lazy(() => import("./pages/SearchPage"));
+const WatchList = React.lazy(() => import("./pages/WatchList"));
 const CategoryMediaPage = React.lazy(
   () => import("./pages/CategoryMediaPage.tsx")
 );
@@ -44,6 +45,14 @@ const routeObj: RouteObject[] = [
         element: (
           <Suspense fallback={<BackDrop />}>
             <SearchPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "watchlist",
+        element: (
+          <Suspense fallback={<BackDrop />}>
+            <WatchList />
           </Suspense>
         ),
       },

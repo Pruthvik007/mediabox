@@ -5,15 +5,19 @@ import { CONSTANTS } from "../helpers/Constants";
 const tabItems = [
   {
     name: "Movies",
-    path: `/${CONSTANTS.ENV.BASE_URL}/media/MOVIES/DISCOVER`,
+    path: `/${CONSTANTS.ENV.BASE_URL}/media/movies/discover`,
   },
   {
     name: "TV Series",
-    path: `/${CONSTANTS.ENV.BASE_URL}/media/SHOWS/DISCOVER`,
+    path: `/${CONSTANTS.ENV.BASE_URL}/media/shows/discover`,
   },
   {
     name: "Search",
     path: `/${CONSTANTS.ENV.BASE_URL}/search`,
+  },
+  {
+    name: "Watchlist",
+    path: `/${CONSTANTS.ENV.BASE_URL}/watchlist`,
   },
 ];
 const NavBar = () => {

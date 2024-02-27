@@ -3,9 +3,13 @@ import { useParams } from "react-router-dom";
 import AdvancedFilters from "../components/AdvancedFilters";
 import MediaList from "../components/MediaList";
 import ScrollToTopButton from "../components/common/ScrollToTopButton";
-import { CONSTANTS, CategoryType } from "../helpers/Constants";
+import { CONSTANTS } from "../helpers/Constants";
 import { useInfiniteMedia } from "../hooks/TmdbQueries";
-import { CategoryMediaParamsType, MediaType } from "../types/TmdbTypes";
+import {
+  CategoryMediaParamsType,
+  CategoryType,
+  MediaType,
+} from "../types/TmdbTypes";
 import ErrorPage from "./ErrorPage";
 import PageNotFound from "./PageNotFound";
 import { useInView } from "react-intersection-observer";
@@ -15,9 +19,8 @@ const CategoryMedia = () => {
   const isValidMedia =
     mediaType !== undefined &&
     category !== undefined &&
-    (mediaType.toUpperCase() === "MOVIES" ||
-      mediaType.toUpperCase() === "SHOWS") &&
-    category.toUpperCase() in CONSTANTS.CATEGORIES;
+    (mediaType === "movies" || mediaType === "shows") &&
+    category in CONSTANTS.CATEGORIES;
 
   const [params, setParams] = useState<CategoryMediaParamsType>({
     with_genres: "",
@@ -44,13 +47,11 @@ const CategoryMedia = () => {
   return (
     <div className="p-3 flex flex-col">
       <p className="text-3xl font-bold text-center py-3 text-neutral-content">
-        {`${
-          CONSTANTS.CATEGORIES[
-            category.toUpperCase() as keyof typeof CONSTANTS.CATEGORIES
-          ]
-        } ${mediaType.toUpperCase()}`}
+        {`${CONSTANTS.CATEGORIES[
+          category as keyof typeof CONSTANTS.CATEGORIES
+        ].toUpperCase()} ${mediaType.toUpperCase()}`}
       </p>
-      {category?.toUpperCase() === "DISCOVER" && (
+      {category === "discover" && (
         <AdvancedFilters
           classNames="py-3"
           mediaType={mediaType as MediaType}

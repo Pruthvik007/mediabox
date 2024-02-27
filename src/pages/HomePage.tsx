@@ -2,11 +2,11 @@ import SampleCategoryMedia from "../components/SampleCategoryMedia";
 const HomePage = () => {
   return (
     <div className="flex flex-col gap-3 p-3">
-      <SampleCategoryMedia category="TRENDING" />
-      <SampleCategoryMedia category="NOW_PLAYING" />
-      <SampleCategoryMedia category="POPULAR" />
-      <SampleCategoryMedia category="TOP_RATED" />
-      <SampleCategoryMedia category="UPCOMING" />
+      <SampleCategoryMedia category="trending" />
+      <SampleCategoryMedia category="now_playing" />
+      <SampleCategoryMedia category="popular" />
+      <SampleCategoryMedia category="top_rated" />
+      <SampleCategoryMedia category="upcoming" />
     </div>
   );
 };

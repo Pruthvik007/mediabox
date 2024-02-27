@@ -1,3 +1,5 @@
+import { END_POINT_OF_MEDIA_OF_CATEGORY } from "../helpers/Constants";
+
 export interface Response<T = Movie | Show> {
   page: number;
   results: T[];
@@ -153,7 +155,7 @@ export interface Cast {
   job?: string;
 }
 
-export type MediaType = "MOVIES" | "SHOWS";
+export type MediaType = "movies" | "shows";
 
 export interface QueryParamsType {
   page?: number;
@@ -191,3 +193,7 @@ export interface Result {
   published_at: string;
   id: string;
 }
+
+export type CategoryType =
+  | keyof typeof END_POINT_OF_MEDIA_OF_CATEGORY.movies
+  | keyof typeof END_POINT_OF_MEDIA_OF_CATEGORY.shows;

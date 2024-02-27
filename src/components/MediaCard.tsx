@@ -1,13 +1,11 @@
-import { Movie, Show } from "../types/TmdbTypes";
+import { Media } from "../types/TmdbTypes";
 import TmdbImage from "./common/TmdbImage";
 type MediaCardProps = {
-  media: Movie | Show;
+  media: Media;
 };
 const MediaCard = ({ media }: MediaCardProps) => {
   const imagePath = media.poster_path ? media.poster_path : media.backdrop_path;
-  const alt = (media as Movie).title
-    ? (media as Movie).title
-    : (media as Show).name;
+  const alt = media.id.toString();
   return (
     <div className="relative">
       <div className="card-sm md:card-md lg:card-lg overflow-y-clip">

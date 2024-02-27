@@ -3,11 +3,10 @@ import { fetchApi } from "../helpers/Fetch";
 import {
   CategoryMediaParamsType,
   Genre,
-  Movie,
+  Media,
   MovieDetails,
   Response,
   SearchMediaParamsType,
-  Show,
   ShowDetails,
   VideosResponse,
 } from "../types/TmdbTypes";
@@ -16,16 +15,16 @@ class TmdbServices {
   getMedia(
     endPoint: string,
     params?: CategoryMediaParamsType
-  ): Promise<Response<Movie | Show>> {
+  ): Promise<Response<Media>> {
     if (!params) {
-      return fetchApi<Response<Movie | Show>>(endPoint);
+      return fetchApi<Response<Media>>(endPoint);
     } else {
       const queries = new URLSearchParams(
         Object.entries(params).filter(
           (q) => q[1] !== null && q[1] !== undefined && q[1] !== ""
         )
       ).toString();
-      return fetchApi<Response<Movie | Show>>(endPoint + "?" + queries);
+      return fetchApi<Response<Media>>(endPoint + "?" + queries);
     }
   }
   getMediaDetails(
@@ -37,19 +36,19 @@ class TmdbServices {
   getMediaSearchResults(
     endPoint: string,
     params: SearchMediaParamsType
-  ): Promise<Response<Movie | Show>> {
+  ): Promise<Response<Media>> {
     const queries = new URLSearchParams(
       Object.entries(params).filter(
         (q) => q[1] !== null && q[1] !== undefined && q[1] !== ""
       )
     ).toString();
-    return fetchApi<Response<Movie | Show>>(endPoint + "?" + queries);
+    return fetchApi<Response<Media>>(endPoint + "?" + queries);
   }
   getMediaRecomendations(
     endPoint: string,
     id: string
-  ): Promise<Response<Movie | Show>> {
-    return fetchApi<Response<Movie | Show>>(
+  ): Promise<Response<Media>> {
+    return fetchApi<Response<Media>>(
       `${endPoint.replace(ID_PLACEHOLDER, id.toString())}`
     );
   }

@@ -1,13 +1,13 @@
 import { useInfiniteQuery, useQuery } from "react-query";
 import {
   CONSTANTS,
-  CategoryType,
   END_POINT_OF,
   END_POINT_OF_MEDIA_OF_CATEGORY,
 } from "../helpers/Constants";
 import TmdbServices from "../services/TmdbServices";
 import {
   CategoryMediaParamsType,
+  CategoryType,
   MediaType,
   SearchMediaParamsType,
 } from "../types/TmdbTypes";
@@ -39,8 +39,8 @@ export const useInfiniteMedia = (
     queryKey: [`${mediaType}-${category}`, mediaType, category, params],
     queryFn: ({ pageParam = 1 }) => {
       return TmdbServices.getMedia(
-        END_POINT_OF_MEDIA_OF_CATEGORY[mediaType?.toUpperCase() as MediaType][
-          category?.toUpperCase() as keyof typeof CONSTANTS.CATEGORIES
+        END_POINT_OF_MEDIA_OF_CATEGORY[mediaType as MediaType][
+          category as keyof typeof CONSTANTS.CATEGORIES
         ],
         {
           ...params,
@@ -58,7 +58,7 @@ export const useInfiniteMedia = (
 export const useMediaDetails = (mediaType: MediaType, mediaId: string) => {
   return useQuery([`${mediaType}-details-${mediaId}`, mediaId, mediaType], () =>
     TmdbServices.getMediaDetails(
-      mediaType === "MOVIES"
+      mediaType === "movies"
         ? END_POINT_OF.DETAILS_OF_MOVIE
         : END_POINT_OF.DETAILS_OF_SHOWS,
       mediaId
@@ -71,7 +71,7 @@ export const useRecommendations = (mediaType: MediaType, mediaId: string) => {
     [`${mediaType}-recomendations-${mediaId}`, mediaId, mediaType],
     () =>
       TmdbServices.getMediaRecomendations(
-        mediaType === "MOVIES"
+        mediaType === "movies"
           ? END_POINT_OF.MOVIE_RECOMENDATIONS
           : END_POINT_OF.SHOW_RECOMENDATIONS,
         mediaId
@@ -87,7 +87,7 @@ export const useSearchResults = (
     queryKey: [`${mediaType}-search`, mediaType, params],
     queryFn: ({ pageParam = 1 }) => {
       return TmdbServices.getMediaSearchResults(
-        mediaType === "MOVIES"
+        mediaType === "movies"
           ? END_POINT_OF.SEARCH_MOVIE
           : END_POINT_OF.SEARCH_SHOWS,
         { ...params, page: pageParam }
@@ -103,7 +103,7 @@ export const useSearchResults = (
 
 export const useGenres = (mediaType: MediaType) => {
   const endPoint =
-    mediaType === "MOVIES"
+    mediaType === "movies"
       ? END_POINT_OF.GENRES_OF_MOVIES
       : END_POINT_OF.GENRES_OF_SHOWS;
   const { data, error } = useQuery([`${mediaType}-genres`], () =>
@@ -115,7 +115,7 @@ export const useGenres = (mediaType: MediaType) => {
 
 export const useVideos = (mediaType: MediaType, mediaId: string) => {
   const endPoint =
-    mediaType === "MOVIES"
+    mediaType === "movies"
       ? END_POINT_OF.VIDEOS_OF_MOVIE
       : END_POINT_OF.VIDEOS_OF_SHOW;
   return useQuery([`${mediaType}-videos-${mediaId}`], () =>

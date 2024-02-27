@@ -11,12 +11,12 @@ import MediaSelector from "./MediaSelector";
 
 type SampleCategoryMediaProps = {
   category:
-    | keyof typeof END_POINT_OF_MEDIA_OF_CATEGORY.MOVIES
-    | keyof typeof END_POINT_OF_MEDIA_OF_CATEGORY.SHOWS;
+    | keyof typeof END_POINT_OF_MEDIA_OF_CATEGORY.movies
+    | keyof typeof END_POINT_OF_MEDIA_OF_CATEGORY.shows;
 };
 const SampleCategoryMedia = ({ category }: SampleCategoryMediaProps) => {
   const navigate = useNavigate();
-  const [mediaType, setMediaType] = useState<MediaType>("MOVIES");
+  const [mediaType, setMediaType] = useState<MediaType>("movies");
   const { isLoading, data } = useSampleMedia(mediaType, category);
 
   return (

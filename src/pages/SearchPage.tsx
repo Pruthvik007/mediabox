@@ -9,7 +9,7 @@ import ErrorPage from "./ErrorPage";
 
 const SearchPage = () => {
   const { ref, inView } = useInView();
-  const [mediaType, setMediaType] = useState<MediaType>("MOVIES");
+  const [mediaType, setMediaType] = useState<MediaType>("movies");
   const [params, setParams] = useState<SearchMediaParamsType>({
     page: 1,
     query: "",

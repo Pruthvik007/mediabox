@@ -5,12 +5,12 @@ export const CONSTANTS = {
   ALL: "ALL",
   GENRES: "GENRES",
   CATEGORIES: {
-    DISCOVER: "DISCOVER",
-    POPULAR: "POPULAR",
-    TRENDING: "TRENDING",
-    NOW_PLAYING: "NOW PLAYING",
-    TOP_RATED: "TOP RATED",
-    UPCOMING: "UPCOMING",
+    discover: "Discover",
+    popular: "Popular",
+    trending: "Trending",
+    now_playing: "Now Playing",
+    top_rated: "Top Rated",
+    upcoming: "Upcoming",
   },
   ENV: {
     TMDB_API_KEY: import.meta.env.VITE_TMDB_API_KEY,
@@ -23,26 +23,22 @@ export const CONSTANTS = {
   VIDSRC_SHOW_URL: "https://vidsrc.xyz/embed/show?tmdb=",
 };
 
-export type CategoryType =
-  | keyof typeof END_POINT_OF_MEDIA_OF_CATEGORY.MOVIES
-  | keyof typeof END_POINT_OF_MEDIA_OF_CATEGORY.SHOWS;
-
 export const END_POINT_OF_MEDIA_OF_CATEGORY = {
-  MOVIES: {
-    DISCOVER: "discover/movie",
-    TRENDING: "trending/movie/week",
-    NOW_PLAYING: "movie/now_playing",
-    POPULAR: "movie/popular",
-    TOP_RATED: "movie/top_rated",
-    UPCOMING: "movie/upcoming",
+  movies: {
+    discover: "discover/movie",
+    trending: "trending/movie/week",
+    now_playing: "movie/now_playing",
+    popular: "movie/popular",
+    top_rated: "movie/top_rated",
+    upcoming: "movie/upcoming",
   },
-  SHOWS: {
-    DISCOVER: "discover/tv",
-    TRENDING: "trending/tv/week",
-    NOW_PLAYING: "tv/airing_today",
-    UPCOMING: "tv/on_the_air",
-    POPULAR: "tv/popular",
-    TOP_RATED: "tv/top_rated",
+  shows: {
+    discover: "discover/tv",
+    trending: "trending/tv/week",
+    now_playing: "tv/airing_today",
+    upcoming: "tv/on_the_air",
+    popular: "tv/popular",
+    top_rated: "tv/top_rated",
   },
 };
 
