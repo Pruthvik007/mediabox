@@ -20,7 +20,7 @@ const MediaList = ({
           to={`/${CONSTANTS.ENV.BASE_URL}/details/${mediaType}/${media.id}`}
           key={media.id}
         >
-          <MediaCard media={media} />
+          <MediaCard media={media} mediaType={mediaType} />
         </Link>
       ))}
       {isLoading && <Skeleton count={20} />}

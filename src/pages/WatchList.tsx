@@ -8,9 +8,9 @@ const WatchList = () => {
   const [mediaType, setMediaType] = useState<MediaType>("movies");
   const { watchList } = useWatchList();
   return (
-    <div className="p-5 h-[calc(100vh-4rem)] space-y-5">
+    <div className="p-5 rounded-xl space-y-5 flex flex-col">
       <MediaSelector mediaType={mediaType} setMediaType={setMediaType} />
-      <div className="flex flex-wrap bg-neutral gap-3 pt-5 px-3">
+      <div className="rounded-xl flex flex-wrap bg-neutral gap-5 justify-start p-3">
         {mediaType === "movies" && (
           <MediaList mediaType={mediaType} mediaList={watchList.movies} />
         )}
