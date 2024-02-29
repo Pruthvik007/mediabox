@@ -8,7 +8,6 @@ import { useSampleMedia } from "../hooks/TmdbQueries";
 import { MediaType } from "../types/TmdbTypes";
 import MediaList from "./MediaList";
 import MediaSelector from "./MediaSelector";
-import ErrorPage from "../pages/ErrorPage";
 
 type SampleCategoryMediaProps = {
   category:
