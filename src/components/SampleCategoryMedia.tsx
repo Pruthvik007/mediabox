@@ -8,6 +8,7 @@ import { useSampleMedia } from "../hooks/TmdbQueries";
 import { MediaType } from "../types/TmdbTypes";
 import MediaList from "./MediaList";
 import MediaSelector from "./MediaSelector";
+import ErrorPage from "../pages/ErrorPage";
 
 type SampleCategoryMediaProps = {
   category:
@@ -30,9 +31,7 @@ const SampleCategoryMedia = ({ category }: SampleCategoryMediaProps) => {
         </div>
         <button
           onClick={() =>
-            navigate(
-              `/${CONSTANTS.ENV.BASE_URL}/media/${mediaType}/${category}`
-            )
+            navigate(`${CONSTANTS.ENV.BASE_URL}/media/${mediaType}/${category}`)
           }
           className="btn btn-active btn-primary btn-sm md:btn-sm lg:btn-md"
         >

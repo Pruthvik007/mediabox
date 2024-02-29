@@ -14,7 +14,7 @@ export const CONSTANTS = {
   },
   ENV: {
     TMDB_API_KEY: import.meta.env.VITE_TMDB_API_KEY,
-    BASE_URL: "movies-and-series",
+    BASE_URL: "/movies-and-series",
     TMDB_API_BASE_URL: "https://api.themoviedb.org/3/",
     TMDB_API_IMAGE_URL: "https://image.tmdb.org/t/p/",
   },

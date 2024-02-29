@@ -17,7 +17,7 @@ const MediaList = ({
     <>
       {mediaList?.map((media) => (
         <Link
-          to={`/${CONSTANTS.ENV.BASE_URL}/details/${mediaType}/${media.id}`}
+          to={`${CONSTANTS.ENV.BASE_URL}/details/${mediaType}/${media.id}`}
           key={media.id}
         >
           <MediaCard media={media} mediaType={mediaType} />
