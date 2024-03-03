@@ -1,26 +1,16 @@
 type SkeletonProps = {
   count?: number;
-  size?: "sm" | "md" | "lg";
-  height?: string;
-  width?: string;
+  className: string;
 };
-const Skeleton = ({ count = 1, size, height, width }: SkeletonProps) => {
+const Skeleton = ({ count = 1, className }: SkeletonProps) => {
   return (
     <>
       {Array.from({ length: count }).map((_, index) => (
-        <div key={index} role="placeholder" className="max-w-sm animate-pulse">
-          <div
-            className={`bg-gray-200 dark:bg-gray-700 ${
-              size
-                ? `card-${size}`
-                : `${
-                    !height && !width
-                      ? "card-sm md:card-md lg:card-lg"
-                      : `${height} ${width}`
-                  }`
-            }`}
-          ></div>
-        </div>
+        <div
+          key={index}
+          role="placeholder"
+          className={`bg-slate-400 dark:bg-slate-700 max-w-sm animate-pulse ${className}`}
+        ></div>
       ))}
     </>
   );

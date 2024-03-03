@@ -23,7 +23,7 @@ const Filters = ({
   }, [debouncedQueryValue]);
   return (
     <div
-      className={`flex flex-row gap-3 bg-base-100 p-5 w-full justify-center border-black rounded-lg items-center ${classNames}`}
+      className={`flex gap-3 bg-base-100 p-5 w-full justify-center border-black rounded-lg items-center ${classNames}`}
     >
       <input
         type="text"

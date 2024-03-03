@@ -22,13 +22,11 @@ const WatchlistButtons: React.FC<WatchlistButtonsProps> = ({
     isMediaPresentInWatchlist,
   } = useWatchList();
 
-  const handleAddToWatchlist = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleAddToWatchlist = () => {
     addMediaToWatchList(mediaDetails as Media, mediaType);
   };
 
-  const handleRemoveFromWatchlist = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleRemoveFromWatchlist = () => {
     removeMediaFromWatchList(mediaDetails as Media, mediaType);
   };
 

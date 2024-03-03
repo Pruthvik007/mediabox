@@ -56,19 +56,19 @@
 
 @layer utilities {
   .card-sm {
-    @apply w-32 h-48;
+    @apply w-32 h-40;
   }
   .card-md {
-    @apply w-44 h-72;
+    @apply w-44 h-64;
   }
 
   .card-lg {
-    @apply w-60 h-96;
+    @apply w-60 h-auto;
   }
 }
 
 .rflex {
-  @apply flex flex-row gap-3 p-3;
+  @apply flex gap-3 p-3;
 }
 
 .cflex {

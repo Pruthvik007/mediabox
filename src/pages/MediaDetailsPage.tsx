@@ -34,7 +34,7 @@ const MediaDetailsPage = () => {
             <p className="text-3xl font-bold text-white font-sans py-2">
               Recommendations
             </p>
-            <div className="flex flex-row gap-3 scrollbar-hidden">
+            <div className="flex gap-3 scrollbar-hidden">
               <MediaList
                 mediaList={recommendationsData.data?.results}
                 mediaType={mediaType as MediaType}

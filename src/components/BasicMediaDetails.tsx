@@ -55,7 +55,7 @@ const BasicMediaDetails = ({
       <div className="text-lg md:text-xl italic font-semibold text">
         <p>{mediaDetails.overview}</p>
       </div>
-      <div className="flex flex-row gap-3 justify-center md:justify-start">
+      <div className="flex gap-3 justify-center md:justify-start">
         <button
           onClick={() => openModal(<VideoModalContent {...trailer} />)}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
@@ -66,8 +66,11 @@ const BasicMediaDetails = ({
         <WatchlistButtons mediaDetails={mediaDetails} mediaType={mediaType} />
       </div>
       <div className="flex flex-col gap-3 lg:flex-row max-w-6xl">
-        <GenresOrCompanies data={mediaDetails.genres} />
-        <GenresOrCompanies data={mediaDetails.production_companies} />
+        <GenresOrCompanies data={mediaDetails.genres} type="Genres" />
+        <GenresOrCompanies
+          data={mediaDetails.production_companies}
+          type="Production Companies"
+        />
       </div>
     </div>
   );
@@ -100,28 +103,27 @@ const MediaTitle = ({
 
 const GenresOrCompanies = ({
   data,
+  type,
 }: {
   data: (Genre | ProductionCompany)[];
+  type: "Genres" | "Production Companies";
 }) => {
   return (
     <div className="flex flex-col items-center md:flex-row bg-base-100 rounded-xl p-3 gap-x-2 overflow-x-auto">
-      <p className="text-xl font-bold text-white">Production Companies:</p>
-      <div className="max-w-full overflow-x-auto">
-        <div
-          className="flex flex-row justify-start rounded-md shadow-sm gap-2 p-2"
-          role="group"
-        >
-          {data.map((item) => (
-            <button
-              disabled
-              key={item.id}
-              type="button"
-              className="px-4 py-2 text-sm font-medium bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
-            >
-              {item.name}
-            </button>
-          ))}
-        </div>
+      <p className="text-xl font-bold text-white">{type}</p>
+      <div
+        className="flex justify-start rounded-md shadow-sm gap-2 p-2 max-w-full overflow-x-auto"
+        role="group"
+      >
+        {data.map((item) => (
+          <button
+            key={item.id}
+            type="button"
+            className="btn btn-sm md:btn-md btn-active btn-info"
+          >
+            {item.name}
+          </button>
+        ))}
       </div>
     </div>
   );

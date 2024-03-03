@@ -25,8 +25,8 @@ const Rating = ({
 }) => {
   return (
     <>
-      <div className="flex flex-row items-center flex-wrap justify-center gap-1">
-        <div className="flex flex-row">
+      <div className="flex items-center flex-wrap justify-center gap-1">
+        <div className="flex">
           {Array.from({ length: totalRating }).map((_, index) => (
             <Star
               key={index}

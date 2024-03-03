@@ -21,9 +21,9 @@ const SampleCategoryMedia = ({ category }: SampleCategoryMediaProps) => {
 
   return (
     <div className="flex flex-col gap-3 p-3 bg-neutral rounded-xl">
-      <div className="w-full flex flex-row place-content-between items-center">
-        <div className="flex flex-row gap-4  items-center">
-          <p className="text-sm md:text-md font-bold text-center text">
+      <div className="w-full flex place-content-between items-center">
+        <div className="flex gap-4  items-center">
+          <p className="text-sm md:text-md lg:text-lg font-bold text">
             {CONSTANTS.CATEGORIES[category]}
           </p>
           <MediaSelector mediaType={mediaType} setMediaType={setMediaType} />
@@ -37,7 +37,7 @@ const SampleCategoryMedia = ({ category }: SampleCategoryMediaProps) => {
           View More
         </button>
       </div>
-      <div className="flex flex-row gap-3 scrollbar-hidden">
+      <div className="flex gap-3 scrollbar-hidden">
         <MediaList
           mediaList={data?.results}
           mediaType={mediaType}

@@ -3,21 +3,21 @@ import Genres from "./Genres";
 import Dropdown from "./common/Dropdown";
 
 type AdvancedFiltersProps = {
-  classNames?: string;
+  className?: string;
   mediaType: MediaType;
   params: CategoryMediaParamsType;
   setParams: (params: CategoryMediaParamsType) => void;
 };
 
 const AdvancedFilters = ({
-  classNames = "",
+  className = "",
   mediaType,
   params,
   setParams,
 }: AdvancedFiltersProps) => {
   return (
     <div
-      className={`flex flex-row gap-3 bg-base-100 p-5 w-full justify-center border-black rounded-lg ${classNames}`}
+      className={`flex gap-3 bg-base-100 p-5 w-full justify-center border-black rounded-lg ${className}`}
     >
       <Genres
         mediaType={mediaType}

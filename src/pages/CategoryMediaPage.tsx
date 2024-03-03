@@ -53,7 +53,7 @@ const CategoryMedia = () => {
       </p>
       {category === "discover" && (
         <AdvancedFilters
-          classNames="py-3"
+          className="py-3"
           mediaType={mediaType as MediaType}
           params={params}
           setParams={setParams}
