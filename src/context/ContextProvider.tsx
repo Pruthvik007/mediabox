@@ -1,9 +1,12 @@
 import { ModalProvider } from "./ModalContext";
+import WatchListProvider from "./WatchListContext";
 
 const ContextProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      <ModalProvider>{children}</ModalProvider>
+      <ModalProvider>
+        <WatchListProvider>{children}</WatchListProvider>
+      </ModalProvider>
     </>
   );
 };

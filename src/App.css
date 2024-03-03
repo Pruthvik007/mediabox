@@ -3,45 +3,7 @@
 @tailwind utilities;
 #root {
   width: 100%;
-  /* max-width: 1280px; */
   margin: 0 auto;
-  /* text-align: center; */
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }
 
 .scrollbar-hidden::-webkit-scrollbar {
@@ -56,7 +18,7 @@
 
 @layer utilities {
   .card-sm {
-    @apply w-32 h-40;
+    @apply w-32 h-44;
   }
   .card-md {
     @apply w-44 h-64;
@@ -65,22 +27,6 @@
   .card-lg {
     @apply w-60 h-auto;
   }
-}
-
-.rflex {
-  @apply flex gap-3 p-3;
-}
-
-.cflex {
-  @apply flex flex-col gap-3 p-3;
-}
-
-.modal-content-text {
-  @apply text-base leading-relaxed text-gray-500 dark:text-gray-400;
-}
-
-.custom-btn {
-  @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800;
 }
 
 .text {

@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
-import ThemeToggle from "./common/ThemeToggle";
-import { CONSTANTS } from "../helpers/Constants";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import CrossIcon from "../assets/icons/svgs/CrossIcon";
 import MenuIcon from "../assets/icons/svgs/MenuIcon";
+import { CONSTANTS } from "../helpers/Constants";
+import ThemeToggle from "./common/ThemeToggle";
 
 const navItems = [
   {
@@ -25,38 +25,43 @@ const navItems = [
 ];
 const Navbar = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const toggleNav = () => {
+  const navigate = useNavigate();
+  const toggleNav = (link: string | null = null) => {
+    if (link) navigate(link);
     setIsVisible(!isVisible);
   };
 
   return (
     <div className="bg-neutral flex justify-between items-center h-20 px-4 text-white">
       <Link
-        className="btn btn-ghost text-xl text"
+        className="btn btn-ghost"
         id="desktop-logo"
         to={CONSTANTS.ENV.BASE_URL}
       >
-        MediaBox
+        <p className="text-xl text-primary">MediaBox</p>
       </Link>
       <ul id="desktop-nav-items" className="hidden md:flex md:items-center">
         {navItems.map((item) => (
           <li
+            onClick={() => toggleNav(item.path)}
             key={item.path}
             className="p-4 hover:bg-primary rounded-xl m-2 cursor-pointer duration-300 hover:text-black"
           >
             <Link to={item.path}>{item.name}</Link>
           </li>
         ))}
-        <li className="p-2 rounded-xl m-2 cursor-pointer hover:bg-primary flex items-center">
-          <ThemeToggle />
-        </li>
       </ul>
-      <div
-        id="mobile-nav-toggle"
-        onClick={toggleNav}
-        className="block md:hidden"
-      >
-        {isVisible ? <CrossIcon /> : <MenuIcon />}
+      <div className="flex items-center gap-5">
+        <div className="p-2 hover:bg-primary rounded-xl m-2 cursor-pointer duration-300 flex items-center">
+          <ThemeToggle />
+        </div>
+        <div
+          id="mobile-nav-toggle"
+          onClick={() => toggleNav()}
+          className="block md:hidden"
+        >
+          {isVisible ? <CrossIcon /> : <MenuIcon />}
+        </div>
       </div>
       <ul
         id="mobile-nav-items"
@@ -66,19 +71,9 @@ const Navbar = () => {
             : "ease-in-out w-[60%] duration-500 fixed top-0 bottom-0 left-[-100%]"
         }
       >
-        <div className="flex items-center justify-between p-3 gap-x-3">
-          <Link
-            className="text-xl text"
-            id="mobile-logo"
-            to={CONSTANTS.ENV.BASE_URL}
-          >
-            MediaBox
-          </Link>
-          <ThemeToggle />
-        </div>
         {navItems.map((item) => (
           <li
-            onClick={toggleNav}
+            onClick={() => toggleNav(item.path)}
             key={item.path}
             className="p-4 border-b rounded-xl hover:bg-primary duration-300 hover:text-black cursor-pointer border-gray-600"
           >

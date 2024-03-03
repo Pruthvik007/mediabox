@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import {
   Media,
   MediaDetails,
@@ -8,7 +7,6 @@ import {
 } from "../types/TmdbTypes";
 import WatchlistButtons from "./WatchlistButtons";
 import TmdbImage from "./common/TmdbImage";
-import { CONSTANTS } from "../helpers/Constants";
 type MediaCardProps = {
   media: Media;
   mediaType: MediaType;
@@ -21,19 +19,14 @@ const MediaCard = ({ media, mediaType }: MediaCardProps) => {
     media.id.toString();
   return (
     <div className="relative group">
-      <Link
-        to={`${CONSTANTS.ENV.BASE_URL}/details/${mediaType}/${media.id}`}
-        key={media.id}
-      >
-        <div className="relative card-sm md:card-md lg:card-lg overflow-y-clip">
-          <TmdbImage imagePath={imagePath} alt={alt} />
-          {media.vote_average !== 0 && (
-            <div className="absolute top-1 right-1 badge badge-xs sm:badge-sm md:badge-md lg:badge-lg badge-neutral rounded-full">
-              {media.vote_average.toFixed(1)}
-            </div>
-          )}
+      <div className="card-sm md:card-md lg:card-lg overflow-y-clip">
+        <TmdbImage imagePath={imagePath} alt={alt} />
+      </div>
+      {media.vote_average !== 0 && (
+        <div className="absolute top-1 right-1 badge badge-xs sm:badge-sm md:badge-md lg:badge-lg badge-neutral rounded-full">
+          {media.vote_average.toFixed(1)}
         </div>
-      </Link>
+      )}
       <WatchlistButtons
         mediaDetails={media as MediaDetails}
         mediaType={mediaType}

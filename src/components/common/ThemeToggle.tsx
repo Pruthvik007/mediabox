@@ -6,7 +6,7 @@ const ThemeToggle = () => {
         id="theme controller"
         type="checkbox"
         className="theme-controller"
-        value="night"
+        value="coffee"
       />
       <svg
         className="swap-on fill-current w-10 h-10"

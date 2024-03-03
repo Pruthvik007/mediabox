@@ -23,7 +23,7 @@ const SampleCategoryMedia = ({ category }: SampleCategoryMediaProps) => {
     <div className="flex flex-col gap-3 p-3 bg-neutral rounded-xl">
       <div className="w-full flex place-content-between items-center">
         <div className="flex gap-4  items-center">
-          <p className="text-sm md:text-md lg:text-lg font-bold text">
+          <p className="text-md lg:text-lg font-bold text">
             {CONSTANTS.CATEGORIES[category]}
           </p>
           <MediaSelector mediaType={mediaType} setMediaType={setMediaType} />

@@ -1,6 +1,6 @@
 import React from "react";
 import { saveIcon, savedIcon } from "../assets/assets";
-import useWatchList from "../hooks/useWatchList";
+import { useWatchList } from "../hooks/useWatchList";
 import { Media, MediaDetails, MediaType } from "../types/TmdbTypes";
 
 type WatchlistButtonsProps = {
@@ -22,11 +22,15 @@ const WatchlistButtons: React.FC<WatchlistButtonsProps> = ({
     isMediaPresentInWatchlist,
   } = useWatchList();
 
-  const handleAddToWatchlist = () => {
+  const handleAddToWatchlist = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     addMediaToWatchList(mediaDetails as Media, mediaType);
   };
 
-  const handleRemoveFromWatchlist = () => {
+  const handleRemoveFromWatchlist = (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    e.preventDefault();
     removeMediaFromWatchList(mediaDetails as Media, mediaType);
   };
 

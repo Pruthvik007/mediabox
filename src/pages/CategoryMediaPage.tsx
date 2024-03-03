@@ -35,7 +35,8 @@ const CategoryMedia = () => {
     if (inView) {
       fetchNextPage();
     }
-  }, [inView, fetchNextPage]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inView]);
 
   if (!isValidMedia) {
     return <PageNotFound />;
@@ -45,7 +46,7 @@ const CategoryMedia = () => {
     return <ErrorPage />;
   }
   return (
-    <div className="p-3 flex flex-col">
+    <div className="p-3 flex flex-col gap-3">
       <p className="text-3xl font-bold text-center py-3 text-neutral-content">
         {`${CONSTANTS.CATEGORIES[
           category as keyof typeof CONSTANTS.CATEGORIES

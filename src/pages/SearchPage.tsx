@@ -19,34 +19,37 @@ const SearchPage = () => {
     useSearchResults(mediaType, params);
 
   useEffect(() => {
-    if (inView) {
+    if (inView && params.query.length > 0) {
       fetchNextPage();
     }
-  }, [inView, fetchNextPage]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inView]);
   if (error) return <ErrorPage />;
   return (
-    <div className="container px-3">
+    <div className="p-3 space-y-3">
       <p className="text-2xl md:text-3xl font-bold text-center py-3 text-neutral-content">
         Search For Movies And TV Series
       </p>
       <Filters
-        classNames="mb-5"
+        className="p-3"
         params={params}
         setParams={setParams}
         mediaType={mediaType}
         setMediaType={setMediaType}
       />
-      <div className="flex flex-wrap gap-3 justify-center bg-neutral">
-        {data?.pages.map((page, i) => (
-          <React.Fragment key={i}>
-            <MediaList
-              mediaList={page.results}
-              mediaType={mediaType as MediaType}
-              isLoading={isFetching || isFetchingNextPage}
-            />
-          </React.Fragment>
-        ))}
-      </div>
+      {data !== undefined && (
+        <div className="flex flex-wrap gap-3 justify-center bg-neutral rounded-xl p-3">
+          {data.pages.map((page, i) => (
+            <React.Fragment key={i}>
+              <MediaList
+                mediaList={page.results}
+                mediaType={mediaType as MediaType}
+                isLoading={isFetching || isFetchingNextPage}
+              />
+            </React.Fragment>
+          ))}
+        </div>
+      )}
       <div id="observer" ref={ref}></div>
       <ScrollToTopButton />
     </div>

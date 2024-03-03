@@ -11,6 +11,7 @@ type DropdownProps = {
 const Dropdown = ({ label, options, value, onChange }: DropdownProps) => {
   return (
     <select
+      id={label}
       className="select select-bordered max-w-xs text-center"
       value={value}
       onChange={(e) => onChange(e.target.value)}
