@@ -49,7 +49,7 @@ const TmdbImage = ({
         />
       ) : (
         <div className="relative">
-          <Skeleton />
+          <Skeleton className="card-sm md:card-md lg:card-lg" />
           <p className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             {alt}
           </p>
