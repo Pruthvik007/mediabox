@@ -12,7 +12,7 @@ const ViewMediaDetails = ({
 }) => {
   return (
     <div className="rounded-lg shadow flex flex-col items-center md:flex-row gap-5 text-center md:text-left justify-center p-5 bg-base-100">
-      <div className="flex flex-col">
+      <div className="space-y-5">
         <div className="card-lg">
           <TmdbImage
             imagePath={mediaDetails?.poster_path}

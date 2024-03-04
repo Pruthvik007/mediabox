@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 #root {
   width: 100%;
   margin: 0 auto;
@@ -25,7 +26,7 @@
   }
 
   .card-lg {
-    @apply w-60 h-auto;
+    @apply w-56 h-80;
   }
 }
 

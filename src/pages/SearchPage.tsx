@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import Filters from "../components/Filters";
 import MediaList from "../components/MediaList";
@@ -40,13 +40,12 @@ const SearchPage = () => {
       {data !== undefined && (
         <div className="flex flex-wrap gap-3 justify-center bg-neutral rounded-xl p-3">
           {data.pages.map((page, i) => (
-            <React.Fragment key={i}>
-              <MediaList
-                mediaList={page.results}
-                mediaType={mediaType as MediaType}
-                isLoading={isFetching || isFetchingNextPage}
-              />
-            </React.Fragment>
+            <MediaList
+              key={i}
+              mediaList={page.results}
+              mediaType={mediaType as MediaType}
+              isLoading={isFetching || isFetchingNextPage}
+            />
           ))}
         </div>
       )}

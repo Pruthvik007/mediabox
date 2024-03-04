@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import { RouteObject, createBrowserRouter } from "react-router-dom";
 import App from "./App.tsx";
 import BackDrop from "./components/common/BackDrop.tsx";
+import { CONSTANTS } from "./helpers/Constants.ts";
 const PageNotFound = React.lazy(() => import("./pages/PageNotFound.tsx"));
 const MediaDetailsPage = React.lazy(() => import("./pages/MediaDetailsPage"));
 const SearchPage = React.lazy(() => import("./pages/SearchPage"));
@@ -9,11 +10,12 @@ const WatchList = React.lazy(() => import("./pages/WatchList"));
 const CategoryMediaPage = React.lazy(
   () => import("./pages/CategoryMediaPage.tsx")
 );
+
 const HomePage = React.lazy(() => import("./pages/HomePage"));
 
 const routeObj: RouteObject[] = [
   {
-    path: "/movies-and-series/",
+    path: CONSTANTS.ENV.BASE_URL,
     element: <App />,
     children: [
       {

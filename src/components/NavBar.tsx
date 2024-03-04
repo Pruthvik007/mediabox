@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import CrossIcon from "../assets/icons/svgs/CrossIcon";
 import MenuIcon from "../assets/icons/svgs/MenuIcon";
 import { CONSTANTS } from "../helpers/Constants";
@@ -25,9 +25,7 @@ const navItems = [
 ];
 const Navbar = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const navigate = useNavigate();
-  const toggleNav = (link: string | null = null) => {
-    if (link) navigate(link);
+  const toggleNav = () => {
     setIsVisible(!isVisible);
   };
 
@@ -40,30 +38,28 @@ const Navbar = () => {
       >
         <p className="text-xl text-primary">MediaBox</p>
       </Link>
-      <ul id="desktop-nav-items" className="hidden md:flex md:items-center">
+      <div id="desktop-nav-items" className="hidden md:flex md:items-center">
         {navItems.map((item) => (
-          <li
-            onClick={() => toggleNav(item.path)}
-            key={item.path}
-            className="p-4 hover:bg-primary rounded-xl m-2 cursor-pointer duration-300 hover:text-black"
-          >
-            <Link to={item.path}>{item.name}</Link>
-          </li>
+          <Link to={item.path} key={item.path}>
+            <div className="p-4 hover:bg-primary rounded-xl m-2 cursor-pointer duration-300 hover:text-black">
+              {item.name}
+            </div>
+          </Link>
         ))}
-      </ul>
+      </div>
       <div className="flex items-center gap-5">
         <div className="p-2 hover:bg-primary rounded-xl m-2 cursor-pointer duration-300 flex items-center">
           <ThemeToggle />
         </div>
         <div
           id="mobile-nav-toggle"
-          onClick={() => toggleNav()}
+          onClick={toggleNav}
           className="block md:hidden"
         >
           {isVisible ? <CrossIcon /> : <MenuIcon />}
         </div>
       </div>
-      <ul
+      <div
         id="mobile-nav-items"
         className={
           isVisible
@@ -72,15 +68,13 @@ const Navbar = () => {
         }
       >
         {navItems.map((item) => (
-          <li
-            onClick={() => toggleNav(item.path)}
-            key={item.path}
-            className="p-4 border-b rounded-xl hover:bg-primary duration-300 hover:text-black cursor-pointer border-gray-600"
-          >
-            <Link to={item.path}>{item.name}</Link>
-          </li>
+          <Link to={item.path} key={item.path}>
+            <div className="p-4 border-b rounded-xl hover:bg-primary duration-300 hover:text-black cursor-pointer border-gray-600">
+              {item.name}
+            </div>
+          </Link>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

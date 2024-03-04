@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 import { useParams } from "react-router-dom";
 import AdvancedFilters from "../components/AdvancedFilters";
 import MediaList from "../components/MediaList";
@@ -12,7 +13,6 @@ import {
 } from "../types/TmdbTypes";
 import ErrorPage from "./ErrorPage";
 import PageNotFound from "./PageNotFound";
-import { useInView } from "react-intersection-observer";
 const CategoryMedia = () => {
   const { ref, inView } = useInView();
   const { mediaType, category } = useParams();
@@ -62,16 +62,15 @@ const CategoryMedia = () => {
       )}
       <div className="flex flex-wrap justify-around bg-neutral gap-0.5">
         {data?.pages.map((page, i) => (
-          <React.Fragment key={i}>
-            <MediaList
-              mediaList={page.results}
-              mediaType={mediaType as MediaType}
-              isLoading={isFetching || isFetchingNextPage}
-            />
-          </React.Fragment>
+          <MediaList
+            key={i}
+            mediaList={page.results}
+            mediaType={mediaType as MediaType}
+            isLoading={isFetching || isFetchingNextPage}
+          />
         ))}
       </div>
-      <div id="observer" ref={ref}></div>
+      {data && data.pages.length >= 1 && <div id="observer" ref={ref}></div>}
       <ScrollToTopButton />
     </div>
   );
