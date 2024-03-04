@@ -10,8 +10,13 @@ import TmdbImage from "./common/TmdbImage";
 type MediaCardProps = {
   media: Media;
   mediaType: MediaType;
+  imageLoading?: "lazy" | "eager";
 };
-const MediaCard = ({ media, mediaType }: MediaCardProps) => {
+const MediaCard = ({
+  media,
+  mediaType,
+  imageLoading = "eager",
+}: MediaCardProps) => {
   const imagePath = media.poster_path ? media.poster_path : media.backdrop_path;
   const alt =
     (media as MovieDetails).title ||
@@ -20,7 +25,7 @@ const MediaCard = ({ media, mediaType }: MediaCardProps) => {
   return (
     <div className="relative group">
       <div className="card-sm md:card-md lg:card-lg overflow-y-clip">
-        <TmdbImage imagePath={imagePath} alt={alt} />
+        <TmdbImage imagePath={imagePath} alt={alt} loading={imageLoading} />
       </div>
       {media.vote_average !== 0 && (
         <div className="absolute top-1 right-1 badge badge-xs sm:badge-sm md:badge-md lg:badge-lg badge-neutral rounded-full">

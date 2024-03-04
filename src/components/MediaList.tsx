@@ -15,12 +15,20 @@ const MediaList = ({
 }) => {
   return (
     <>
-      {mediaList?.map((media) => (
+      {mediaList?.slice(0, 10).map((media) => (
         <Link
           to={`${CONSTANTS.ENV.BASE_URL}/details/${mediaType}/${media.id}`}
           key={media.id}
         >
-          <MediaCard media={media} mediaType={mediaType} />
+          <MediaCard media={media} mediaType={mediaType} imageLoading="eager" />
+        </Link>
+      ))}
+      {mediaList?.slice(10).map((media) => (
+        <Link
+          to={`${CONSTANTS.ENV.BASE_URL}/details/${mediaType}/${media.id}`}
+          key={media.id}
+        >
+          <MediaCard media={media} mediaType={mediaType} imageLoading="lazy" />
         </Link>
       ))}
       {isLoading && (

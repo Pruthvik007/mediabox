@@ -17,6 +17,7 @@ const ViewMediaDetails = ({
           <TmdbImage
             imagePath={mediaDetails?.poster_path}
             alt={mediaDetails?.id.toString()}
+            loading="eager"
           />
         </div>
         <Rating

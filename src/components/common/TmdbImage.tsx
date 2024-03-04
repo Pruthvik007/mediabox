@@ -6,10 +6,12 @@ const TmdbImage = ({
   imagePath,
   alt,
   imageType = "POSTER",
+  loading = "eager",
 }: {
   imagePath: string;
   alt: string;
   imageType?: keyof typeof ImageSize;
+  loading?: "lazy" | "eager";
 }) => {
   const [isLoading, setIsLoading] = useState(true);
   return (
@@ -29,7 +31,7 @@ const TmdbImage = ({
           onLoad={() => {
             setIsLoading(false);
           }}
-          loading="lazy"
+          loading={loading}
           height="100%"
           width="100%"
           srcSet={`${
