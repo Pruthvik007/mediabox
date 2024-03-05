@@ -33,7 +33,7 @@ const BasicMediaDetails = ({
         result.official &&
         result.site === "YouTube" &&
         result.type === "Trailer" &&
-        result.name === "Official Trailer"
+        result.name.toLowerCase().includes("trailer")
     );
 
     if (trailerData) {
@@ -65,13 +65,11 @@ const BasicMediaDetails = ({
         <MediaProvider mediaType={mediaType} id={mediaDetails.id} />
         <WatchlistButtons mediaDetails={mediaDetails} mediaType={mediaType} />
       </div>
-      <div className="flex flex-col gap-3 lg:flex-row max-w-6xl">
-        <GenresOrCompanies data={mediaDetails.genres} type="Genres" />
-        <GenresOrCompanies
-          data={mediaDetails.production_companies}
-          type="Production Companies"
-        />
-      </div>
+      <GenresOrCompanies data={mediaDetails.genres} type="Genres" />
+      <GenresOrCompanies
+        data={mediaDetails.production_companies}
+        type="Production Companies"
+      />
     </div>
   );
 };
@@ -109,8 +107,8 @@ const GenresOrCompanies = ({
   type: "Genres" | "Production Companies";
 }) => {
   return (
-    <div className="flex flex-col items-center md:flex-row bg-base-100 rounded-xl p-3 gap-x-2 overflow-x-auto">
-      <p className="text-xl font-bold text-white">{type}</p>
+    <div className="flex flex-col items-center md:flex-row bg-base-100 rounded-xl py-2 px-4 gap-x-2">
+      <p className="text-lg text whitespace-nowrap">{type}</p>
       <div
         className="flex justify-start rounded-md shadow-sm gap-2 p-2 max-w-full overflow-x-auto"
         role="group"

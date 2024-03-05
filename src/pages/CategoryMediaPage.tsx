@@ -60,7 +60,7 @@ const CategoryMedia = () => {
           setParams={setParams}
         />
       )}
-      <div className="flex flex-wrap justify-around bg-neutral gap-0.5">
+      <div className="flex flex-wrap justify-around bg-neutral gap-x-0.5 gap-y-2 p-2 rounded-xl">
         {data?.pages.map((page, i) => (
           <MediaList
             key={i}

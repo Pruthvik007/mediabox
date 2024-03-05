@@ -37,10 +37,10 @@
 ::-webkit-scrollbar {
   width: 2px;
   height: 2px;
-  background-color: #5b5b5b;
+  background-color: #000000;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #000000;
+  background-color: #5b5b5b;
   border-radius: 10px;
 }

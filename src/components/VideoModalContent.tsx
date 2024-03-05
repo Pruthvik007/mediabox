@@ -13,6 +13,12 @@ const VideoModalContent = ({
   type?: "VIDEO" | "MEDIA";
   mediaType?: MediaType;
 }) => {
+  const src =
+    (type === "VIDEO"
+      ? CONSTANTS.YOUTUBE_VIDEO_URL
+      : mediaType === "movies"
+      ? CONSTANTS.VIDSRC_MOVIE_URL
+      : CONSTANTS.VIDSRC_SHOW_URL) + id;
   return (
     <div>
       <Modal.Header>
@@ -20,17 +26,7 @@ const VideoModalContent = ({
       </Modal.Header>
       <Modal.Body>
         {id.length > 0 && (
-          <iframe
-            className="w-full h-80"
-            src={
-              (type === "VIDEO"
-                ? CONSTANTS.YOUTUBE_VIDEO_URL
-                : mediaType === "movies"
-                ? CONSTANTS.VIDSRC_MOVIE_URL
-                : CONSTANTS.VIDSRC_SHOW_URL) + id
-            }
-            allowFullScreen
-          ></iframe>
+          <iframe className="w-full h-80" src={src} allowFullScreen></iframe>
         )}
         {id.length === 0 && (
           <p className="text-xl font-bold text-red-500 text-center">

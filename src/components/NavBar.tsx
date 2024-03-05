@@ -68,7 +68,7 @@ const Navbar = () => {
         }
       >
         {navItems.map((item) => (
-          <Link to={item.path} key={item.path}>
+          <Link onClick={toggleNav} to={item.path} key={item.path}>
             <div className="p-4 border-b rounded-xl hover:bg-primary duration-300 hover:text-black cursor-pointer border-gray-600">
               {item.name}
             </div>

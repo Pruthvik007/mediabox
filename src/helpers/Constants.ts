@@ -20,7 +20,7 @@ export const CONSTANTS = {
   },
   YOUTUBE_VIDEO_URL: "https://www.youtube.com/embed/",
   VIDSRC_MOVIE_URL: "https://vidsrc.xyz/embed/movie?tmdb=",
-  VIDSRC_SHOW_URL: "https://vidsrc.xyz/embed/show?tmdb=",
+  VIDSRC_SHOW_URL: "https://vidsrc.xyz/embed/tv?tmdb=",
 };
 
 export const END_POINT_OF_MEDIA_OF_CATEGORY = {

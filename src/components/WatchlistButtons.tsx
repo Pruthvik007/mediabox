@@ -56,7 +56,12 @@ const WatchlistButtons: React.FC<WatchlistButtonsProps> = ({
         className={`${buttonClass} text-white font-bold p-2 rounded-lg ${className}`}
       >
         {asIcons ? (
-          <img src={iconSrc} alt={buttonText} className="w-full h-full" />
+          <img
+            src={iconSrc}
+            alt={buttonText}
+            className="w-full h-full"
+            loading="lazy"
+          />
         ) : (
           <span>{buttonText}</span>
         )}
