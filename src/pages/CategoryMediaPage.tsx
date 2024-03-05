@@ -12,14 +12,18 @@ import {
   MediaType,
 } from "../types/TmdbTypes";
 import ErrorPage from "./ErrorPage";
-import PageNotFound from "./PageNotFound";
+
+type RouteParams = {
+  mediaType: MediaType;
+  category: CategoryType;
+};
+
 const CategoryMedia = () => {
   const { ref, inView } = useInView();
-  const { mediaType, category } = useParams();
+  const { mediaType, category } = useParams<RouteParams>();
   const isValidMedia =
-    mediaType !== undefined &&
-    category !== undefined &&
     (mediaType === "movies" || mediaType === "shows") &&
+    category !== undefined &&
     category in CONSTANTS.CATEGORIES;
 
   const [params, setParams] = useState<CategoryMediaParamsType>({
@@ -39,7 +43,7 @@ const CategoryMedia = () => {
   }, [inView]);
 
   if (!isValidMedia) {
-    return <PageNotFound />;
+    return <ErrorPage />;
   }
 
   if (error) {
@@ -60,16 +64,18 @@ const CategoryMedia = () => {
           setParams={setParams}
         />
       )}
-      <div className="flex flex-wrap justify-around bg-neutral gap-x-0.5 gap-y-2 p-2 rounded-xl">
-        {data?.pages.map((page, i) => (
-          <MediaList
-            key={i}
-            mediaList={page.results}
-            mediaType={mediaType as MediaType}
-            isLoading={isFetching || isFetchingNextPage}
-          />
-        ))}
-      </div>
+      {data !== undefined && (
+        <div className="flex flex-wrap justify-around bg-neutral gap-x-0.5 gap-y-2 p-2 rounded-xl">
+          {data.pages.map((page, i) => (
+            <MediaList
+              key={i}
+              mediaList={page.results}
+              mediaType={mediaType as MediaType}
+              isLoading={isFetching || isFetchingNextPage}
+            />
+          ))}
+        </div>
+      )}
       {data && data.pages.length >= 1 && <div id="observer" ref={ref}></div>}
       <ScrollToTopButton />
     </div>
