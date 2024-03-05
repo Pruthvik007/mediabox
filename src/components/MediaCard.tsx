@@ -24,9 +24,12 @@ const MediaCard = ({
     media.id.toString();
   return (
     <div className="relative group">
-      <div className="card-sm md:card-md lg:card-lg overflow-y-clip">
-        <TmdbImage imagePath={imagePath} alt={alt} loading={imageLoading} />
-      </div>
+      <TmdbImage
+        imagePath={imagePath}
+        alt={alt}
+        loading={imageLoading}
+        className="card-sm md:card-md lg:card-lg overflow-y-clip"
+      />
       {media.vote_average !== 0 && (
         <div className="absolute top-1 right-1 badge badge-xs sm:badge-sm md:badge-md lg:badge-lg badge-neutral rounded-full">
           {media.vote_average.toFixed(1)}
@@ -37,6 +40,7 @@ const MediaCard = ({
         mediaType={mediaType}
         asIcons
         className="block lg:hidden lg:group-hover:block absolute bottom-1 right-1"
+        iconsLoading={imageLoading}
       />
     </div>
   );

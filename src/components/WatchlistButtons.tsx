@@ -8,6 +8,7 @@ type WatchlistButtonsProps = {
   mediaType: MediaType;
   asIcons?: boolean;
   className?: string;
+  iconsLoading?: "lazy" | "eager";
 };
 
 const WatchlistButtons: React.FC<WatchlistButtonsProps> = ({
@@ -15,6 +16,7 @@ const WatchlistButtons: React.FC<WatchlistButtonsProps> = ({
   mediaType,
   asIcons = false,
   className = "",
+  iconsLoading = "eager",
 }) => {
   const {
     addMediaToWatchList,
@@ -60,7 +62,7 @@ const WatchlistButtons: React.FC<WatchlistButtonsProps> = ({
             src={iconSrc}
             alt={buttonText}
             className="w-full h-full"
-            loading="lazy"
+            loading={iconsLoading}
           />
         ) : (
           <span>{buttonText}</span>

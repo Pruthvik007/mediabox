@@ -13,13 +13,12 @@ const ViewMediaDetails = ({
   return (
     <div className="rounded-lg shadow flex flex-col items-center md:flex-row gap-5 text-center md:text-left justify-center p-5 bg-base-100">
       <div className="space-y-5">
-        <div className="card-lg">
-          <TmdbImage
-            imagePath={mediaDetails?.poster_path}
-            alt={mediaDetails?.id.toString()}
-            loading="eager"
-          />
-        </div>
+        <TmdbImage
+          imagePath={mediaDetails?.poster_path}
+          alt={mediaDetails?.id.toString()}
+          loading="eager"
+          className="card-lg"
+        />
         <Rating
           actualRating={Number((mediaDetails.vote_average / 2).toFixed(1))}
           totalRating={5}

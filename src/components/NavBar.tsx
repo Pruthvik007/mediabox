@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import CrossIcon from "../assets/icons/svgs/CrossIcon";
 import MenuIcon from "../assets/icons/svgs/MenuIcon";
 import { CONSTANTS } from "../helpers/Constants";
@@ -24,6 +24,11 @@ const navItems = [
   },
 ];
 const Navbar = () => {
+  const location = useLocation();
+  const isCurrentPath = (path: string) => {
+    return location.pathname === path;
+  };
+
   const [isVisible, setIsVisible] = useState(false);
   const toggleNav = () => {
     setIsVisible(!isVisible);
@@ -41,7 +46,11 @@ const Navbar = () => {
       <div id="desktop-nav-items" className="hidden md:flex md:items-center">
         {navItems.map((item) => (
           <Link to={item.path} key={item.path}>
-            <div className="p-4 hover:bg-primary rounded-xl m-2 cursor-pointer duration-300 hover:text-black">
+            <div
+              className={`p-4 hover:bg-primary rounded-xl m-2 cursor-pointer duration-300 hover:text-black ${
+                isCurrentPath(item.path) && "bg-primary text-black"
+              }`}
+            >
               {item.name}
             </div>
           </Link>

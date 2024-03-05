@@ -18,20 +18,20 @@ const SampleCategoryMedia = ({ category }: SampleCategoryMediaProps) => {
   const navigate = useNavigate();
   const [mediaType, setMediaType] = useState<MediaType>("movies");
   const { isLoading, data } = useSampleMedia(mediaType, category);
-
+  const onViewMore = () => {
+    navigate(`${CONSTANTS.ENV.BASE_URL}/media/${mediaType}/${category}`);
+  };
   return (
     <div className="flex flex-col gap-3 p-3 bg-neutral rounded-xl">
-      <div className="w-full flex place-content-between items-center">
-        <div className="flex gap-4  items-center">
+      <div className="flex place-content-between items-center">
+        <div className="flex gap-4 items-center">
           <p className="text-md lg:text-lg font-bold text">
             {CONSTANTS.CATEGORIES[category]}
           </p>
           <MediaSelector mediaType={mediaType} setMediaType={setMediaType} />
         </div>
         <button
-          onClick={() =>
-            navigate(`${CONSTANTS.ENV.BASE_URL}/media/${mediaType}/${category}`)
-          }
+          onClick={onViewMore}
           className="btn btn-active btn-primary btn-sm md:btn-sm lg:btn-md"
         >
           View More

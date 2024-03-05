@@ -9,7 +9,7 @@ const Skeleton = ({ count = 1, className }: SkeletonProps) => {
         <div
           key={index}
           role="placeholder"
-          className={`bg-slate-400 dark:bg-slate-700 max-w-sm animate-pulse ${className}`}
+          className={`bg-slate-400 dark:bg-slate-700 animate-pulse ${className}`}
         ></div>
       ))}
     </>
