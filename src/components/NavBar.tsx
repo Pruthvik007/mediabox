@@ -78,7 +78,11 @@ const Navbar = () => {
       >
         {navItems.map((item) => (
           <Link onClick={toggleNav} to={item.path} key={item.path}>
-            <div className="p-4 border-b rounded-xl hover:bg-primary duration-300 hover:text-black cursor-pointer border-gray-600">
+            <div
+              className={`p-4 border-b rounded-xl hover:bg-primary duration-300 hover:text-black cursor-pointer border-gray-600 ${
+                isCurrentPath(item.path) && "bg-primary text-black"
+              }`}
+            >
               {item.name}
             </div>
           </Link>
