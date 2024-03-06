@@ -12,6 +12,7 @@ import {
 import VideoModalContent from "./VideoModalContent";
 import WatchlistButtons from "./WatchlistButtons";
 import MediaProvider from "./MediaProvider";
+import { useKeyDown } from "../hooks/useKeyDown";
 
 const BasicMediaDetails = ({
   mediaType,
@@ -22,29 +23,33 @@ const BasicMediaDetails = ({
 }) => {
   const { openModal } = useContext(ModalContext);
   const videosData = useVideos(mediaType, mediaDetails.id.toString());
-  let trailer = {
-    name: "",
-    id: "",
-  };
+  const playTrailer = () => {
+    let trailer = {
+      name: "",
+      id: "",
+    };
 
-  if (videosData.isSuccess) {
-    const trailerData = videosData.data.results.find(
-      (result) =>
-        result.official &&
-        result.site === "YouTube" &&
-        result.type === "Trailer" &&
-        result.name.toLowerCase().includes("trailer")
-    );
-
-    if (trailerData) {
-      trailer = {
-        name: trailerData.name,
-        id: trailerData.key,
-      };
+    if (videosData.isSuccess) {
+      const trailerData = videosData.data.results.find(
+        (result) =>
+          result.official &&
+          result.site === "YouTube" &&
+          result.type === "Trailer" &&
+          result.name.toLowerCase().includes("trailer")
+      );
+      if (trailerData) {
+        trailer = {
+          name: trailerData.name,
+          id: trailerData.key,
+        };
+      }
     }
-  }
+    openModal(<VideoModalContent {...trailer} />);
+  };
+  useKeyDown(" ", playTrailer);
+
   return (
-    <div className="flex flex-col gap-3 bg-neutral p-3 rounded-xl max-w-full">
+    <div className="flex flex-col gap-3 bg-neutral p-3 rounded-xl">
       <MediaTitle mediaDetails={mediaDetails} mediaType={mediaType} />
       {mediaDetails.tagline !== undefined &&
         mediaDetails.tagline.length > 0 && (
@@ -56,10 +61,7 @@ const BasicMediaDetails = ({
         <p>{mediaDetails.overview}</p>
       </div>
       <div className="flex gap-3 justify-center md:justify-start">
-        <button
-          onClick={() => openModal(<VideoModalContent {...trailer} />)}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
-        >
+        <button onClick={playTrailer} className="custom-btn-primary">
           Play Trailer
         </button>
         <MediaProvider mediaType={mediaType} id={mediaDetails.id} />
@@ -109,19 +111,18 @@ const GenresOrCompanies = ({
   return (
     <div className="flex flex-col items-center md:flex-row bg-base-100 rounded-xl py-2 px-4 gap-x-2">
       <p className="text-lg text whitespace-nowrap">{type}</p>
-      <div
-        className="flex justify-start rounded-md shadow-sm gap-2 p-2 max-w-full overflow-x-auto"
-        role="group"
-      >
-        {data.map((item) => (
-          <button
-            key={item.id}
-            type="button"
-            className="btn btn-sm md:btn-md btn-active btn-info"
-          >
-            {item.name}
-          </button>
-        ))}
+      <div className="overflow-x-auto">
+        <div className="flex rounded-md shadow-sm gap-2 p-2" role="group">
+          {data.map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              className="btn btn-sm md:btn-md btn-active btn-info"
+            >
+              {item.name}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

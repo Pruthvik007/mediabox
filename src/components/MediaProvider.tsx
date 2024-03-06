@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { MediaType } from "../types/TmdbTypes";
 import VideoModalContent from "./VideoModalContent";
 import { ModalContext } from "../context/ModalContext";
+import { useKeyDown } from "../hooks/useKeyDown";
 
 const MediaProvider = ({
   mediaType,
@@ -11,20 +12,19 @@ const MediaProvider = ({
   id: number;
 }) => {
   const { openModal } = useContext(ModalContext);
+  const playMedia = () => {
+    openModal(
+      <VideoModalContent
+        name="Watch At VidSrc"
+        id={id.toString()}
+        type="MEDIA"
+        mediaType={mediaType}
+      />
+    );
+  };
+  useKeyDown("Enter", playMedia);
   return (
-    <button
-      onClick={() =>
-        openModal(
-          <VideoModalContent
-            name="Watch At VidSrc"
-            id={id.toString()}
-            type="MEDIA"
-            mediaType={mediaType}
-          />
-        )
-      }
-      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
-    >
+    <button onClick={playMedia} className="custom-btn-primary">
       {mediaType === "movies" ? "Watch Movie" : "Watch Show"}
     </button>
   );

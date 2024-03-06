@@ -1,5 +1,6 @@
 import { ReactNode, useContext } from "react";
 import { ModalContext } from "../../context/ModalContext";
+import { useKeyDown } from "../../hooks/useKeyDown";
 
 const ModalHeader = ({ children }: { children: ReactNode }) => {
   const { closeModal } = useContext(ModalContext);
@@ -43,7 +44,8 @@ const ModalFooter = ({ children }: { children: React.ReactNode }) => {
 };
 
 const Modal = () => {
-  const { isVisible, modalContent } = useContext(ModalContext);
+  const { isVisible, modalContent, closeModal } = useContext(ModalContext);
+  useKeyDown("Escape", closeModal);
   return (
     <>
       {isVisible && (
