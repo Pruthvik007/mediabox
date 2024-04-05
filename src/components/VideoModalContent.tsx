@@ -6,7 +6,7 @@ const VideoModalContent = ({
   name,
   id,
   type = "VIDEO",
-  mediaType,
+  mediaType = "movies",
 }: {
   name: string;
   id: string;

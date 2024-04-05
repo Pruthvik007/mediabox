@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { ModalContext } from "../context/ModalContext";
 import { useVideos } from "../hooks/TmdbQueries";
+import { useKeyDown } from "../hooks/useKeyDown";
 import {
   Genre,
   MediaDetails,
@@ -9,10 +10,9 @@ import {
   ProductionCompany,
   ShowDetails,
 } from "../types/TmdbTypes";
+import MediaProvider from "./MediaProvider";
 import VideoModalContent from "./VideoModalContent";
 import WatchlistButtons from "./WatchlistButtons";
-import MediaProvider from "./MediaProvider";
-import { useKeyDown } from "../hooks/useKeyDown";
 
 const BasicMediaDetails = ({
   mediaType,
@@ -60,11 +60,13 @@ const BasicMediaDetails = ({
       <div className="text-lg md:text-xl italic font-semibold text">
         <p>{mediaDetails.overview}</p>
       </div>
-      <div className="flex gap-3 justify-center md:justify-start">
-        <button onClick={playTrailer} className="custom-btn-primary">
-          Play Trailer
-        </button>
-        <MediaProvider mediaType={mediaType} id={mediaDetails.id} />
+      <div className="flex flex-col md:flex-row gap-3 justify-center items-center md:justify-start">
+        <div className="flex gap-3">
+          <button onClick={playTrailer} className="custom-btn-primary">
+            Watch Trailer
+          </button>
+          <MediaProvider mediaType={mediaType} id={mediaDetails.id} />
+        </div>
         <WatchlistButtons mediaDetails={mediaDetails} mediaType={mediaType} />
       </div>
       <GenresOrCompanies data={mediaDetails.genres} type="Genres" />
@@ -111,18 +113,19 @@ const GenresOrCompanies = ({
   return (
     <div className="flex flex-col items-center md:flex-row bg-base-100 rounded-xl py-2 px-4 gap-x-2">
       <p className="text-lg text whitespace-nowrap">{type}</p>
-      <div className="overflow-x-auto">
-        <div className="flex rounded-md shadow-sm gap-2 p-2" role="group">
-          {data.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              className="btn btn-sm md:btn-md btn-active btn-info"
-            >
-              {item.name}
-            </button>
-          ))}
-        </div>
+      <div
+        className="flex rounded-md shadow-sm gap-2 p-2 flex-wrap"
+        role="group"
+      >
+        {data.map((item) => (
+          <button
+            key={item.id}
+            type="button"
+            className="btn btn-sm md:btn-md btn-active btn-info"
+          >
+            {item.name}
+          </button>
+        ))}
       </div>
     </div>
   );

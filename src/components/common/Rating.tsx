@@ -1,6 +1,7 @@
 type StarProps = {
   color: "text-yellow-300" | "text-gray-300 dark:text-gray-500";
 };
+
 const Star = ({ color }: StarProps) => {
   return (
     <svg
@@ -14,6 +15,7 @@ const Star = ({ color }: StarProps) => {
     </svg>
   );
 };
+
 const Rating = ({
   actualRating,
   totalRating,
@@ -24,23 +26,21 @@ const Rating = ({
   displayText?: string;
 }) => {
   return (
-    <>
-      <div className="flex items-center flex-wrap justify-center gap-1">
-        <div className="flex">
-          {Array.from({ length: totalRating }).map((_, index) => (
-            <Star
-              key={index}
-              color={
-                index < Math.floor(actualRating)
-                  ? "text-yellow-300"
-                  : "text-gray-300 dark:text-gray-500"
-              }
-            />
-          ))}
-        </div>
-        {displayText && <p className="text-sm ms-1">{displayText}</p>}
+    <div className="flex items-center flex-wrap gap-1 max-w-fit">
+      <div className="flex">
+        {Array.from({ length: totalRating }).map((_, index) => (
+          <Star
+            key={index}
+            color={
+              index < Math.floor(actualRating)
+                ? "text-yellow-300"
+                : "text-gray-300 dark:text-gray-500"
+            }
+          />
+        ))}
       </div>
-    </>
+      {displayText && <p className="text-sm ms-1">{displayText}</p>}
+    </div>
   );
 };
 
