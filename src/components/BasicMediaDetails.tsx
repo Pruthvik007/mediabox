@@ -13,6 +13,8 @@ import {
 import MediaProvider from "./MediaProvider";
 import VideoModalContent from "./VideoModalContent";
 import WatchlistButtons from "./WatchlistButtons";
+import TmdbImage from "./common/TmdbImage";
+import Rating from "./common/Rating";
 
 const BasicMediaDetails = ({
   mediaType,
@@ -49,31 +51,34 @@ const BasicMediaDetails = ({
   useKeyDown(" ", playTrailer);
 
   return (
-    <div className="flex flex-col gap-3 bg-neutral p-3 rounded-xl">
-      <MediaTitle mediaDetails={mediaDetails} mediaType={mediaType} />
-      {mediaDetails.tagline !== undefined &&
-        mediaDetails.tagline.length > 0 && (
-          <p className="text-md md:text-lg italic font-semibold text">
-            "{mediaDetails.tagline}"
-          </p>
-        )}
-      <div className="text-lg md:text-xl italic font-semibold text">
-        <p>{mediaDetails.overview}</p>
-      </div>
-      <div className="flex flex-col md:flex-row gap-3 justify-center items-center md:justify-start">
-        <div className="flex gap-3">
-          <button onClick={playTrailer} className="custom-btn-primary">
-            Watch Trailer
-          </button>
-          <MediaProvider mediaType={mediaType} id={mediaDetails.id} />
+    <div className="rounded-lg shadow flex flex-col items-center md:flex-row gap-5 text-center md:text-left justify-center p-5 bg-base-100">
+      <MediaPosterAndRating mediaDetails={mediaDetails} />
+      <div className="flex flex-col gap-3 bg-neutral p-3 rounded-xl">
+        <MediaTitle mediaDetails={mediaDetails} mediaType={mediaType} />
+        {mediaDetails.tagline !== undefined &&
+          mediaDetails.tagline.length > 0 && (
+            <p className="text-md md:text-lg italic font-semibold text">
+              "{mediaDetails.tagline}"
+            </p>
+          )}
+        <div className="text-lg md:text-xl italic font-semibold text">
+          <p>{mediaDetails.overview}</p>
         </div>
-        <WatchlistButtons mediaDetails={mediaDetails} mediaType={mediaType} />
+        <div className="flex flex-col md:flex-row gap-3 justify-center items-center md:justify-start">
+          <div className="flex gap-3">
+            <button onClick={playTrailer} className="custom-btn-primary">
+              Watch Trailer
+            </button>
+            <MediaProvider mediaType={mediaType} id={mediaDetails.id} />
+          </div>
+          <WatchlistButtons mediaDetails={mediaDetails} mediaType={mediaType} />
+        </div>
+        <GenresOrCompanies data={mediaDetails.genres} type="Genres" />
+        <GenresOrCompanies
+          data={mediaDetails.production_companies}
+          type="Production Companies"
+        />
       </div>
-      <GenresOrCompanies data={mediaDetails.genres} type="Genres" />
-      <GenresOrCompanies
-        data={mediaDetails.production_companies}
-        type="Production Companies"
-      />
     </div>
   );
 };
@@ -127,6 +132,28 @@ const GenresOrCompanies = ({
           </button>
         ))}
       </div>
+    </div>
+  );
+};
+
+const MediaPosterAndRating = ({
+  mediaDetails,
+}: {
+  mediaDetails: MediaDetails;
+}) => {
+  return (
+    <div className="flex flex-col items-center gap-y-5">
+      <TmdbImage
+        imagePath={mediaDetails?.poster_path}
+        alt={mediaDetails?.id.toString()}
+        loading="eager"
+        className="card-lg"
+      />
+      <Rating
+        actualRating={Number((mediaDetails.vote_average / 2).toFixed(1))}
+        totalRating={5}
+        displayText={`${mediaDetails.vote_average.toFixed(1)} / 10`}
+      />
     </div>
   );
 };

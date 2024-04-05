@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
+import BasicMediaDetails from "../components/BasicMediaDetails";
 import MediaList from "../components/MediaList";
-import ViewMediaDetails from "../components/ViewMediaDetails";
 import BackButton from "../components/common/BackButton";
 import BackDrop from "../components/common/BackDrop";
 import { useMediaDetails, useRecommendations } from "../hooks/TmdbQueries";
@@ -23,7 +23,7 @@ const MediaDetailsPage = () => {
   return (
     <div className="flex flex-col gap-5 p-3">
       {mediaDetails && (
-        <ViewMediaDetails
+        <BasicMediaDetails
           mediaDetails={mediaDetails}
           mediaType={mediaType as MediaType}
         />
