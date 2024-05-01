@@ -10,7 +10,7 @@ import {
   ProductionCompany,
   ShowDetails,
 } from "../types/TmdbTypes";
-import MediaProvider from "./MediaProvider";
+// import MediaProvider from "./MediaProvider";
 import VideoModalContent from "./VideoModalContent";
 import WatchlistButtons from "./WatchlistButtons";
 import TmdbImage from "./common/TmdbImage";
@@ -69,7 +69,7 @@ const BasicMediaDetails = ({
             <button onClick={playTrailer} className="custom-btn-primary">
               Watch Trailer
             </button>
-            <MediaProvider mediaType={mediaType} id={mediaDetails.id} />
+            {/* <MediaProvider mediaType={mediaType} id={mediaDetails.id} /> */}
           </div>
           <WatchlistButtons mediaDetails={mediaDetails} mediaType={mediaType} />
         </div>
