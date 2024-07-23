@@ -4,6 +4,7 @@ import {
   CategoryMediaParamsType,
   Genre,
   Media,
+  MediaDetails,
   MovieDetails,
   Response,
   SearchMediaParamsType,
@@ -27,10 +28,7 @@ class TmdbServices {
       return fetchApi<Response<Media>>(endPoint + "?" + queries);
     }
   }
-  getMediaDetails(
-    endPoint: string,
-    id: string
-  ): Promise<MovieDetails | ShowDetails> {
+  getMediaDetails(endPoint: string, id: string): Promise<MediaDetails> {
     return fetchApi<MovieDetails | ShowDetails>(`${endPoint}${id}`);
   }
   getMediaSearchResults(

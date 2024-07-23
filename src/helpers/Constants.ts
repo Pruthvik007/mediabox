@@ -68,8 +68,8 @@ export const END_POINT_OF = {
   MOVIE_RECOMENDATIONS: "movie/:id/similar",
   SHOW_RECOMENDATIONS: "tv/:id/similar",
 
-  VIDEOS_OF_MOVIE: "/movie/:id/videos",
-  VIDEOS_OF_SHOW: "/tv/:id/videos",
+  VIDEOS_OF_MOVIE: "movie/:id/videos",
+  VIDEOS_OF_SHOW: "tv/:id/videos",
 };
 
 export const ID_PLACEHOLDER = ":id";

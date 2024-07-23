@@ -1,6 +1,6 @@
 import { END_POINT_OF_MEDIA_OF_CATEGORY } from "../helpers/Constants";
 
-export interface Response<T = Movie | Show> {
+export interface Response<T> {
   page: number;
   results: T[];
   total_pages: number;

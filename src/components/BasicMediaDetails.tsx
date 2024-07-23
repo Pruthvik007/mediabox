@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { ModalContext } from "../context/ModalContext";
-import { useVideos } from "../hooks/TmdbQueries";
+import { useMediaDetails, useVideos } from "../hooks/TmdbQueries";
 import { useKeyDown } from "../hooks/useKeyDown";
 import {
   Genre,
@@ -10,21 +10,28 @@ import {
   ProductionCompany,
   ShowDetails,
 } from "../types/TmdbTypes";
-// import MediaProvider from "./MediaProvider";
+import MediaProvider from "./MediaProvider";
 import VideoModalContent from "./VideoModalContent";
 import WatchlistButtons from "./WatchlistButtons";
-import TmdbImage from "./common/TmdbImage";
+import BackDrop from "./common/BackDrop";
 import Rating from "./common/Rating";
+import TmdbImage from "./common/TmdbImage";
 
 const BasicMediaDetails = ({
   mediaType,
-  mediaDetails,
+  mediaId,
 }: {
   mediaType: MediaType;
-  mediaDetails: MediaDetails;
+  mediaId: string;
 }) => {
+  const {
+    isLoading,
+    error,
+    data: mediaDetails,
+  } = useMediaDetails(mediaType as MediaType, mediaId!);
+
   const { openModal } = useContext(ModalContext);
-  const videosData = useVideos(mediaType, mediaDetails.id.toString());
+  const videosData = useVideos(mediaType, mediaId);
   const playTrailer = () => {
     let trailer = {
       name: "",
@@ -32,13 +39,15 @@ const BasicMediaDetails = ({
     };
 
     if (videosData.isSuccess) {
-      const trailerData = videosData.data.results.find(
-        (result) =>
-          result.official &&
-          result.site === "YouTube" &&
-          result.type === "Trailer" &&
-          result.name.toLowerCase().includes("trailer")
-      );
+      const trailerData = videosData.data.results
+        .sort((v1, v2) => v1.name.localeCompare(v2.name))
+        .find(
+          (result) =>
+            result.official &&
+            result.site === "YouTube" &&
+            result.type === "Trailer" &&
+            result.name.toLowerCase().includes("trailer")
+        );
       if (trailerData) {
         trailer = {
           name: trailerData.name,
@@ -51,34 +60,44 @@ const BasicMediaDetails = ({
   useKeyDown(" ", playTrailer);
 
   return (
-    <div className="rounded-lg shadow flex flex-col items-center md:flex-row gap-5 text-center md:text-left justify-center p-5 bg-base-100">
-      <MediaPosterAndRating mediaDetails={mediaDetails} />
-      <div className="flex flex-col gap-3 bg-neutral p-3 rounded-xl">
-        <MediaTitle mediaDetails={mediaDetails} mediaType={mediaType} />
-        {mediaDetails.tagline !== undefined &&
-          mediaDetails.tagline.length > 0 && (
-            <p className="text-md md:text-lg italic font-semibold text">
-              "{mediaDetails.tagline}"
-            </p>
-          )}
-        <div className="text-lg md:text-xl italic font-semibold text">
-          <p>{mediaDetails.overview}</p>
-        </div>
-        <div className="flex flex-col md:flex-row gap-3 justify-center items-center md:justify-start">
-          <div className="flex gap-3">
-            <button onClick={playTrailer} className="custom-btn-primary">
-              Watch Trailer
-            </button>
-            {/* <MediaProvider mediaType={mediaType} id={mediaDetails.id} /> */}
+    <div>
+      {isLoading && <BackDrop />}
+      {error !== null && (
+        <p className="text-3xl text-red-500">Something Went Wrong!</p>
+      )}
+      {mediaDetails && (
+        <div className="rounded-lg shadow flex flex-col items-center md:flex-row gap-5 text-center md:text-left justify-center p-5 bg-base-100">
+          <MediaPosterAndRating mediaDetails={mediaDetails} />
+          <div className="flex flex-col gap-3 bg-neutral p-3 rounded-xl">
+            <MediaTitle mediaDetails={mediaDetails} mediaType={mediaType} />
+            {mediaDetails.tagline && mediaDetails.tagline.length > 0 && (
+              <p className="text-md md:text-lg italic font-semibold text">
+                "{mediaDetails.tagline}"
+              </p>
+            )}
+            <div className="text-lg md:text-xl italic font-semibold text">
+              <p>{mediaDetails.overview}</p>
+            </div>
+            <div className="flex flex-col md:flex-row gap-3 justify-center items-center md:justify-start">
+              <div className="flex gap-3">
+                <button onClick={playTrailer} className="custom-btn-primary">
+                  Watch Trailer
+                </button>
+                <MediaProvider mediaType={mediaType} id={mediaDetails.id} />
+              </div>
+              <WatchlistButtons
+                mediaDetails={mediaDetails}
+                mediaType={mediaType}
+              />
+            </div>
+            <GenresOrCompanies data={mediaDetails.genres} type="Genres" />
+            <GenresOrCompanies
+              data={mediaDetails.production_companies}
+              type="Production Companies"
+            />
           </div>
-          <WatchlistButtons mediaDetails={mediaDetails} mediaType={mediaType} />
         </div>
-        <GenresOrCompanies data={mediaDetails.genres} type="Genres" />
-        <GenresOrCompanies
-          data={mediaDetails.production_companies}
-          type="Production Companies"
-        />
-      </div>
+      )}
     </div>
   );
 };
