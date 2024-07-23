@@ -1,10 +1,11 @@
 import { useContext } from "react";
+import { ModalContext } from "../context/ModalContext";
 import { useVideos } from "../hooks/TmdbQueries";
 import { MediaType, Result } from "../types/TmdbTypes";
 import BackDrop from "./common/BackDrop";
-import { ModalContext } from "../context/ModalContext";
+import Image from "./common/Image";
 import VideoModalContent from "./VideoModalContent";
-import { CONSTANTS } from "../helpers/Constants";
+import { playIcon } from "../assets/assets";
 
 const Videos = ({
   mediaType,
@@ -38,12 +39,23 @@ const Videos = ({
         <div className="flex gap-3 overflow-x-auto">
           {videos.results.map((video) => {
             return (
-              <div key={video.key} onClick={() => playVideo(video)}>
-                <iframe
-                  className="pointer-events-none"
-                  src={CONSTANTS.YOUTUBE_VIDEO_URL + video.key}
-                  allowFullScreen
-                ></iframe>
+              <div
+                className="relative cursor-pointer"
+                key={video.key}
+                onClick={() => playVideo(video)}
+              >
+                <Image
+                  alt={video.name}
+                  imagePath={video.key}
+                  imageType="YOUTUBE_THUMBNAIL"
+                  loading="lazy"
+                  className="card-horizontal-sm md:card-horizontal-md lg:card-horizontal-lg rounded-xl overflow-y-clip"
+                />
+                <img
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-5 h-5 md:w-8 md:h-8 lg:w-10 lg:h-10"
+                  src={playIcon}
+                  alt="play"
+                />
               </div>
             );
           })}

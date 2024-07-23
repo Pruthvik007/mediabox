@@ -28,6 +28,18 @@
   .card-lg {
     @apply w-56 h-80;
   }
+
+  .card-horizontal-sm {
+    @apply w-52 h-32;
+  }
+
+  .card-horizontal-md {
+    @apply w-60 h-40;
+  }
+
+  .card-horizontal-lg {
+    @apply w-80 h-48;
+  }
 }
 
 .text {

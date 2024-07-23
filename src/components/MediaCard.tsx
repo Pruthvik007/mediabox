@@ -6,7 +6,7 @@ import {
   ShowDetails,
 } from "../types/TmdbTypes";
 import WatchlistButtons from "./WatchlistButtons";
-import TmdbImage from "./common/TmdbImage";
+import Image from "./common/Image";
 type MediaCardProps = {
   media: Media;
   mediaType: MediaType;
@@ -24,7 +24,7 @@ const MediaCard = ({
     media.id.toString();
   return (
     <div className="relative group">
-      <TmdbImage
+      <Image
         imagePath={imagePath}
         alt={alt}
         loading={imageLoading}

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { CONSTANTS, ImageSize } from "../../helpers/Constants";
 import Skeleton from "./Skeleton";
 
-const TmdbImage = ({
+const Image = ({
   imagePath,
   alt,
   imageType = "POSTER",
@@ -16,16 +16,31 @@ const TmdbImage = ({
   className?: string;
 }) => {
   const [isLoading, setIsLoading] = useState(true);
+  const getImage = (size: "sm" | "md" | "lg" = "sm") => {
+    return imageType === "YOUTUBE_THUMBNAIL"
+      ? getYoutubeImage(size)
+      : getTmdbImage(size);
+  };
+  const getTmdbImage = (size: "sm" | "md" | "lg" = "sm") => {
+    return (
+      CONSTANTS.ENV.TMDB_API_IMAGE_URL + ImageSize[imageType][size] + imagePath
+    );
+  };
+
+  const getYoutubeImage = (size: "sm" | "md" | "lg" = "sm") => {
+    return (
+      CONSTANTS.YOUTUBE_THUMBNAIL_URL +
+      imagePath +
+      "/" +
+      ImageSize[imageType][size]
+    );
+  };
   return (
     <>
       {imagePath ? (
         <div className={className}>
           <img
-            src={
-              CONSTANTS.ENV.TMDB_API_IMAGE_URL +
-              ImageSize[imageType].sm +
-              imagePath
-            }
+            src={getImage()}
             alt={alt}
             style={{
               filter: `${isLoading ? "blur(20px)" : ""}`,
@@ -37,19 +52,9 @@ const TmdbImage = ({
             loading={loading}
             height="100%"
             width="100%"
-            srcSet={`${
-              CONSTANTS.ENV.TMDB_API_IMAGE_URL +
-              ImageSize[imageType].sm +
-              imagePath
-            } 300w, ${
-              CONSTANTS.ENV.TMDB_API_IMAGE_URL +
-              ImageSize[imageType].md +
-              imagePath
-            } 768w, ${
-              CONSTANTS.ENV.TMDB_API_IMAGE_URL +
-              ImageSize[imageType].lg +
-              imagePath
-            } 1280w`}
+            srcSet={`${getImage("sm")} 300w, ${getImage("md")} 768w, ${getImage(
+              "lg"
+            )} 1280w`}
             sizes="(max-width: 300px) 300px, (max-width: 768px) 768px, 1280px"
           />
         </div>
@@ -65,4 +70,4 @@ const TmdbImage = ({
   );
 };
 
-export default TmdbImage;
+export default Image;

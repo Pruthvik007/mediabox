@@ -15,7 +15,7 @@ import VideoModalContent from "./VideoModalContent";
 import WatchlistButtons from "./WatchlistButtons";
 import BackDrop from "./common/BackDrop";
 import Rating from "./common/Rating";
-import TmdbImage from "./common/TmdbImage";
+import Image from "./common/Image";
 
 const BasicMediaDetails = ({
   mediaType,
@@ -162,7 +162,7 @@ const MediaPosterAndRating = ({
 }) => {
   return (
     <div className="flex flex-col items-center gap-y-5">
-      <TmdbImage
+      <Image
         imagePath={mediaDetails?.poster_path}
         alt={mediaDetails?.id.toString()}
         loading="eager"

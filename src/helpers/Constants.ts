@@ -19,6 +19,7 @@ export const CONSTANTS = {
     TMDB_API_IMAGE_URL: "https://image.tmdb.org/t/p/",
   },
   YOUTUBE_VIDEO_URL: "https://www.youtube.com/embed/",
+  YOUTUBE_THUMBNAIL_URL: "https://img.youtube.com/vi/",
   VIDSRC_MOVIE_URL: "https://vidsrc.xyz/embed/movie?tmdb=",
   VIDSRC_SHOW_URL: "https://vidsrc.xyz/embed/tv?tmdb=",
 };
@@ -111,6 +112,12 @@ export const ImageSize = {
     md: "w780",
     lg: "w1280",
     original: "original",
+  },
+  YOUTUBE_THUMBNAIL: {
+    sm: "hqdefault.jpg",
+    md: "mqdefault.jpg",
+    lg: "maxresdefault.jpg",
+    original: "maxresdefault.jpg",
   },
 };
 export const validateEmail = (email: string) => {
