@@ -12,14 +12,18 @@ const WatchList = () => {
 
   return (
     <div className="p-5 rounded-xl space-y-5 flex flex-col">
-      <MediaSelector mediaType={mediaType} setMediaType={setMediaType} />
+      <MediaSelector
+        className="mx-auto"
+        mediaType={mediaType}
+        setMediaType={setMediaType}
+      />
       {isEmpty ? (
         <p className="text-xl font-bold text-yellow-500 mx-auto">
           No {mediaType.charAt(0).toUpperCase() + mediaType.slice(1)} Added To
           Watchlist!
         </p>
       ) : (
-        <div className="flex flex-wrap p-3 gap-3 bg-base-100 rounded-xl">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 p-3 gap-3 bg-base-100 max-w-fit rounded-xl mx-auto">
           <MediaList mediaType={mediaType} mediaList={mediaList} />
         </div>
       )}

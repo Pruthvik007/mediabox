@@ -65,7 +65,7 @@ const CategoryMedia = () => {
         />
       )}
       {data !== undefined && (
-        <div className="flex flex-wrap justify-around bg-neutral gap-x-0.5 gap-y-2 p-2 rounded-xl">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 p-3 gap-3 bg-base-100 max-w-fit rounded-xl mx-auto">
           {data.pages.map((page, i) => (
             <MediaList
               key={i}

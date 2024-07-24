@@ -38,7 +38,7 @@ const SearchPage = () => {
         setMediaType={setMediaType}
       />
       {data !== undefined && (
-        <div className="flex flex-wrap gap-3 justify-center bg-neutral rounded-xl p-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 p-3 gap-3 bg-neutral max-w-fit rounded-xl mx-auto">
           {data.pages.map((page, i) => (
             <MediaList
               key={i}
