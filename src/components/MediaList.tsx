@@ -32,7 +32,10 @@ const MediaList = ({
         </Link>
       ))}
       {isLoading && (
-        <Skeleton count={20} className="card-sm md:card-md lg:card-lg" />
+        <Skeleton
+          count={20}
+          className="card-sm md:card-md lg:card-lg flex-shrink-0"
+        />
       )}
     </>
   );

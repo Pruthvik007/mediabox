@@ -11,7 +11,7 @@ export default defineConfig({
       manifest: {
         name: "MediaBox",
         short_name: "MediaBox",
-        theme_color: "#ffffff",
+        theme_color: "#2b2b2b",
         icons: [
           {
             src: "pwa-64x64.png",
