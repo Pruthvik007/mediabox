@@ -167,7 +167,12 @@ export interface CategoryMediaParamsType extends QueryParamsType {
   include_adult?: boolean;
   year?: string;
   with_genres?: string;
+  with_companies?: string;
   sort_by?: string;
+  sort_by_popularity?: string;
+  sort_by_date?: string;
+  sort_by_vote_average?: string;
+  sort_by_vote_count?: string;
 }
 
 export interface SearchMediaParamsType extends QueryParamsType {

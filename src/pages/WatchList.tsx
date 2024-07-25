@@ -23,7 +23,7 @@ const WatchList = () => {
           Watchlist!
         </p>
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 p-3 gap-3 bg-base-100 max-w-fit rounded-xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 2xl:grid-cols-6 p-3 gap-3 bg-base-100 max-w-fit rounded-xl mx-auto">
           <MediaList mediaType={mediaType} mediaList={mediaList} />
         </div>
       )}

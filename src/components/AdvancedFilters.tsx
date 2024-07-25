@@ -1,3 +1,4 @@
+import { QUERY_TYPE } from "../helpers/Constants";
 import { CategoryMediaParamsType, MediaType } from "../types/TmdbTypes";
 import Genres from "./Genres";
 import Dropdown from "./common/Dropdown";
@@ -32,14 +33,20 @@ const AdvancedFilters = ({
       <Dropdown
         label="Sort By Popularity"
         options={[
-          { value: "popularity.desc", label: "High To Low" },
-          { value: "popularity.asc", label: "Low To High" },
+          {
+            value: QUERY_TYPE.SORT_BY.VOTE_COUNT_DESC,
+            label: "Descending",
+          },
+          {
+            value: QUERY_TYPE.SORT_BY.VOTE_COUNT_ASC,
+            label: "Ascending",
+          },
         ]}
-        value={params.sort_by ? params.sort_by : ""}
+        value={params.sort_by_vote_count ? params.sort_by_vote_count : ""}
         onChange={(value) =>
           setParams({
             ...params,
-            sort_by: value,
+            sort_by_vote_count: value,
           })
         }
       />

@@ -8,19 +8,19 @@ import ThemeToggle from "./common/ThemeToggle";
 const navItems = [
   {
     name: "Movies",
-    path: `${CONSTANTS.ENV.BASE_URL}/media/movies/discover`,
+    path: `${CONSTANTS.ENV.BASE_URL}media/movies/discover`,
   },
   {
-    name: "TV Series",
-    path: `${CONSTANTS.ENV.BASE_URL}/media/shows/discover`,
+    name: "TV Shows",
+    path: `${CONSTANTS.ENV.BASE_URL}media/shows/discover`,
   },
   {
     name: "Search",
-    path: `${CONSTANTS.ENV.BASE_URL}/search`,
+    path: `${CONSTANTS.ENV.BASE_URL}search`,
   },
   {
     name: "Watchlist",
-    path: `${CONSTANTS.ENV.BASE_URL}/watchlist`,
+    path: `${CONSTANTS.ENV.BASE_URL}watchlist`,
   },
 ];
 const Navbar = () => {

@@ -24,19 +24,54 @@ const CategoryMedia = () => {
   const isValidMedia =
     (mediaType === "movies" || mediaType === "shows") &&
     category !== undefined &&
-    category in CONSTANTS.CATEGORIES;
+    category in CONSTANTS.categories;
 
   const [params, setParams] = useState<CategoryMediaParamsType>({
     with_genres: "",
+    with_companies: "",
     sort_by: "",
+    sort_by_date: "",
+    sort_by_vote_average: "",
+    sort_by_vote_count: "",
     include_adult: undefined,
     year: "",
   });
 
-  const { data, error, fetchNextPage, isFetching, isFetchingNextPage } =
-    useInfiniteMedia(mediaType as MediaType, category as CategoryType, params);
   useEffect(() => {
-    if (inView) {
+    const genre = new URLSearchParams(window.location.search).get(
+      "with_genres"
+    );
+    const company = new URLSearchParams(window.location.search).get(
+      "with_companies"
+    );
+    if (genre) {
+      setParams((prev) => ({
+        ...prev,
+        with_genres: genre,
+      }));
+    }
+    if (company) {
+      setParams((prev) => ({
+        ...prev,
+        with_companies: company,
+      }));
+    }
+  }, []);
+
+  const {
+    data,
+    error,
+    fetchNextPage,
+    isFetching,
+    isFetchingNextPage,
+    hasNextPage,
+  } = useInfiniteMedia(
+    mediaType as MediaType,
+    category as CategoryType,
+    params
+  );
+  useEffect(() => {
+    if (inView && hasNextPage) {
       fetchNextPage();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,8 +87,8 @@ const CategoryMedia = () => {
   return (
     <div className="p-3 flex flex-col gap-3">
       <p className="text-3xl font-bold text-center py-3 text-neutral-content">
-        {`${CONSTANTS.CATEGORIES[
-          category as keyof typeof CONSTANTS.CATEGORIES
+        {`${CONSTANTS.categories[
+          category as keyof typeof CONSTANTS.categories
         ].toUpperCase()} ${mediaType.toUpperCase()}`}
       </p>
       {category === "discover" && (
@@ -65,7 +100,7 @@ const CategoryMedia = () => {
         />
       )}
       {data !== undefined && (
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 p-3 gap-3 bg-base-100 max-w-fit rounded-xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 2xl:grid-cols-6 py-5 px-3 gap-3 bg-base-100 rounded-xl place-items-center w-full">
           {data.pages.map((page, i) => (
             <MediaList
               key={i}

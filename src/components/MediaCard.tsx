@@ -23,12 +23,12 @@ const MediaCard = ({
     (media as ShowDetails).name ||
     media.id.toString();
   return (
-    <div className="relative group">
+    <div className="relative group card-sm md:card-md lg:card-lg overflow-y-clip">
       <Image
+        className="card-sm md:card-md lg:card-lg overflow-y-clip"
         imagePath={imagePath}
         alt={alt}
         loading={imageLoading}
-        className="card-sm md:card-md lg:card-lg overflow-y-clip"
       />
       {media.vote_average !== 0 && (
         <div className="absolute top-1 right-1 badge badge-xs sm:badge-sm md:badge-md lg:badge-lg badge-neutral rounded-full">

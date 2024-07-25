@@ -1,5 +1,6 @@
 import { ID_PLACEHOLDER } from "../helpers/Constants";
 import { fetchApi } from "../helpers/Fetch";
+import TmdbHelper from "../helpers/TmdbHelper";
 import {
   CategoryMediaParamsType,
   Genre,
@@ -20,12 +21,9 @@ class TmdbServices {
     if (!params) {
       return fetchApi<Response<Media>>(endPoint);
     } else {
-      const queries = new URLSearchParams(
-        Object.entries(params).filter(
-          (q) => q[1] !== null && q[1] !== undefined && q[1] !== ""
-        )
-      ).toString();
-      return fetchApi<Response<Media>>(endPoint + "?" + queries);
+      return fetchApi<Response<Media>>(
+        endPoint + "?" + TmdbHelper.getCategoryMediaParams(params)
+      );
     }
   }
   getMediaDetails(endPoint: string, id: string): Promise<MediaDetails> {
@@ -35,12 +33,9 @@ class TmdbServices {
     endPoint: string,
     params: SearchMediaParamsType
   ): Promise<Response<Media>> {
-    const queries = new URLSearchParams(
-      Object.entries(params).filter(
-        (q) => q[1] !== null && q[1] !== undefined && q[1] !== ""
-      )
-    ).toString();
-    return fetchApi<Response<Media>>(endPoint + "?" + queries);
+    return fetchApi<Response<Media>>(
+      endPoint + "?" + TmdbHelper.getQueryParams(params)
+    );
   }
   getMediaRecomendations(
     endPoint: string,

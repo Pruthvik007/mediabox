@@ -1,10 +1,10 @@
 export const CONSTANTS = {
-  MOVIES: "MOVIES",
-  SHOWS: "SHOWS",
-  PEOPLE: "PEOPLE",
-  ALL: "ALL",
-  GENRES: "GENRES",
-  CATEGORIES: {
+  movies: "MOVIES",
+  shows: "SHOWS",
+  people: "PEOPLE",
+  all: "ALL",
+  genres: "GENRES",
+  categories: {
     discover: "Discover",
     popular: "Popular",
     trending: "Trending",
@@ -14,7 +14,7 @@ export const CONSTANTS = {
   },
   ENV: {
     TMDB_API_KEY: import.meta.env.VITE_TMDB_API_KEY,
-    BASE_URL: "/movies-and-series",
+    BASE_URL: "/movies-and-series/",
     TMDB_API_BASE_URL: "https://api.themoviedb.org/3/",
     TMDB_API_IMAGE_URL: "https://image.tmdb.org/t/p/",
   },
@@ -82,11 +82,32 @@ export const TRENDING_TIME_WINDOW = {
 };
 //query page language region year include_adult
 
+export const sortByTypes = [
+  "sort_by",
+  "sort_by_date",
+  "sort_by_vote_average",
+  "sort_by_vote_count",
+  "sort_by_popularity",
+];
+
 export const QUERY_TYPE = {
-  SORT_BY: "sort_by",
-  SORT_BY_VALUES: {
+  SORT_BY: {
     POPULARITY_DESC: "popularity.desc",
     POPULARITY_ASC: "popularity.asc",
+    VOTE_AVERAGE_DESC: "vote_average.desc",
+    VOTE_AVERAGE_ASC: "vote_average.asc",
+    VOTE_COUNT_DESC: "vote_count.desc",
+    VOTE_COUNT_ASC: "vote_count.asc",
+    release_date: {
+      movies: {
+        asc: "primary_release_date.asc",
+        desc: "primary_release_date.desc",
+      },
+      shows: {
+        asc: "first_air_date.asc",
+        desc: "first_air_date.desc",
+      },
+    },
   },
   PAGE_NUMBER: "page",
   LANGUAGE: "language",
@@ -98,6 +119,7 @@ export const QUERY_TYPE = {
   INCLUDE_ADULT: "include_adult",
   QUERY: "query",
   WITH_GENRES: "with_genres",
+  WITH_COMPANIES: "with_companies",
 };
 
 export const ImageSize = {

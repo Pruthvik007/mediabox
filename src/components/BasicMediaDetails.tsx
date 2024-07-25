@@ -1,5 +1,7 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { ModalContext } from "../context/ModalContext";
+import { CONSTANTS, QUERY_TYPE } from "../helpers/Constants";
 import { useMediaDetails, useVideos } from "../hooks/TmdbQueries";
 import { useKeyDown } from "../hooks/useKeyDown";
 import {
@@ -14,8 +16,8 @@ import MediaProvider from "./MediaProvider";
 import VideoModalContent from "./VideoModalContent";
 import WatchlistButtons from "./WatchlistButtons";
 import BackDrop from "./common/BackDrop";
-import Rating from "./common/Rating";
 import Image from "./common/Image";
+import Rating from "./common/Rating";
 
 const BasicMediaDetails = ({
   mediaType,
@@ -68,7 +70,7 @@ const BasicMediaDetails = ({
       {mediaDetails && (
         <div className="rounded-lg shadow flex flex-col items-center md:flex-row gap-5 text-center md:text-left justify-center p-5 bg-base-100">
           <MediaPosterAndRating mediaDetails={mediaDetails} />
-          <div className="flex flex-col gap-3 bg-neutral p-3 rounded-xl">
+          <div className="flex flex-col gap-3 bg-neutral p-3 rounded-xl w-full md:w-2/3 lg:w-full">
             <MediaTitle mediaDetails={mediaDetails} mediaType={mediaType} />
             {mediaDetails.tagline && mediaDetails.tagline.length > 0 && (
               <p className="text-md md:text-lg italic font-semibold text">
@@ -90,10 +92,15 @@ const BasicMediaDetails = ({
                 mediaType={mediaType}
               />
             </div>
-            <GenresOrCompanies data={mediaDetails.genres} type="Genres" />
+            <GenresOrCompanies
+              mediaType={mediaType}
+              data={mediaDetails.genres}
+              type="Genres"
+            />
             <GenresOrCompanies
               data={mediaDetails.production_companies}
               type="Production Companies"
+              mediaType={mediaType}
             />
           </div>
         </div>
@@ -130,25 +137,30 @@ const MediaTitle = ({
 const GenresOrCompanies = ({
   data,
   type,
+  mediaType,
 }: {
   data: (Genre | ProductionCompany)[];
   type: "Genres" | "Production Companies";
+  mediaType: MediaType;
 }) => {
+  const typeKey =
+    type === "Genres" ? QUERY_TYPE.WITH_GENRES : QUERY_TYPE.WITH_COMPANIES;
   return (
     <div className="flex flex-col items-center md:flex-row bg-base-100 rounded-xl py-2 px-4 gap-x-2">
       <p className="text-lg text whitespace-nowrap">{type}</p>
       <div
-        className="flex rounded-md shadow-sm gap-2 p-2 flex-wrap"
+        className="flex rounded-md shadow-sm gap-2 p-2 overflow-x-auto max-w-full"
         role="group"
       >
         {data.map((item) => (
-          <button
+          <Link
+            to={`${CONSTANTS.ENV.BASE_URL}media/${mediaType}/discover?${typeKey}=${item.id}`}
             key={item.id}
             type="button"
             className="btn btn-sm md:btn-md btn-active btn-info"
           >
             {item.name}
-          </button>
+          </Link>
         ))}
       </div>
     </div>
