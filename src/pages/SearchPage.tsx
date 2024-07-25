@@ -15,9 +15,10 @@ const SearchPage = () => {
     query: "",
     include_adult: false,
   });
-  const { data, error, fetchNextPage, isFetching, isFetchingNextPage } =
-    useSearchResults(mediaType, params);
-
+  const { data, error, fetchNextPage, isFetching } = useSearchResults(
+    mediaType,
+    params
+  );
   useEffect(() => {
     if (inView && params.query.length > 0) {
       fetchNextPage();
@@ -44,7 +45,7 @@ const SearchPage = () => {
               key={i}
               mediaList={page.results}
               mediaType={mediaType as MediaType}
-              isLoading={isFetching || isFetchingNextPage}
+              isLoading={isFetching}
             />
           ))}
         </div>

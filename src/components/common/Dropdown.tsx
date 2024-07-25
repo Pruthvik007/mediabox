@@ -12,7 +12,7 @@ const Dropdown = ({ label, options, value, onChange }: DropdownProps) => {
   return (
     <select
       id={label}
-      className="select select-bordered max-w-xs text-center"
+      className="select select-bordered text-center overflow-hidden"
       value={value}
       onChange={(e) => onChange(e.target.value)}
     >

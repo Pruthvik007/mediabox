@@ -11,7 +11,12 @@ export default defineConfig({
       manifest: {
         name: "MediaBox",
         short_name: "MediaBox",
-        theme_color: "#2b2b2b",
+        theme_color: "#1976D2",
+        background_color: "#f8fcfe",
+        display: "fullscreen",
+        description: "View Information Of Movies and TV Shows.",
+        start_url: "/movies-and-series/",
+        scope: "/movies-and-series/",
         icons: [
           {
             src: "pwa-64x64.png",

@@ -100,7 +100,7 @@ const CategoryMedia = () => {
         />
       )}
       {data !== undefined && (
-        <div className="grid grid-cols-2 md:grid-cols-4 2xl:grid-cols-6 py-5 px-3 gap-3 bg-base-100 rounded-xl place-items-center w-full">
+        <div className="grid grid-cols-2 md:grid-cols-4 2xl:grid-cols-6 p-3 gap-3 bg-base-100 rounded-xl mx-auto">
           {data.pages.map((page, i) => (
             <MediaList
               key={i}
