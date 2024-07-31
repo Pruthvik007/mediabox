@@ -27,7 +27,7 @@ const SearchPage = () => {
   }, [inView]);
   if (error) return <ErrorPage />;
   return (
-    <div className="p-3 space-y-3 min-h-[calc(100vh-5rem)]">
+    <div className="p-3 space-y-3 min-height-screen">
       <p className="text-2xl md:text-3xl font-bold text-center py-3 text-neutral-content">
         Search For Movies And TV Series
       </p>
@@ -38,18 +38,23 @@ const SearchPage = () => {
         mediaType={mediaType}
         setMediaType={setMediaType}
       />
-      {data !== undefined && (
-        <div className="grid grid-cols-2 md:grid-cols-4 2xl:grid-cols-6 p-3 gap-3 bg-neutral max-w-fit rounded-xl mx-auto">
-          {data.pages.map((page, i) => (
-            <MediaList
-              key={i}
-              mediaList={page.results}
-              mediaType={mediaType as MediaType}
-              isLoading={isFetching}
-            />
-          ))}
-        </div>
-      )}
+      {data &&
+        (data.pages[0].total_results !== 0 ? (
+          <div className="grid grid-cols-2 md:grid-cols-4 2xl:grid-cols-6 p-3 gap-3 bg-neutral max-w-fit rounded-xl mx-auto">
+            {data.pages.map((page, i) => (
+              <MediaList
+                key={i}
+                mediaList={page.results}
+                mediaType={mediaType as MediaType}
+                isLoading={isFetching}
+              />
+            ))}
+          </div>
+        ) : (
+          <p className="text-sm md:text-3xl text-warning mx-auto md:whitespace-nowrap text-center">
+            No Results Found. Try Something Different!
+          </p>
+        ))}
       <div id="observer" ref={ref}></div>
       <ScrollToTopButton />
     </div>

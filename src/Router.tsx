@@ -3,6 +3,7 @@ import { RouteObject, createBrowserRouter } from "react-router-dom";
 import App from "./App.tsx";
 import BackDrop from "./components/common/BackDrop.tsx";
 import { CONSTANTS } from "./helpers/Constants.ts";
+import ErrorPage from "./pages/ErrorPage.tsx";
 const PageNotFound = React.lazy(() => import("./pages/PageNotFound.tsx"));
 const MediaDetailsPage = React.lazy(() => import("./pages/MediaDetailsPage"));
 const SearchPage = React.lazy(() => import("./pages/SearchPage"));
@@ -17,6 +18,7 @@ const routeObj: RouteObject[] = [
   {
     path: CONSTANTS.ENV.BASE_URL,
     element: <App />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,

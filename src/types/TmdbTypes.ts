@@ -7,6 +7,12 @@ export interface Response<T> {
   total_results: number;
 }
 
+export interface FailureResponse {
+  success: boolean;
+  status_code: number;
+  status_message: string;
+}
+
 export interface Media {
   backdrop_path: string;
   genre_ids?: number[];

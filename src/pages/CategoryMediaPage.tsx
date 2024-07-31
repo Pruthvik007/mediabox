@@ -68,7 +68,8 @@ const CategoryMedia = () => {
   } = useInfiniteMedia(
     mediaType as MediaType,
     category as CategoryType,
-    params
+    params,
+    isValidMedia
   );
   useEffect(() => {
     if (inView && hasNextPage) {
@@ -78,14 +79,14 @@ const CategoryMedia = () => {
   }, [inView]);
 
   if (!isValidMedia) {
-    return <ErrorPage />;
+    return <ErrorPage message="Invalid Category" />;
   }
 
   if (error) {
     return <ErrorPage />;
   }
   return (
-    <div className="p-3 flex flex-col gap-3">
+    <div className="p-3 flex flex-col gap-3 min-height-screen">
       <p className="text-3xl font-bold text-center py-3 text-neutral-content">
         {`${CONSTANTS.categories[
           category as keyof typeof CONSTANTS.categories
@@ -99,18 +100,23 @@ const CategoryMedia = () => {
           setParams={setParams}
         />
       )}
-      {data !== undefined && (
-        <div className="grid grid-cols-2 md:grid-cols-4 2xl:grid-cols-6 p-3 gap-3 bg-base-100 rounded-xl mx-auto">
-          {data.pages.map((page, i) => (
-            <MediaList
-              key={i}
-              mediaList={page.results}
-              mediaType={mediaType as MediaType}
-              isLoading={isFetching || isFetchingNextPage}
-            />
-          ))}
-        </div>
-      )}
+      {data &&
+        (data.pages[0].total_results !== 0 ? (
+          <div className="grid grid-cols-2 md:grid-cols-4 2xl:grid-cols-6 p-3 gap-3 bg-base-100 rounded-xl mx-auto">
+            {data.pages.map((page, i) => (
+              <MediaList
+                key={i}
+                mediaList={page.results}
+                mediaType={mediaType as MediaType}
+                isLoading={isFetching || isFetchingNextPage}
+              />
+            ))}
+          </div>
+        ) : (
+          <p className="text-sm md:text-3xl text-warning mx-auto md:whitespace-nowrap text-center">
+            No Results Found For Given Category
+          </p>
+        ))}
       {data && data.pages.length >= 1 && <div id="observer" ref={ref}></div>}
       <ScrollToTopButton />
     </div>

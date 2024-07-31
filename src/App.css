@@ -60,3 +60,7 @@
 .custom-btn-primary {
   @apply bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg;
 }
+
+.min-height-screen {
+  @apply min-h-[calc(100vh-5rem)]; // 5rem => Height of NavBar
+}

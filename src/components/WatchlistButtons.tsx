@@ -44,7 +44,7 @@ const WatchlistButtons: React.FC<WatchlistButtonsProps> = ({
       ? `bg-red-500 hover:bg-red-700 ${
           asIcons && "btn btn-xs md:btn-sm rounded-full"
         }`
-      : `bg-blue-500 hover:bg-blue-700 ${
+      : `bg-green-500 hover:bg-green-700 ${
           asIcons && "btn btn-xs md:btn-sm rounded-full"
         }`;
     const iconSrc = isInWatchlist ? savedIcon : saveIcon;
@@ -72,9 +72,7 @@ const WatchlistButtons: React.FC<WatchlistButtonsProps> = ({
   };
 
   return (
-    <div>
-      {renderButton(isMediaPresentInWatchlist(mediaDetails.id, mediaType))}
-    </div>
+    <>{renderButton(isMediaPresentInWatchlist(mediaDetails.id, mediaType))}</>
   );
 };
 

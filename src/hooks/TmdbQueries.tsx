@@ -33,7 +33,8 @@ export const useSampleMedia = (
 export const useInfiniteMedia = (
   mediaType: MediaType,
   category: CategoryType,
-  params: CategoryMediaParamsType
+  params: CategoryMediaParamsType,
+  enabled: boolean = true
 ) => {
   return useInfiniteQuery({
     queryKey: [`${mediaType}-${category}`, mediaType, category, params],
@@ -48,6 +49,7 @@ export const useInfiniteMedia = (
         }
       );
     },
+    enabled: enabled,
     getNextPageParam: (lastPage) =>
       lastPage.page + 1 <= lastPage.total_pages ? lastPage.page + 1 : null,
     keepPreviousData: true,
