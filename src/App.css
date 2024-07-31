@@ -62,5 +62,5 @@
 }
 
 .min-height-screen {
-  @apply min-h-[calc(100vh-5rem)]; // 5rem => Height of NavBar
+  @apply min-h-[calc(100vh-5rem)]; /* 5rem => Height of NavBar */
 }
