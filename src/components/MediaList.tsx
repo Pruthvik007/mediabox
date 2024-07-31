@@ -1,17 +1,14 @@
 import { Link } from "react-router-dom";
+import { CONSTANTS } from "../helpers/Constants";
 import { Media, MediaType } from "../types/TmdbTypes";
 import MediaCard from "./MediaCard";
-import Skeleton from "./common/Skeleton";
-import { CONSTANTS } from "../helpers/Constants";
 
 const MediaList = ({
   mediaList,
   mediaType,
-  isLoading,
 }: {
   mediaList: Media[] | undefined;
   mediaType: MediaType;
-  isLoading?: boolean;
 }) => {
   return (
     <>
@@ -31,14 +28,7 @@ const MediaList = ({
           <MediaCard media={media} mediaType={mediaType} imageLoading="lazy" />
         </Link>
       ))}
-      {isLoading && (
-        <Skeleton
-          count={20}
-          className="card-sm md:card-md lg:card-lg flex-shrink-0"
-        />
-      )}
     </>
   );
 };
-
 export default MediaList;

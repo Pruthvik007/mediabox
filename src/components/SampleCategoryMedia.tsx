@@ -8,6 +8,7 @@ import { useSampleMedia } from "../hooks/TmdbQueries";
 import { MediaType } from "../types/TmdbTypes";
 import MediaList from "./MediaList";
 import MediaSelector from "./MediaSelector";
+import Skeleton from "./common/Skeleton";
 
 type SampleCategoryMediaProps = {
   category:
@@ -38,11 +39,13 @@ const SampleCategoryMedia = ({ category }: SampleCategoryMediaProps) => {
         </button>
       </div>
       <div className="flex gap-3 scrollbar-hidden">
-        <MediaList
-          mediaList={data?.results}
-          mediaType={mediaType}
-          isLoading={isLoading}
-        />
+        <MediaList mediaList={data?.results} mediaType={mediaType} />
+        {isLoading && (
+          <Skeleton
+            count={20}
+            className="card-sm md:card-md lg:card-lg flex-shrink-0"
+          />
+        )}
       </div>
     </div>
   );

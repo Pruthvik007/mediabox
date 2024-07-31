@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import AdvancedFilters from "../components/AdvancedFilters";
 import MediaList from "../components/MediaList";
 import ScrollToTopButton from "../components/common/ScrollToTopButton";
+import Skeleton from "../components/common/Skeleton";
 import { CONSTANTS } from "../helpers/Constants";
 import { useInfiniteMedia } from "../hooks/TmdbQueries";
 import {
@@ -58,19 +59,13 @@ const CategoryMedia = () => {
     }
   }, []);
 
-  const {
-    data,
-    error,
-    fetchNextPage,
-    isFetching,
-    isFetchingNextPage,
-    hasNextPage,
-  } = useInfiniteMedia(
-    mediaType as MediaType,
-    category as CategoryType,
-    params,
-    isValidMedia
-  );
+  const { data, error, fetchNextPage, isFetching, hasNextPage } =
+    useInfiniteMedia(
+      mediaType as MediaType,
+      category as CategoryType,
+      params,
+      isValidMedia
+    );
   useEffect(() => {
     if (inView && hasNextPage) {
       fetchNextPage();
@@ -103,14 +98,19 @@ const CategoryMedia = () => {
       {data &&
         (data.pages[0].total_results !== 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-4 2xl:grid-cols-6 p-3 gap-3 bg-base-100 rounded-xl mx-auto">
-            {data.pages.map((page, i) => (
+            {data.pages.map((page) => (
               <MediaList
-                key={i}
+                key={page.page}
                 mediaList={page.results}
                 mediaType={mediaType as MediaType}
-                isLoading={isFetching || isFetchingNextPage}
               />
             ))}
+            {isFetching && (
+              <Skeleton
+                count={20}
+                className="card-sm md:card-md lg:card-lg flex-shrink-0"
+              />
+            )}
           </div>
         ) : (
           <p className="text-sm md:text-3xl text-warning mx-auto md:whitespace-nowrap text-center">

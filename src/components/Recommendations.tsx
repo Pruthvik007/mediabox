@@ -1,5 +1,6 @@
 import { useRecommendations } from "../hooks/TmdbQueries";
 import { MediaType } from "../types/TmdbTypes";
+import Skeleton from "./common/Skeleton";
 import MediaList from "./MediaList";
 
 const Recommendations = ({
@@ -33,8 +34,13 @@ const Recommendations = ({
           <MediaList
             mediaList={recommendations.results}
             mediaType={mediaType as MediaType}
-            isLoading={isLoading}
           />
+          {isLoading && (
+            <Skeleton
+              count={20}
+              className="card-sm md:card-md lg:card-lg flex-shrink-0"
+            />
+          )}
         </div>
       )}
     </div>

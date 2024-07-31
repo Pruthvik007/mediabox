@@ -6,6 +6,7 @@ import ScrollToTopButton from "../components/common/ScrollToTopButton";
 import { useSearchResults } from "../hooks/TmdbQueries";
 import { MediaType, SearchMediaParamsType } from "../types/TmdbTypes";
 import ErrorPage from "./ErrorPage";
+import Skeleton from "../components/common/Skeleton";
 
 const SearchPage = () => {
   const { ref, inView } = useInView();
@@ -46,9 +47,14 @@ const SearchPage = () => {
                 key={i}
                 mediaList={page.results}
                 mediaType={mediaType as MediaType}
-                isLoading={isFetching}
               />
             ))}
+            {isFetching && (
+              <Skeleton
+                count={20}
+                className="card-sm md:card-md lg:card-lg flex-shrink-0"
+              />
+            )}
           </div>
         ) : (
           <p className="text-sm md:text-3xl text-warning mx-auto md:whitespace-nowrap text-center">
