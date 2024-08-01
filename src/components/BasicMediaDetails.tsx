@@ -1,10 +1,12 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ModalContext } from "../context/ModalContext";
 import { CONSTANTS, QUERY_TYPE } from "../helpers/Constants";
 import { useMediaDetails, useVideos } from "../hooks/TmdbQueries";
+import { useFilters } from "../hooks/useFilters";
 import { useKeyDown } from "../hooks/useKeyDown";
 import {
+  CategoryMediaParamsType,
   Genre,
   MediaDetails,
   MediaType,
@@ -31,7 +33,6 @@ const BasicMediaDetails = ({
     error,
     data: mediaDetails,
   } = useMediaDetails(mediaType as MediaType, mediaId!);
-
   const { openModal } = useContext(ModalContext);
   const videosData = useVideos(mediaType, mediaId);
   const playTrailer = () => {
@@ -143,8 +144,20 @@ const GenresOrCompanies = ({
   type: "Genres" | "Production Companies";
   mediaType: MediaType;
 }) => {
-  const typeKey =
-    type === "Genres" ? QUERY_TYPE.WITH_GENRES : QUERY_TYPE.WITH_COMPANIES;
+  const { updateFilters, clearFilters } = useFilters();
+  const navigate = useNavigate();
+  const applyFilters = (item: Genre | ProductionCompany) => {
+    clearFilters();
+    const typeKey =
+      type === "Genres" ? QUERY_TYPE.WITH_GENRES : QUERY_TYPE.WITH_COMPANIES;
+    updateFilters(
+      typeKey as keyof CategoryMediaParamsType,
+      item.id.toString(),
+      item.name
+    );
+    navigate(`${CONSTANTS.ENV.BASE_URL}media/${mediaType}/discover`);
+  };
+
   return (
     <div className="flex flex-col items-center md:flex-row bg-base-100 rounded-xl py-2 px-4 gap-x-2">
       <p className="text-lg text whitespace-nowrap">{type}</p>
@@ -153,14 +166,13 @@ const GenresOrCompanies = ({
         role="group"
       >
         {data.map((item) => (
-          <Link
-            to={`${CONSTANTS.ENV.BASE_URL}media/${mediaType}/discover?${typeKey}=${item.id}`}
+          <button
             key={item.id}
-            type="button"
             className="btn btn-sm md:btn-md btn-active btn-info"
+            onClick={() => applyFilters(item)}
           >
             {item.name}
-          </Link>
+          </button>
         ))}
       </div>
     </div>

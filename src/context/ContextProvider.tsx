@@ -1,3 +1,4 @@
+import { FilterProvider } from "./FiltersContext";
 import { ModalProvider } from "./ModalContext";
 import WatchListProvider from "./WatchListContext";
 
@@ -5,7 +6,9 @@ const ContextProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <ModalProvider>
-        <WatchListProvider>{children}</WatchListProvider>
+        <WatchListProvider>
+          <FilterProvider>{children}</FilterProvider>
+        </WatchListProvider>
       </ModalProvider>
     </>
   );

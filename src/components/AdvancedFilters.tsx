@@ -1,34 +1,28 @@
 import { QUERY_TYPE } from "../helpers/Constants";
-import { CategoryMediaParamsType, MediaType } from "../types/TmdbTypes";
+import { useFilters } from "../hooks/useFilters";
+import { MediaType } from "../types/TmdbTypes";
 import Genres from "./Genres";
 import Dropdown from "./common/Dropdown";
 
 type AdvancedFiltersProps = {
   className?: string;
   mediaType: MediaType;
-  params: CategoryMediaParamsType;
-  setParams: (params: CategoryMediaParamsType) => void;
 };
 
 const AdvancedFilters = ({
   className = "",
   mediaType,
-  params,
-  setParams,
 }: AdvancedFiltersProps) => {
+  const { updateFilters, clearFilters, filters, isFiltersActive } =
+    useFilters();
   return (
     <div
-      className={`flex gap-3 bg-base-100 p-5 w-full justify-center border-black rounded-lg ${className}`}
+      className={`flex flex-col md:flex-row gap-3 bg-base-100 p-5 w-full justify-center border-black rounded-lg ${className}`}
     >
       <Genres
         mediaType={mediaType}
-        value={params.with_genres ? params.with_genres : ""}
-        onChange={(value) =>
-          setParams({
-            ...params,
-            with_genres: value,
-          })
-        }
+        value={filters.with_genres ? filters.with_genres : ""}
+        onChange={(value) => updateFilters("with_genres", value)}
       />
       <Dropdown
         label="Sort By Popularity"
@@ -42,14 +36,17 @@ const AdvancedFilters = ({
             label: "Ascending",
           },
         ]}
-        value={params.sort_by_vote_count ? params.sort_by_vote_count : ""}
-        onChange={(value) =>
-          setParams({
-            ...params,
-            sort_by_vote_count: value,
-          })
-        }
+        value={filters.sort_by_vote_count ? filters.sort_by_vote_count : ""}
+        onChange={(value) => updateFilters("sort_by_vote_count", value)}
       />
+      {isFiltersActive() && (
+        <button
+          className="btn btn-md btn-active btn-warning rounded-xl"
+          onClick={clearFilters}
+        >
+          Clear Filters
+        </button>
+      )}
     </div>
   );
 };

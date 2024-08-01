@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { useParams } from "react-router-dom";
 import AdvancedFilters from "../components/AdvancedFilters";
@@ -7,11 +7,8 @@ import ScrollToTopButton from "../components/common/ScrollToTopButton";
 import Skeleton from "../components/common/Skeleton";
 import { CONSTANTS } from "../helpers/Constants";
 import { useInfiniteMedia } from "../hooks/TmdbQueries";
-import {
-  CategoryMediaParamsType,
-  CategoryType,
-  MediaType,
-} from "../types/TmdbTypes";
+import { useFilters } from "../hooks/useFilters";
+import { CategoryType, MediaType } from "../types/TmdbTypes";
 import ErrorPage from "./ErrorPage";
 
 type RouteParams = {
@@ -27,43 +24,13 @@ const CategoryMedia = () => {
     category !== undefined &&
     category in CONSTANTS.categories;
 
-  const [params, setParams] = useState<CategoryMediaParamsType>({
-    with_genres: "",
-    with_companies: "",
-    sort_by: "",
-    sort_by_date: "",
-    sort_by_vote_average: "",
-    sort_by_vote_count: "",
-    include_adult: undefined,
-    year: "",
-  });
-
-  useEffect(() => {
-    const genre = new URLSearchParams(window.location.search).get(
-      "with_genres"
-    );
-    const company = new URLSearchParams(window.location.search).get(
-      "with_companies"
-    );
-    if (genre) {
-      setParams((prev) => ({
-        ...prev,
-        with_genres: genre,
-      }));
-    }
-    if (company) {
-      setParams((prev) => ({
-        ...prev,
-        with_companies: company,
-      }));
-    }
-  }, []);
+  const { filters, activeFilterName } = useFilters();
 
   const { data, error, fetchNextPage, isFetching, hasNextPage } =
     useInfiniteMedia(
       mediaType as MediaType,
       category as CategoryType,
-      params,
+      filters,
       isValidMedia
     );
   useEffect(() => {
@@ -80,20 +47,19 @@ const CategoryMedia = () => {
   if (error) {
     return <ErrorPage />;
   }
+
   return (
     <div className="p-3 flex flex-col gap-3 min-height-screen">
-      <p className="text-3xl font-bold text-center py-3 text-neutral-content">
-        {`${CONSTANTS.categories[
-          category as keyof typeof CONSTANTS.categories
-        ].toUpperCase()} ${mediaType.toUpperCase()}`}
-      </p>
+      <div className="flex flex-wrap justify-center gap-3 text-sm md:text-2xl font-bold py-3 text-neutral-content">
+        <span>
+          {`${CONSTANTS.categories[
+            category as keyof typeof CONSTANTS.categories
+          ].toUpperCase()} ${mediaType.toUpperCase()}`}
+        </span>
+        <span>{activeFilterName ? `(From ${activeFilterName})` : ""}</span>
+      </div>
       {category === "discover" && (
-        <AdvancedFilters
-          className="py-3"
-          mediaType={mediaType as MediaType}
-          params={params}
-          setParams={setParams}
-        />
+        <AdvancedFilters className="py-3" mediaType={mediaType as MediaType} />
       )}
       {data &&
         (data.pages[0].total_results !== 0 ? (
