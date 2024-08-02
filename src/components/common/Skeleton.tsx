@@ -8,7 +8,7 @@ const Skeleton = ({ count = 1, className }: SkeletonProps) => {
       {Array.from({ length: count }).map((_, index) => (
         <div
           key={index}
-          role="placeholder"
+          role="presentation"
           className={`bg-slate-400 dark:bg-slate-700 animate-pulse ${className}`}
         ></div>
       ))}

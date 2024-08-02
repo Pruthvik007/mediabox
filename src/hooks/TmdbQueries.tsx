@@ -98,7 +98,6 @@ export const useSearchResults = (
     enabled: params.query.length > 0,
     getNextPageParam: (lastPage) =>
       lastPage.page + 1 <= lastPage.total_pages ? lastPage.page + 1 : null,
-    keepPreviousData: true,
     staleTime: ONE_DAY,
   });
 };

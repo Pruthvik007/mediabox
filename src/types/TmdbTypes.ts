@@ -21,7 +21,7 @@ export interface Media {
   overview: string;
   popularity: number;
   poster_path: string;
-  vote_average: number;
+  vote_average: number | undefined;
   vote_count: number;
 }
 

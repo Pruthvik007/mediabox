@@ -3,17 +3,15 @@ import { RouteObject, createBrowserRouter } from "react-router-dom";
 import App from "./App.tsx";
 import BackDrop from "./components/common/BackDrop.tsx";
 import { CONSTANTS } from "./helpers/Constants.ts";
-import ErrorPage from "./pages/ErrorPage.tsx";
-const PageNotFound = React.lazy(() => import("./pages/PageNotFound.tsx"));
+const PageNotFound = React.lazy(() => import("./pages/PageNotFound"));
 const MediaDetailsPage = React.lazy(() => import("./pages/MediaDetailsPage"));
 const SearchPage = React.lazy(() => import("./pages/SearchPage"));
 const WatchList = React.lazy(() => import("./pages/WatchList"));
 const CategoryMediaPage = React.lazy(
   () => import("./pages/CategoryMediaPage.tsx")
 );
-
-const HomePage = React.lazy(() => import("./pages/HomePage"));
-
+const ErrorPage = React.lazy(() => import("./pages/ErrorPage"));
+import HomePage from "./pages/HomePage.tsx";
 const routeObj: RouteObject[] = [
   {
     path: CONSTANTS.ENV.BASE_URL,

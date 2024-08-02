@@ -71,12 +71,7 @@ const CategoryMedia = () => {
                 mediaType={mediaType as MediaType}
               />
             ))}
-            {isFetching && (
-              <Skeleton
-                count={20}
-                className="card-sm md:card-md lg:card-lg flex-shrink-0"
-              />
-            )}
+            {isFetching && <Skeleton count={20} className="media-card" />}
           </div>
         ) : (
           <p className="text-sm md:text-3xl text-warning mx-auto md:whitespace-nowrap text-center">

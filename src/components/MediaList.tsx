@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { CONSTANTS } from "../helpers/Constants";
 import { Media, MediaType } from "../types/TmdbTypes";
 import MediaCard from "./MediaCard";
+import TmdbHelper from "../helpers/TmdbHelper";
 
 const MediaList = ({
   mediaList,
@@ -12,20 +13,15 @@ const MediaList = ({
 }) => {
   return (
     <>
-      {mediaList?.slice(0, 10).map((media) => (
+      {mediaList?.map((media) => (
         <Link
           to={`${CONSTANTS.ENV.BASE_URL}details/${mediaType}/${media.id}`}
           key={media.id}
+          title={`View ${TmdbHelper.getMediaTitle(media, mediaType)} ${
+            mediaType === "movies" ? "Movie" : "Show"
+          } Details`}
         >
-          <MediaCard media={media} mediaType={mediaType} imageLoading="eager" />
-        </Link>
-      ))}
-      {mediaList?.slice(10).map((media) => (
-        <Link
-          to={`${CONSTANTS.ENV.BASE_URL}details/${mediaType}/${media.id}`}
-          key={media.id}
-        >
-          <MediaCard media={media} mediaType={mediaType} imageLoading="lazy" />
+          <MediaCard media={media} mediaType={mediaType} />
         </Link>
       ))}
     </>

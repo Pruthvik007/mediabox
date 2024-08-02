@@ -40,12 +40,7 @@ const SampleCategoryMedia = ({ category }: SampleCategoryMediaProps) => {
       </div>
       <div className="flex gap-3 scrollbar-hidden">
         <MediaList mediaList={data?.results} mediaType={mediaType} />
-        {isLoading && (
-          <Skeleton
-            count={20}
-            className="card-sm md:card-md lg:card-lg flex-shrink-0"
-          />
-        )}
+        {isLoading && <Skeleton count={20} className="media-card" />}
       </div>
     </div>
   );

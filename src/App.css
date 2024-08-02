@@ -18,32 +18,17 @@
 }
 
 @layer utilities {
-  .card-sm {
-    @apply w-32 h-44;
-  }
-  .card-md {
-    @apply w-44 h-64;
+  .media-card {
+    @apply w-32 h-44 md:w-44 md:h-64 lg:w-56 lg:h-80 flex-shrink-0;
   }
 
-  .card-lg {
-    @apply w-56 h-80;
+  .media-card-lg {
+    @apply w-56 h-80 flex-shrink-0;
   }
 
-  .card-horizontal-sm {
-    @apply w-52 h-32;
+  .card-horizontal {
+    @apply w-52 h-32 md:w-60 md:h-40 lg:w-80 lg:h-48 flex-shrink-0;
   }
-
-  .card-horizontal-md {
-    @apply w-60 h-40;
-  }
-
-  .card-horizontal-lg {
-    @apply w-80 h-48;
-  }
-}
-
-.text {
-  @apply text-neutral-content dark:text-white;
 }
 
 ::-webkit-scrollbar {

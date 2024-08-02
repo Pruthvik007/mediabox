@@ -45,13 +45,15 @@ const Image = ({
             style={{
               filter: `${isLoading ? "blur(20px)" : ""}`,
               transition: "1s filter linear",
+              objectFit: "contain",
+              objectPosition: "center",
+              width: "100%",
+              height: "100%",
             }}
             onLoad={() => {
               setIsLoading(false);
             }}
             loading={loading}
-            height="100%"
-            width="100%"
             srcSet={`${getImage("sm")} 300w, ${getImage("md")} 768w, ${getImage(
               "lg"
             )} 1280w`}

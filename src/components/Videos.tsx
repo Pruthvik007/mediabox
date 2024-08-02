@@ -49,7 +49,7 @@ const Videos = ({
                   imagePath={video.key}
                   imageType="YOUTUBE_THUMBNAIL"
                   loading="lazy"
-                  className="card-horizontal-sm md:card-horizontal-md lg:card-horizontal-lg rounded-xl overflow-y-clip"
+                  className="card-horizontal rounded-xl"
                 />
                 <img
                   className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-5 h-5 md:w-8 md:h-8 lg:w-10 lg:h-10"

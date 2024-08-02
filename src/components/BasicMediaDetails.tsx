@@ -20,6 +20,7 @@ import WatchlistButtons from "./WatchlistButtons";
 import BackDrop from "./common/BackDrop";
 import Image from "./common/Image";
 import Rating from "./common/Rating";
+import TmdbHelper from "../helpers/TmdbHelper";
 
 const BasicMediaDetails = ({
   mediaType,
@@ -36,29 +37,9 @@ const BasicMediaDetails = ({
   const { openModal } = useContext(ModalContext);
   const videosData = useVideos(mediaType, mediaId);
   const playTrailer = () => {
-    let trailer = {
-      name: "",
-      id: "",
-    };
-
-    if (videosData.isSuccess) {
-      const trailerData = videosData.data.results
-        .sort((v1, v2) => v1.name.localeCompare(v2.name))
-        .find(
-          (result) =>
-            result.official &&
-            result.site === "YouTube" &&
-            result.type === "Trailer" &&
-            result.name.toLowerCase().includes("trailer")
-        );
-      if (trailerData) {
-        trailer = {
-          name: trailerData.name,
-          id: trailerData.key,
-        };
-      }
-    }
-    openModal(<VideoModalContent {...trailer} />);
+    openModal(
+      <VideoModalContent {...TmdbHelper.getOfficialTrailer(videosData.data)} />
+    );
   };
   useKeyDown(" ", playTrailer);
 
@@ -69,9 +50,9 @@ const BasicMediaDetails = ({
         <p className="text-3xl text-red-500">Something Went Wrong!</p>
       )}
       {mediaDetails && (
-        <div className="rounded-lg shadow flex flex-col items-center md:flex-row gap-5 text-center md:text-left justify-center p-5 bg-base-100">
+        <div className="rounded-lg shadow flex flex-col items-center md:flex-row gap-5 text-center md:text-left justify-center p-5">
           <MediaPosterAndRating mediaDetails={mediaDetails} />
-          <div className="flex flex-col gap-3 bg-neutral p-3 rounded-xl w-full md:w-2/3 lg:w-full">
+          <div className="flex flex-col gap-3 bg-neutral p-3 rounded-xl w-full md:w-2/3 lg:w-3/4">
             <MediaTitle mediaDetails={mediaDetails} mediaType={mediaType} />
             {mediaDetails.tagline && mediaDetails.tagline.length > 0 && (
               <p className="text-md md:text-lg italic font-semibold text">
@@ -119,10 +100,7 @@ const MediaTitle = ({
   mediaDetails: MediaDetails;
   mediaType: MediaType;
 }) => {
-  const title =
-    mediaType === "movies"
-      ? (mediaDetails as MovieDetails).original_title
-      : (mediaDetails as ShowDetails).original_name;
+  const title = TmdbHelper.getMediaTitle(mediaDetails, mediaType);
   const date =
     mediaType === "movies"
       ? (mediaDetails as MovieDetails).release_date
@@ -160,7 +138,9 @@ const GenresOrCompanies = ({
 
   return (
     <div className="flex flex-col items-center md:flex-row bg-base-100 rounded-xl py-2 px-4 gap-x-2">
-      <p className="text-lg text whitespace-nowrap">{type}</p>
+      <p className="text-lg text-neutral-content dark:text-white whitespace-nowrap">
+        {type}
+      </p>
       <div
         className="flex rounded-md shadow-sm gap-2 p-2 overflow-x-auto max-w-full"
         role="group"
@@ -187,16 +167,20 @@ const MediaPosterAndRating = ({
   return (
     <div className="flex flex-col items-center gap-y-5">
       <Image
+        className="media-card-lg"
         imagePath={mediaDetails?.poster_path}
         alt={mediaDetails?.id.toString()}
         loading="eager"
-        className="card-lg"
       />
-      <Rating
-        actualRating={Number((mediaDetails.vote_average / 2).toFixed(1))}
-        totalRating={5}
-        displayText={`${mediaDetails.vote_average.toFixed(1)} / 10`}
-      />
+      {mediaDetails.vote_average !== undefined && (
+        <Rating
+          actualRating={Math.ceil(
+            Number((mediaDetails.vote_average / 2).toFixed(1))
+          )}
+          totalRating={5}
+          displayText={`${mediaDetails.vote_average.toFixed(1)} / 10`}
+        />
+      )}
     </div>
   );
 };

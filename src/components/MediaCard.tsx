@@ -7,41 +7,45 @@ import {
 } from "../types/TmdbTypes";
 import WatchlistButtons from "./WatchlistButtons";
 import Image from "./common/Image";
+import { useInView } from "react-intersection-observer";
+import Skeleton from "./common/Skeleton";
 type MediaCardProps = {
   media: Media;
   mediaType: MediaType;
-  imageLoading?: "lazy" | "eager";
 };
-const MediaCard = ({
-  media,
-  mediaType,
-  imageLoading = "eager",
-}: MediaCardProps) => {
+
+const MediaCard = ({ media, mediaType }: MediaCardProps) => {
+  const { ref, inView } = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+  });
+
   const imagePath = media.poster_path ? media.poster_path : media.backdrop_path;
   const alt =
     (media as MovieDetails).title ||
     (media as ShowDetails).name ||
     media.id.toString();
+
   return (
-    <div className="relative group card-sm md:card-md lg:card-lg overflow-y-clip">
-      <Image
-        className="card-sm md:card-md lg:card-lg overflow-y-clip"
-        imagePath={imagePath}
-        alt={alt}
-        loading={imageLoading}
-      />
-      {media.vote_average !== 0 && (
-        <div className="absolute top-1 right-1 badge badge-xs sm:badge-sm md:badge-md lg:badge-lg badge-neutral rounded-full">
-          {media.vote_average.toFixed(1)}
-        </div>
+    <div ref={ref} className={`relative group`}>
+      {inView ? (
+        <>
+          <Image className="media-card" imagePath={imagePath} alt={alt} />
+          {media.vote_average !== undefined && media.vote_average !== 0 && (
+            <div className="absolute top-2 right-2 badge badge-xs sm:badge-sm md:badge-md lg:badge-lg badge-neutral rounded-full">
+              {media.vote_average.toFixed(1)}
+            </div>
+          )}
+          <WatchlistButtons
+            mediaDetails={media as MediaDetails}
+            mediaType={mediaType}
+            asIcons
+            className="block lg:hidden lg:group-hover:block absolute bottom-1 right-1"
+          />
+        </>
+      ) : (
+        <Skeleton className="media-card" />
       )}
-      <WatchlistButtons
-        mediaDetails={media as MediaDetails}
-        mediaType={mediaType}
-        asIcons
-        className="block lg:hidden lg:group-hover:block absolute bottom-1 right-1"
-        iconsLoading={imageLoading}
-      />
     </div>
   );
 };

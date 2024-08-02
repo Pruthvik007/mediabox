@@ -35,12 +35,7 @@ const Recommendations = ({
             mediaList={recommendations.results}
             mediaType={mediaType as MediaType}
           />
-          {isLoading && (
-            <Skeleton
-              count={20}
-              className="card-sm md:card-md lg:card-lg flex-shrink-0"
-            />
-          )}
+          {isLoading && <Skeleton count={20} className="media-card" />}
         </div>
       )}
     </div>
