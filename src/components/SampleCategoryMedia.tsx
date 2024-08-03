@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   CONSTANTS,
@@ -19,9 +19,9 @@ const SampleCategoryMedia = ({ category }: SampleCategoryMediaProps) => {
   const navigate = useNavigate();
   const [mediaType, setMediaType] = useState<MediaType>("movies");
   const { isLoading, data } = useSampleMedia(mediaType, category);
-  const onViewMore = () => {
+  const onViewMore = useCallback(() => {
     navigate(`${CONSTANTS.ENV.BASE_URL}media/${mediaType}/${category}`);
-  };
+  }, [mediaType, category, navigate]);
   return (
     <div className="flex flex-col gap-3 p-3 bg-neutral rounded-xl">
       <div className="flex place-content-between items-center">

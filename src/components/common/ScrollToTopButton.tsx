@@ -1,24 +1,21 @@
-import React, { useState } from "react";
-const ScrollToTopButton = () => {
+import React, { memo, useEffect, useState } from "react";
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+};
+const ScrollToTopButton = memo(() => {
   const [visible, setVisible] = useState(false);
 
-  const toggleVisible = () => {
-    const scrolled = document.documentElement.scrollTop;
-    if (scrolled > 300) {
-      setVisible(true);
-    } else if (scrolled <= 300) {
-      setVisible(false);
-    }
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
-  window.addEventListener("scroll", toggleVisible);
+  useEffect(() => {
+    const toggleVisible = () => {
+      const scrolled = document.documentElement.scrollTop;
+      setVisible(scrolled > 300);
+    };
+    window.addEventListener("scroll", toggleVisible);
+    return () => window.removeEventListener("scroll", toggleVisible);
+  }, []);
 
   return (
     <React.Fragment>
@@ -38,6 +35,6 @@ const ScrollToTopButton = () => {
       )}
     </React.Fragment>
   );
-};
+});
 
 export default ScrollToTopButton;

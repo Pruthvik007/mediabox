@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useCallback, useState } from "react";
 import { Media, MediaType } from "../types/TmdbTypes";
 
 type WatchListContextType = {
@@ -30,31 +30,40 @@ const getExistingWatchList = () => {
 
 const WatchListProvider = ({ children }: { children: React.ReactNode }) => {
   const [watchList, setWatchList] = useState<WatchList>(getExistingWatchList());
-  const addMediaToWatchList = (media: Media, mediaType: MediaType) => {
-    setWatchList((prev) => {
-      const updatedList = {
-        ...prev,
-        [mediaType]: [...prev[mediaType], media],
-      };
-      localStorage.setItem("watchlist", JSON.stringify(updatedList));
-      return updatedList;
-    });
-  };
+  const addMediaToWatchList = useCallback(
+    (media: Media, mediaType: MediaType) => {
+      setWatchList((prev) => {
+        const updatedList = {
+          ...prev,
+          [mediaType]: [...prev[mediaType], media],
+        };
+        localStorage.setItem("watchlist", JSON.stringify(updatedList));
+        return updatedList;
+      });
+    },
+    [setWatchList]
+  );
 
-  const removeMediaFromWatchList = (media: Media, mediaType: MediaType) => {
-    setWatchList((prev) => {
-      const updatedList = {
-        ...prev,
-        [mediaType]: prev[mediaType].filter((m) => m.id !== media.id),
-      };
-      localStorage.setItem("watchlist", JSON.stringify(updatedList));
-      return updatedList;
-    });
-  };
+  const removeMediaFromWatchList = useCallback(
+    (media: Media, mediaType: MediaType) => {
+      setWatchList((prev) => {
+        const updatedList = {
+          ...prev,
+          [mediaType]: prev[mediaType].filter((m) => m.id !== media.id),
+        };
+        localStorage.setItem("watchlist", JSON.stringify(updatedList));
+        return updatedList;
+      });
+    },
+    [setWatchList]
+  );
 
-  const isMediaPresentInWatchlist = (mediaId: number, mediaType: MediaType) => {
-    return watchList[mediaType].find((m) => m.id === mediaId) !== undefined;
-  };
+  const isMediaPresentInWatchlist = useCallback(
+    (mediaId: number, mediaType: MediaType) => {
+      return watchList[mediaType].find((m) => m.id === mediaId) !== undefined;
+    },
+    [watchList]
+  );
 
   return (
     <WatchListContext.Provider

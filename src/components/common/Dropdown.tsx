@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 type Option = {
   label: string;
   value: string;
@@ -8,7 +10,7 @@ type DropdownProps = {
   value: string;
   onChange: (value: string) => void;
 };
-const Dropdown = ({ label, options, value, onChange }: DropdownProps) => {
+const Dropdown = memo(({ label, options, value, onChange }: DropdownProps) => {
   return (
     <select
       id={label}
@@ -24,6 +26,6 @@ const Dropdown = ({ label, options, value, onChange }: DropdownProps) => {
       ))}
     </select>
   );
-};
+});
 
 export default Dropdown;

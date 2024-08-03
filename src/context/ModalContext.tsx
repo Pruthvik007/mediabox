@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useCallback, useState } from "react";
 
 export const ModalContext = createContext({
   isVisible: false,
@@ -11,14 +11,17 @@ export const ModalContext = createContext({
 export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [modalContent, setModalContent] = useState<React.ReactNode | null>();
-  const openModal = (children: React.ReactNode) => {
-    setModalContent(children);
-    setIsVisible(true);
-  };
-  const closeModal = () => {
+  const openModal = useCallback(
+    (children: React.ReactNode) => {
+      setModalContent(children);
+      setIsVisible(true);
+    },
+    [setIsVisible, setModalContent]
+  );
+  const closeModal = useCallback(() => {
     setIsVisible(false);
     setModalContent(null);
-  };
+  }, [setIsVisible, setModalContent]);
   return (
     <ModalContext.Provider
       value={{ isVisible, modalContent, openModal, closeModal }}

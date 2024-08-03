@@ -1,6 +1,6 @@
 # MediaBox
 
-![Performance](https://img.shields.io/badge/Performance-99-brightgreen)
+![Performance](https://img.shields.io/badge/Performance-100-brightgreen)
 ![Accessibility](https://img.shields.io/badge/Accessibility-100-brightgreen)
 ![Best Practices](https://img.shields.io/badge/Best_Practices-100-brightgreen)
 ![SEO](https://img.shields.io/badge/SEO-100-brightgreen)
@@ -33,7 +33,11 @@ MediaBox is built using the following technologies:
 - **Caching with React Query**: Duplicate requests are avoided through efficient caching with React Query, enhancing performance and reducing server load.
 - **Customizable Themes**: Users can switch between two themes, allowing for personalized viewing experiences.
 - **Trailers and Media Playback**: MediaBox enables users to watch trailers and stream media directly within the application, providing a comprehensive entertainment experience.
-- **Lighthouse Ratings**: MediaBox maintains a near-perfect Lighthouse score of 99 for Performance, alongside perfect Accessibility, Best Practices, and SEO scores.
+- **Lighthouse Ratings**: MediaBox has earned perfect Lighthouse scores in Performance, Accessibility, Best Practices, and SEO.
+
+## LightHouse Results
+
+![LightHouseScores](./lighthouse_scores.png)
 
 ## Installation
 
@@ -42,19 +46,25 @@ To install and run MediaBox locally, follow these steps:
 1. Clone the repository:
    ```bash
      git clone https://github.com/pruthvik007/movies-and-series.git
+   ```
 2. Navigate to the project directory:
    ```bash
      cd movies-and-series
+   ```
 3. Install dependencies:
    ```bash
      npm install
+   ```
 4. Add your TMDB API Key:
    Create a .env file in the root of the project and add your TMDB API key:
    ```plaintext
      VITE_TMDB_API_KEY=your_tmdb_api_key_here
+   ```
 5. Start the development server:
    ```bash
      npm run dev
+   ```
 
 ## Usage
+
 Once the development server is running, you can access the application at http://localhost:5173/movies-and-series/ in your web browser. Browse through the media library, filter content, watch trailers, and enjoy the seamless experience provided by MediaBox.

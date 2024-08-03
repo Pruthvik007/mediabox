@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useCallback, useState } from "react";
 import { CategoryMediaParamsType } from "../types/TmdbTypes";
 type FiltersContextType = {
   filters: CategoryMediaParamsType;
@@ -32,18 +32,21 @@ export const FilterProvider = ({ children }: { children: React.ReactNode }) => {
     }
     return false;
   };
-  const updateFilters = (
-    filterName: keyof CategoryMediaParamsType,
-    value: string,
-    displayValue?: string
-  ) => {
-    setFilters((prev) => ({
-      ...prev,
-      [filterName]: value,
-    }));
-    if (displayValue) setActiveFilterName(displayValue);
-  };
-  const clearFilters = () => {
+  const updateFilters = useCallback(
+    (
+      filterName: keyof CategoryMediaParamsType,
+      value: string,
+      displayValue?: string
+    ) => {
+      setFilters((prev) => ({
+        ...prev,
+        [filterName]: value,
+      }));
+      if (displayValue) setActiveFilterName(displayValue);
+    },
+    [setFilters, setActiveFilterName]
+  );
+  const clearFilters = useCallback(() => {
     setFilters((prev) => ({
       ...prev,
       with_genres: "",
@@ -51,7 +54,7 @@ export const FilterProvider = ({ children }: { children: React.ReactNode }) => {
       sort_by_vote_count: "",
     }));
     setActiveFilterName("");
-  };
+  }, [setFilters, setActiveFilterName]);
   return (
     <FiltersContext.Provider
       value={{

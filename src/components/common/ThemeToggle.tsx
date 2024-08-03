@@ -1,4 +1,6 @@
-const ThemeToggle = () => {
+import { memo } from "react";
+
+const ThemeToggle = memo(() => {
   return (
     <label htmlFor="theme controller" className="swap swap-rotate">
       <span className="sr-only">Toggle Theme</span>
@@ -24,6 +26,6 @@ const ThemeToggle = () => {
       </svg>
     </label>
   );
-};
+});
 
 export default ThemeToggle;

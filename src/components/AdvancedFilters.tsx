@@ -1,3 +1,4 @@
+import { memo, useCallback } from "react";
 import { QUERY_TYPE } from "../helpers/Constants";
 import { useFilters } from "../hooks/useFilters";
 import { MediaType } from "../types/TmdbTypes";
@@ -9,21 +10,58 @@ type AdvancedFiltersProps = {
   mediaType: MediaType;
 };
 
-const AdvancedFilters = ({
-  className = "",
-  mediaType,
-}: AdvancedFiltersProps) => {
-  const { updateFilters, clearFilters, filters, isFiltersActive } =
-    useFilters();
-  return (
-    <div
-      className={`flex flex-col md:flex-row gap-3 bg-base-100 p-5 w-full justify-center border-black rounded-lg ${className}`}
-    >
-      <Genres
-        mediaType={mediaType}
-        value={filters.with_genres ? filters.with_genres : ""}
-        onChange={(value) => updateFilters("with_genres", value)}
-      />
+const AdvancedFilters = memo(
+  ({ className = "", mediaType }: AdvancedFiltersProps) => {
+    const { updateFilters, clearFilters, filters, isFiltersActive } =
+      useFilters();
+    const handleGenresChange = useCallback(
+      (value: string) => {
+        updateFilters("with_genres", value);
+      },
+      [updateFilters]
+    );
+
+    const handleSortByPopularityChange = useCallback(
+      (value: string) => {
+        updateFilters("sort_by_vote_count", value);
+      },
+      [updateFilters]
+    );
+    return (
+      <div
+        className={`flex flex-col md:flex-row gap-3 bg-base-100 p-5 w-full justify-center border-black rounded-lg ${className}`}
+      >
+        <Genres
+          mediaType={mediaType}
+          value={filters.with_genres ? filters.with_genres : ""}
+          onChange={handleGenresChange}
+        />
+        <SortByPopularity
+          value={filters.sort_by_vote_count ? filters.sort_by_vote_count : ""}
+          onChange={handleSortByPopularityChange}
+        />
+        {isFiltersActive() && (
+          <button
+            className="btn btn-md btn-active btn-warning rounded-xl"
+            onClick={clearFilters}
+          >
+            Clear Filters
+          </button>
+        )}
+      </div>
+    );
+  }
+);
+
+const SortByPopularity = memo(
+  ({
+    value,
+    onChange,
+  }: {
+    value: string;
+    onChange: (value: string) => void;
+  }) => {
+    return (
       <Dropdown
         label="Sort By Popularity"
         options={[
@@ -36,19 +74,11 @@ const AdvancedFilters = ({
             label: "Ascending",
           },
         ]}
-        value={filters.sort_by_vote_count ? filters.sort_by_vote_count : ""}
-        onChange={(value) => updateFilters("sort_by_vote_count", value)}
+        value={value}
+        onChange={onChange}
       />
-      {isFiltersActive() && (
-        <button
-          className="btn btn-md btn-active btn-warning rounded-xl"
-          onClick={clearFilters}
-        >
-          Clear Filters
-        </button>
-      )}
-    </div>
-  );
-};
+    );
+  }
+);
 
 export default AdvancedFilters;
