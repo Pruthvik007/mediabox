@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import CrossIcon from "../assets/icons/svgs/CrossIcon";
 import MenuIcon from "../assets/icons/svgs/MenuIcon";
@@ -25,17 +25,14 @@ const navItems = [
 ];
 const Navbar = () => {
   const location = useLocation();
-  const isCurrentPath = useCallback(
-    (path: string) => {
-      return location.pathname === path;
-    },
-    [location.pathname]
-  );
+  const isCurrentPath = (path: string) => {
+    return location.pathname === path;
+  };
 
   const [isVisible, setIsVisible] = useState(false);
-  const toggleNav = useCallback(() => {
+  const toggleNav = () => {
     setIsVisible(!isVisible);
-  }, [isVisible]);
+  };
 
   return (
     <div className="bg-neutral flex justify-between items-center h-20 px-4 text-white">
