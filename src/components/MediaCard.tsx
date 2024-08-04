@@ -9,12 +9,13 @@ import WatchlistButtons from "./WatchlistButtons";
 import Image from "./common/Image";
 import { useInView } from "react-intersection-observer";
 import Skeleton from "./common/Skeleton";
+import { memo } from "react";
 type MediaCardProps = {
   media: Media;
   mediaType: MediaType;
 };
 
-const MediaCard = ({ media, mediaType }: MediaCardProps) => {
+const MediaCard = memo(({ media, mediaType }: MediaCardProps) => {
   const { ref, inView } = useInView({
     threshold: 0.1,
     triggerOnce: true,
@@ -32,7 +33,7 @@ const MediaCard = ({ media, mediaType }: MediaCardProps) => {
         <>
           <Image className="media-card" imagePath={imagePath} alt={alt} />
           {media.vote_average !== undefined && media.vote_average !== 0 && (
-            <div className="absolute top-2 right-2 badge badge-xs sm:badge-sm md:badge-md lg:badge-lg badge-neutral rounded-full">
+            <div className="absolute top-1 right-2 badge badge-xs sm:badge-sm md:badge-md lg:badge-lg badge-neutral rounded-full">
               {media.vote_average.toFixed(1)}
             </div>
           )}
@@ -40,7 +41,7 @@ const MediaCard = ({ media, mediaType }: MediaCardProps) => {
             mediaDetails={media as MediaDetails}
             mediaType={mediaType}
             asIcons
-            className="block lg:hidden lg:group-hover:block absolute bottom-1 right-1"
+            className="block lg:hidden lg:group-hover:block absolute bottom-1 right-2"
           />
         </>
       ) : (
@@ -48,6 +49,6 @@ const MediaCard = ({ media, mediaType }: MediaCardProps) => {
       )}
     </div>
   );
-};
+});
 
 export default MediaCard;

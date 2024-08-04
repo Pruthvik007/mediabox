@@ -11,12 +11,25 @@ export default defineConfig({
       },
       mangle: true,
     },
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ["react", "react-dom"],
+          query: ["react-query"],
+        },
+      },
+    },
   },
   plugins: [
     react(),
     VitePWA({
       registerType: "autoUpdate",
+      injectRegister: "script-defer",
       includeAssets: ["favicon.ico", "apple-touch-icon.png", "mask-icon.svg"],
+      workbox: {
+        globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
+        globIgnores: ["assets/*.{js,css,html,ico,png,svg}"],
+      },
       manifest: {
         name: "MediaBox",
         short_name: "MediaBox",

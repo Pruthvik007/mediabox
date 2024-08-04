@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import AdvancedFilters from "../components/AdvancedFilters";
 import MediaList from "../components/MediaList";
 import ScrollToTopButton from "../components/common/ScrollToTopButton";
-import Skeleton from "../components/common/Skeleton";
 import { CONSTANTS } from "../helpers/Constants";
 import { useInfiniteMedia } from "../hooks/TmdbQueries";
 import { useFilters } from "../hooks/useFilters";
@@ -64,14 +63,11 @@ const CategoryMedia = () => {
       {data &&
         (data.pages[0].total_results !== 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-4 2xl:grid-cols-6 p-3 gap-3 bg-base-100 rounded-xl mx-auto">
-            {data.pages.map((page) => (
-              <MediaList
-                key={page.page}
-                mediaList={page.results}
-                mediaType={mediaType as MediaType}
-              />
-            ))}
-            {isFetching && <Skeleton count={20} className="media-card" />}
+            <MediaList
+              mediaList={data.pages.flatMap((page) => page.results)}
+              mediaType={mediaType as MediaType}
+              isLoading={isFetching}
+            />
           </div>
         ) : (
           <p className="text-sm md:text-3xl text-warning mx-auto md:whitespace-nowrap text-center">

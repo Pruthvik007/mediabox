@@ -6,7 +6,6 @@ import ScrollToTopButton from "../components/common/ScrollToTopButton";
 import { useSearchResults } from "../hooks/TmdbQueries";
 import { MediaType, SearchMediaParamsType } from "../types/TmdbTypes";
 import ErrorPage from "./ErrorPage";
-import Skeleton from "../components/common/Skeleton";
 
 const SearchPage = () => {
   const { ref, inView } = useInView();
@@ -42,14 +41,11 @@ const SearchPage = () => {
       {data &&
         (data.pages[0].total_results !== 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-4 2xl:grid-cols-6 p-3 gap-3 bg-neutral max-w-fit rounded-xl mx-auto">
-            {data.pages.map((page, i) => (
-              <MediaList
-                key={i}
-                mediaList={page.results}
-                mediaType={mediaType as MediaType}
-              />
-            ))}
-            {isFetching && <Skeleton count={20} className="media-card" />}
+            <MediaList
+              mediaList={data.pages.flatMap((page) => page.results)}
+              mediaType={mediaType as MediaType}
+              isLoading={isFetching}
+            />
           </div>
         ) : (
           <p className="text-sm md:text-3xl text-warning mx-auto md:whitespace-nowrap text-center">
