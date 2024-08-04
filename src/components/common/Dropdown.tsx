@@ -13,6 +13,7 @@ type DropdownProps = {
 const Dropdown = memo(({ label, options, value, onChange }: DropdownProps) => {
   return (
     <select
+      aria-label={label}
       id={label}
       className="select select-bordered text-center overflow-hidden"
       value={value}

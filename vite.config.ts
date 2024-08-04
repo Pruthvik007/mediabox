@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
-
+const SIXTY_DAYS = 60 * 60 * 24 * 60;
 export default defineConfig({
   build: {
     minify: "terser",
@@ -14,8 +14,8 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          react: ["react", "react-dom"],
-          query: ["react-query"],
+          react: ["react", "react-dom", "react-intersection-observer"],
+          react_query: ["react-query"],
         },
       },
     },
@@ -29,6 +29,41 @@ export default defineConfig({
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
         globIgnores: ["assets/*.{js,css,html,ico,png,svg}"],
+        runtimeCaching: [
+          {
+            urlPattern: ({ url }) =>
+              url.origin === self.location.origin &&
+              /\.(png|jpg|jpeg|gif|svg)$/.test(url.pathname),
+            handler: "CacheFirst",
+            options: {
+              cacheName: "local-images-cache",
+              expiration: {
+                maxEntries: 100,
+                maxAgeSeconds: SIXTY_DAYS,
+              },
+            },
+          },
+          {
+            urlPattern: /\/assets\/react-.*\.js$/,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "react-chunks",
+              expiration: {
+                maxAgeSeconds: SIXTY_DAYS,
+              },
+            },
+          },
+          {
+            urlPattern: /\/assets\/react_query-.*\.js$/,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "react-query-chunks",
+              expiration: {
+                maxAgeSeconds: SIXTY_DAYS,
+              },
+            },
+          },
+        ],
       },
       manifest: {
         name: "MediaBox",
