@@ -52,20 +52,20 @@ const CategoryMedia = () => {
       <div className="flex flex-wrap justify-center gap-3 text-sm md:text-2xl font-bold py-3 text-neutral-content">
         <span>
           {`${CONSTANTS.categories[
-            category as keyof typeof CONSTANTS.categories
+            category
           ].toUpperCase()} ${mediaType.toUpperCase()}`}
         </span>
         <span>{activeFilterName ? `(From ${activeFilterName})` : ""}</span>
       </div>
       {category === "discover" && (
-        <AdvancedFilters className="py-3" mediaType={mediaType as MediaType} />
+        <AdvancedFilters className="py-3" mediaType={mediaType} />
       )}
       {data &&
         (data.pages[0].total_results !== 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-4 2xl:grid-cols-6 p-3 gap-3 bg-base-100 rounded-xl mx-auto">
             <MediaList
               mediaList={data.pages.flatMap((page) => page.results)}
-              mediaType={mediaType as MediaType}
+              mediaType={mediaType}
               isLoading={isFetching}
             />
           </div>

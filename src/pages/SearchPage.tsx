@@ -43,7 +43,7 @@ const SearchPage = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 2xl:grid-cols-6 p-3 gap-3 bg-neutral max-w-fit rounded-xl mx-auto">
             <MediaList
               mediaList={data.pages.flatMap((page) => page.results)}
-              mediaType={mediaType as MediaType}
+              mediaType={mediaType}
               isLoading={isFetching}
             />
           </div>

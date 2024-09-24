@@ -1,6 +1,6 @@
 type SkeletonProps = {
   count?: number;
-  className: string;
+  className?: string;
 };
 const Skeleton = ({ count = 1, className }: SkeletonProps) => {
   return (

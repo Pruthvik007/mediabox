@@ -1,15 +1,14 @@
+import { memo } from "react";
+import { useInView } from "react-intersection-observer";
 import {
   Media,
-  MediaDetails,
   MediaType,
   MovieDetails,
   ShowDetails,
 } from "../types/TmdbTypes";
 import WatchlistButtons from "./WatchlistButtons";
 import Image from "./common/Image";
-import { useInView } from "react-intersection-observer";
 import Skeleton from "./common/Skeleton";
-import { memo } from "react";
 type MediaCardProps = {
   media: Media;
   mediaType: MediaType;
@@ -28,24 +27,24 @@ const MediaCard = memo(({ media, mediaType }: MediaCardProps) => {
     media.id.toString();
 
   return (
-    <div ref={ref} className={`relative group`}>
+    <div ref={ref} className={`relative group media-card`}>
       {inView ? (
         <>
-          <Image className="media-card" imagePath={imagePath} alt={alt} />
+          <Image imagePath={imagePath} alt={alt} />
           {media.vote_average !== undefined && media.vote_average !== 0 && (
-            <div className="absolute top-1 right-2 badge badge-xs sm:badge-sm md:badge-md lg:badge-lg badge-neutral rounded-full">
+            <p className="absolute top-1 right-2 badge badge-xs sm:badge-sm md:badge-md lg:badge-lg badge-neutral rounded-full">
               {media.vote_average.toFixed(1)}
-            </div>
+            </p>
           )}
           <WatchlistButtons
-            mediaDetails={media as MediaDetails}
+            mediaDetails={media}
             mediaType={mediaType}
             asIcons
             className="block lg:hidden lg:group-hover:block absolute bottom-1 right-2"
           />
         </>
       ) : (
-        <Skeleton className="media-card" />
+        <Skeleton />
       )}
     </div>
   );

@@ -13,7 +13,7 @@ const Recommendations = ({
     isLoading,
     error,
     data: recommendations,
-  } = useRecommendations(mediaType as MediaType, mediaId);
+  } = useRecommendations(mediaType, mediaId);
   if (error) return;
   return (
     <div className="bg-neutral rounded-xl p-3">
@@ -32,7 +32,7 @@ const Recommendations = ({
         <div className="flex gap-3 scrollbar-hidden">
           <MediaList
             mediaList={recommendations.results}
-            mediaType={mediaType as MediaType}
+            mediaType={mediaType}
             isLoading={isLoading}
           />
         </div>

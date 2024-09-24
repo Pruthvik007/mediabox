@@ -40,7 +40,7 @@ export const useInfiniteMedia = (
     queryKey: [`${mediaType}-${category}`, mediaType, category, params],
     queryFn: ({ pageParam = 1 }) => {
       return TmdbServices.getMedia(
-        END_POINT_OF_MEDIA_OF_CATEGORY[mediaType as MediaType][
+        END_POINT_OF_MEDIA_OF_CATEGORY[mediaType][
           category as keyof typeof CONSTANTS.categories
         ],
         {
