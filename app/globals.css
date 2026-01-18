@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Horizontal scrollable container */
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-x: auto;
+}
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}

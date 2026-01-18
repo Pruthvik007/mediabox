@@ -1,4 +1,8 @@
 import type { Metadata } from "next";
+import { Providers } from "@/components/providers";
+import { Navbar } from "@/components/navbar";
+import { ModalOutlet } from "@/components/modal-outlet";
+import { ScrollToTopClient } from "@/components/scroll-to-top-client";
 import "@pruthvik007/components/theme.css";
 import "./globals.css";
 
@@ -23,9 +27,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        <div className="min-h-screen bg-background text-foreground">
-          <main>{children}</main>
-        </div>
+        <Providers>
+          <div className="min-h-screen bg-background text-foreground">
+            <Navbar />
+            <main className="pt-4 pb-16">{children}</main>
+            <ModalOutlet />
+            <ScrollToTopClient />
+          </div>
+        </Providers>
       </body>
     </html>
   );
