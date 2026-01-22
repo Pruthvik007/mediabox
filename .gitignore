@@ -19,5 +19,10 @@ node_modules/
 # Logs
 *.log
 
+# Swap files
+*.swp
+*.swo
+*~
+
 # Vercel
 .vercel
