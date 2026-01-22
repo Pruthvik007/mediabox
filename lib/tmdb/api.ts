@@ -28,14 +28,22 @@ const TMDB_BASE = "https://api.themoviedb.org/3";
  */
 async function tmdbFetch<T>(path: string, params?: Record<string, string>): Promise<T> {
   const url = new URL(`${TMDB_BASE}/${path}`);
-  url.searchParams.set("api_key", process.env.TMDB_API_KEY!);
   if (params) {
     Object.entries(params).forEach(([k, v]) => {
       if (v) url.searchParams.set(k, v);
     });
   }
 
-  const res = await fetch(url.toString(), { next: { revalidate: 86400 } });
+  const apiKey = process.env.TMDB_API_KEY!;
+  const isBearer = apiKey.startsWith("ey");
+  const headers: Record<string, string> = isBearer
+    ? { Authorization: `Bearer ${apiKey}` }
+    : {};
+  if (!isBearer) {
+    url.searchParams.set("api_key", apiKey);
+  }
+
+  const res = await fetch(url.toString(), { headers, next: { revalidate: 86400 } });
   if (!res.ok) {
     logger.error({ status: res.status, path }, "TMDB API error");
     throw new Error(`TMDB API error: ${res.status}`);
