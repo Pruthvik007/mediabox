@@ -23,10 +23,18 @@ export async function GET(
 
   const url = new URL(`${TMDB_BASE}/${tmdbPath}`);
   searchParams.forEach((value, key) => url.searchParams.set(key, value));
-  url.searchParams.set("api_key", process.env.TMDB_API_KEY!);
+
+  const apiKey = process.env.TMDB_API_KEY!;
+  const isBearer = apiKey.startsWith("ey");
+  const headers: Record<string, string> = isBearer
+    ? { Authorization: `Bearer ${apiKey}` }
+    : {};
+  if (!isBearer) {
+    url.searchParams.set("api_key", apiKey);
+  }
 
   try {
-    const res = await fetch(url.toString());
+    const res = await fetch(url.toString(), { headers });
     const data = await res.json();
 
     if (!res.ok) {
