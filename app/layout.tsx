@@ -3,6 +3,7 @@ import { Providers } from "@/components/providers";
 import { Navbar } from "@/components/navbar";
 import { ModalOutlet } from "@/components/modal-outlet";
 import { ScrollToTopClient } from "@/components/scroll-to-top-client";
+import { ThemeScript } from "@/components/theme-script";
 import "@pruthvik007/components/theme.css";
 import "./globals.css";
 
@@ -15,18 +16,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              const theme = localStorage.getItem("theme");
-              if (theme === "dark" || (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
-                document.documentElement.classList.add("dark");
-              }
-            `,
-          }}
-        />
+        <ThemeScript />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <Providers>
           <div className="min-h-screen bg-background text-foreground">
             <Navbar />
