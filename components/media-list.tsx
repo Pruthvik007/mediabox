@@ -14,8 +14,8 @@ interface MediaListProps {
 export function MediaList({ items, mediaType, isLoading }: MediaListProps) {
   return (
     <MediaGrid>
-      {items.map((media) => (
-        <MediaCard key={media.id} media={media} mediaType={mediaType} />
+      {items.map((media, index) => (
+        <MediaCard key={`${media.id}-${index}`} media={media} mediaType={mediaType} />
       ))}
       {isLoading && (
         <Skeleton count={20} className="aspect-[2/3] rounded-lg" />
