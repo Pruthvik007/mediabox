@@ -4,7 +4,6 @@ import { Navbar } from "@/components/navbar";
 import { ModalOutlet } from "@/components/modal-outlet";
 import { ScrollToTopClient } from "@/components/scroll-to-top-client";
 import { ThemeScript } from "@/components/theme-script";
-import "@pruthvik007/components/theme.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
