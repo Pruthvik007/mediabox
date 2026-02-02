@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@pruthvik007/components": "*",
+    "@pruthvik007/components": "^0.0.4",
     "@pruthvik007/utils": "*",
     "lucide-react": "^0.470.0",
     "next": "^16.0.0",
