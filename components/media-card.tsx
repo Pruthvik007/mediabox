@@ -14,12 +14,14 @@ interface MediaCardProps {
   media: Media;
   mediaType: MediaType;
   className?: string;
+  priority?: boolean;
 }
 
 export const MediaCard = memo(function MediaCard({
   media,
   mediaType,
   className,
+  priority = false,
 }: MediaCardProps) {
   const posterUrl = getTmdbImageUrl(
     media.poster_path || media.backdrop_path,
@@ -59,6 +61,7 @@ export const MediaCard = memo(function MediaCard({
             fill
             sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
             className="object-cover"
+            priority={priority}
           />
 
           {media.vote_average !== undefined && media.vote_average > 0 && (
