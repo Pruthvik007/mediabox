@@ -1,6 +1,6 @@
 "use client";
 
-import { Heart } from "lucide-react";
+import { Bookmark } from "lucide-react";
 import { Button } from "@pruthvik007/components";
 import { cn } from "@pruthvik007/utils";
 import { useWatchlist } from "@/hooks/use-watchlist";
@@ -44,11 +44,11 @@ export function WatchlistButton({
         )}
         aria-label={inWatchlist ? "Remove from watchlist" : "Add to watchlist"}
       >
-        <Heart
+        <Bookmark
           className={cn(
             "h-4 w-4",
             inWatchlist
-              ? "fill-red-500 text-red-500"
+              ? "fill-primary text-primary"
               : "text-muted-foreground"
           )}
         />
@@ -58,17 +58,17 @@ export function WatchlistButton({
 
   return (
     <Button
-      variant={inWatchlist ? "destructive" : "default"}
+      variant={inWatchlist ? "secondary" : "default"}
       onClick={handleClick}
       className={className}
     >
-      <Heart
+      <Bookmark
         className={cn(
           "mr-2 h-4 w-4",
           inWatchlist && "fill-current"
         )}
       />
-      {inWatchlist ? "Remove from Watchlist" : "Add to Watchlist"}
+      {inWatchlist ? "Saved" : "Save to Watchlist"}
     </Button>
   );
 }
