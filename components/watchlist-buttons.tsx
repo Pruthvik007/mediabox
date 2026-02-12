@@ -53,8 +53,8 @@ export function WatchlistButton({
           className={cn(
             "h-4 w-4",
             inWatchlist
-              ? "fill-primary text-primary"
-              : "text-muted-foreground"
+              ? "fill-destructive text-destructive"
+              : "text-primary"
           )}
         />
       </Button>
@@ -63,7 +63,7 @@ export function WatchlistButton({
 
   return (
     <Button
-      variant={inWatchlist ? "secondary" : "default"}
+      variant={inWatchlist ? "destructive" : "default"}
       onClick={handleClick}
       className={className}
     >
@@ -73,7 +73,7 @@ export function WatchlistButton({
           inWatchlist && "fill-current"
         )}
       />
-      {inWatchlist ? "Saved" : "Save to Watchlist"}
+      {inWatchlist ? "Remove" : "Save"}
     </Button>
   );
 }
