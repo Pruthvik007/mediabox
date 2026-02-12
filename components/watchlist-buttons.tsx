@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { Bookmark } from "lucide-react";
 import { Button } from "@pruthvik007/components";
 import { cn } from "@pruthvik007/utils";
@@ -20,7 +21,11 @@ export function WatchlistButton({
   className,
 }: WatchlistButtonProps) {
   const { addMedia, removeMedia, isInWatchlist } = useWatchlist();
-  const inWatchlist = isInWatchlist(media.id, mediaType);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
+
+  const inWatchlist = mounted && isInWatchlist(media.id, mediaType);
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
