@@ -59,8 +59,8 @@ export default function SearchPage() {
   return (
     <Container size="lg">
       <div className="flex flex-col gap-6">
-        <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-          <div className="flex-1 w-full">
+        <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center sm:justify-center">
+          <div className="w-full sm:w-80">
             <SearchInput value={query} onChange={setQuery} />
           </div>
           <MediaSelector selected={mediaType} onSelect={(t) => { setMediaType(t); setPage(1); }} />
