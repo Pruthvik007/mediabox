@@ -55,19 +55,21 @@ export function AdvancedFilters({ mediaType, className }: AdvancedFiltersProps) 
 
   return (
     <div
-      className={`flex flex-col md:flex-row gap-3 rounded-lg bg-card p-4 items-center ${className ?? ""}`}
+      className={`flex flex-col sm:flex-row gap-3 rounded-lg bg-card p-4 items-stretch sm:items-center sm:justify-center ${className ?? ""}`}
     >
       <Select
         options={genreOptions}
         value={currentGenre}
         onChange={(value) => updateParam("with_genres", value)}
         placeholder="All Genres"
+        className="sm:w-48"
       />
       <Select
         options={SORT_OPTIONS}
         value={currentSort}
         onChange={(value) => updateParam("sort_by", value)}
         placeholder="Sort By"
+        className="sm:w-56"
       />
       {hasActiveFilters && (
         <Button variant="destructive" size="sm" onClick={clearFilters}>
