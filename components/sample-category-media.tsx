@@ -47,13 +47,11 @@ export function SampleCategoryMedia({
 
   return (
     <Section className="rounded-xl bg-card p-4">
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-4">
-          <h2 className="text-lg font-bold text-foreground">{title}</h2>
-          <MediaSelector selected={mediaType} onSelect={setMediaType} />
-        </div>
-        <Link href={viewMorePath}>
-          <Button size="sm">View More</Button>
+      <div className="flex flex-wrap items-center gap-2 sm:gap-4 mb-4">
+        <h2 className="text-base sm:text-lg font-bold text-foreground">{title}</h2>
+        <MediaSelector selected={mediaType} onSelect={setMediaType} />
+        <Link href={viewMorePath} className="ml-auto">
+          <Button size="xs">View More</Button>
         </Link>
       </div>
 
