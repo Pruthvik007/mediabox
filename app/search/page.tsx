@@ -59,7 +59,7 @@ export default function SearchPage() {
   return (
     <Container size="lg">
       <div className="flex flex-col gap-6">
-        <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center sm:justify-center">
+        <div className="flex flex-col items-center sm:flex-row gap-4 sm:justify-center">
           <div className="w-full sm:w-80">
             <SearchInput value={query} onChange={setQuery} />
           </div>
