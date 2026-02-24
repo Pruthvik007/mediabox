@@ -47,12 +47,25 @@ export function SampleCategoryMedia({
 
   return (
     <Section className="rounded-xl bg-card p-4">
-      <div className="flex flex-wrap items-center gap-2 sm:gap-4 mb-4">
-        <h2 className="text-base sm:text-lg font-bold text-foreground">{title}</h2>
-        <MediaSelector selected={mediaType} onSelect={setMediaType} />
-        <Link href={viewMorePath} className="ml-auto">
-          <Button size="xs">View More</Button>
-        </Link>
+      <div className="mb-4">
+        {/* Small screens: title on top, buttons below */}
+        <div className="sm:hidden">
+          <h2 className="text-base font-bold text-foreground mb-2">{title}</h2>
+          <div className="flex items-center justify-between">
+            <MediaSelector selected={mediaType} onSelect={setMediaType} />
+            <Link href={viewMorePath}>
+              <Button size="xs">View More</Button>
+            </Link>
+          </div>
+        </div>
+        {/* Desktop: all in one row */}
+        <div className="hidden sm:flex items-center gap-4">
+          <h2 className="text-lg font-bold text-foreground">{title}</h2>
+          <MediaSelector selected={mediaType} onSelect={setMediaType} />
+          <Link href={viewMorePath} className="ml-auto">
+            <Button size="sm">View More</Button>
+          </Link>
+        </div>
       </div>
 
       <div className="flex gap-3 overflow-x-auto overflow-y-hidden pb-2 scrollbar-hidden">
