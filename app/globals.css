@@ -5,6 +5,11 @@
 
 @custom-variant dark (&:is(.dark *));
 
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
 /* Horizontal scrollable container */
 .scrollbar-hidden {
   -ms-overflow-style: none;
