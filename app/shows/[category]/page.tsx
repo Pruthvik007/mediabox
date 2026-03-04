@@ -23,7 +23,7 @@ export default async function ShowsCategoryPage({ params }: Props) {
 
   return (
     <Container size="lg">
-      <h1 className="text-2xl font-bold mb-6">{CATEGORY_LABELS[categoryType]} TV Shows</h1>
+      <h1 className="text-2xl font-bold mb-6 text-center">{CATEGORY_LABELS[categoryType]} TV Shows</h1>
       <InfiniteCategoryPage
         mediaType="shows"
         category={categoryType}
