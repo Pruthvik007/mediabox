@@ -9,9 +9,9 @@ interface MediaGridProps {
 export function MediaGrid({ children, className }: MediaGridProps) {
   return (
     <Grid
-      cols={{ sm: 2, md: 3, lg: 5 }}
+      cols={{ sm: 3, md: 4, lg: 5 }}
       gap="default"
-      className={cn(className)}
+      className={cn("grid-cols-2", className)}
     >
       {children}
     </Grid>
