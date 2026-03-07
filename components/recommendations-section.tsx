@@ -15,9 +15,9 @@ export function RecommendationsSection({
 
   return (
     <Section title="Recommendations" className="rounded-xl bg-card p-4">
-      <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hidden">
+      <div className="flex gap-3 overflow-x-auto overflow-y-hidden pb-2 scrollbar-hidden">
         {items.map((media) => (
-          <div key={media.id} className="flex-shrink-0 w-36 md:w-44">
+          <div key={media.id} className="flex-shrink-0 w-36 md:w-44 overflow-hidden">
             <MediaCard media={media} mediaType={mediaType} />
           </div>
         ))}
