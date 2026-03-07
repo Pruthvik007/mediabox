@@ -13,7 +13,7 @@ export function VideosSection({ videos }: VideosSectionProps) {
 
   return (
     <Section title="Videos" className="rounded-xl bg-card p-4">
-      <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hidden">
+      <div className="flex gap-3 overflow-x-auto overflow-y-hidden pb-2 scrollbar-hidden">
         {videos.map((video) => (
           <VideoCard key={video.id} video={video} />
         ))}
