@@ -71,7 +71,7 @@ export function MediaDetails({
       <div className="relative flex flex-col md:flex-row gap-6 p-6 pt-12 items-center md:items-start">
         {posterUrl && (
           <div className="flex flex-col items-center gap-4 flex-shrink-0">
-            <div className="relative w-48 md:w-64 aspect-[2/3] rounded-lg overflow-hidden shadow-lg">
+            <div className="relative w-40 min-[400px]:w-52 sm:w-56 md:w-64 aspect-[2/3] rounded-lg overflow-hidden shadow-lg">
               <Image
                 src={posterUrl}
                 alt={title}
