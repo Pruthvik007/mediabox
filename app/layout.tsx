@@ -17,7 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <ThemeScript />
       </head>
-      <body suppressHydrationWarning>
+      <body>
         <Providers>
           <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
             <Navbar />

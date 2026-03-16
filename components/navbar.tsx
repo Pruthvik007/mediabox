@@ -49,7 +49,7 @@ export function Navbar() {
           </nav>
 
           <div className="flex items-center gap-2">
-            {mounted && <ThemeToggle />}
+            {mounted ? <ThemeToggle /> : <div className="size-9" />}
             <Button
               variant="ghost"
               size="icon"
