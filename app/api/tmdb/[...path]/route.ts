@@ -4,15 +4,6 @@ import { createLogger } from "@pruthvik007/utils";
 const logger = createLogger("tmdb-proxy");
 const TMDB_BASE = "https://api.themoviedb.org/3";
 
-/**
- * Catch-all TMDB proxy route.
- * - Injects API key server-side (never reaches the browser)
- * - Caches responses for 24 hours
- *
- * Example:
- *   Client: GET /api/tmdb/movie/popular?page=1
- *   Proxy:  GET https://api.themoviedb.org/3/movie/popular?page=1&api_key=xxx
- */
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ path: string[] }> }

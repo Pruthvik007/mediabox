@@ -5,12 +5,85 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+  --color-background: hsl(222 50% 8%);
+  --color-foreground: hsl(200 25% 78%);
+
+  --color-card: hsl(222 45% 10%);
+  --color-card-foreground: hsl(200 25% 78%);
+  --color-popover: hsl(222 45% 10%);
+  --color-popover-foreground: hsl(200 25% 78%);
+  --color-surface-2: hsl(222 40% 12%);
+  --color-surface-3: hsl(222 35% 15%);
+
+  --color-primary: hsl(198 93% 60%);
+  --color-primary-foreground: hsl(222 50% 8%);
+  --color-secondary: hsl(232 70% 70%);
+  --color-secondary-foreground: hsl(222 50% 8%);
+
+  --color-neutral: hsl(217 33% 17%);
+  --color-neutral-foreground: hsl(200 25% 78%);
+  --color-muted: hsl(222 35% 15%);
+  --color-muted-foreground: hsl(215 15% 50%);
+  --color-accent: hsl(222 35% 15%);
+  --color-accent-foreground: hsl(200 25% 85%);
+
+  --color-destructive: hsl(0 62% 45%);
+  --color-destructive-foreground: hsl(0 0% 100%);
+  --color-success: hsl(160 67% 52%);
+  --color-success-foreground: hsl(0 0% 100%);
+  --color-warning: hsl(38 92% 50%);
+  --color-warning-foreground: hsl(0 0% 0%);
+  --color-info: hsl(198 93% 60%);
+  --color-info-foreground: hsl(222 50% 8%);
+
+  --color-border: hsl(222 30% 18%);
+  --color-input: hsl(222 30% 18%);
+  --color-ring: hsl(198 93% 60%);
+}
+
+.dark {
+  --color-background: hsl(310 15% 12%);
+  --color-foreground: hsl(25 30% 82%);
+
+  --color-card: hsl(310 18% 10%);
+  --color-card-foreground: hsl(25 30% 82%);
+  --color-popover: hsl(310 18% 10%);
+  --color-popover-foreground: hsl(25 30% 82%);
+  --color-surface-2: hsl(310 15% 8%);
+  --color-surface-3: hsl(310 15% 14%);
+
+  --color-primary: hsl(32 70% 55%);
+  --color-primary-foreground: hsl(310 15% 8%);
+  --color-secondary: hsl(15 20% 30%);
+  --color-secondary-foreground: hsl(25 30% 82%);
+
+  --color-neutral: hsl(310 10% 7%);
+  --color-neutral-foreground: hsl(25 30% 82%);
+  --color-muted: hsl(310 12% 16%);
+  --color-muted-foreground: hsl(25 15% 55%);
+  --color-accent: hsl(310 12% 18%);
+  --color-accent-foreground: hsl(25 30% 88%);
+
+  --color-destructive: hsl(0 72% 51%);
+  --color-destructive-foreground: hsl(0 0% 100%);
+  --color-success: hsl(160 67% 52%);
+  --color-success-foreground: hsl(0 0% 100%);
+  --color-warning: hsl(32 70% 55%);
+  --color-warning-foreground: hsl(0 0% 0%);
+  --color-info: hsl(199 89% 48%);
+  --color-info-foreground: hsl(0 0% 100%);
+
+  --color-border: hsl(310 12% 18%);
+  --color-input: hsl(310 12% 18%);
+  --color-ring: hsl(32 70% 55%);
+}
+
 html, body {
   overflow-x: hidden;
   max-width: 100vw;
 }
 
-/* Horizontal scrollable container */
 .scrollbar-hidden {
   -ms-overflow-style: none;
   scrollbar-width: none;

@@ -22,10 +22,6 @@ import { buildCategoryParams } from "./helpers";
 const logger = createLogger("tmdb-api");
 const TMDB_BASE = "https://api.themoviedb.org/3";
 
-/**
- * Server-side TMDB fetch. Adds API key automatically.
- * Uses Next.js ISR with 24hr revalidation.
- */
 async function tmdbFetch<T>(path: string, params?: Record<string, string>): Promise<T> {
   const url = new URL(`${TMDB_BASE}/${path}`);
   if (params) {
@@ -50,8 +46,6 @@ async function tmdbFetch<T>(path: string, params?: Record<string, string>): Prom
   }
   return res.json();
 }
-
-// ── Public API ──
 
 export async function getMediaByCategory(
   mediaType: MediaType,
