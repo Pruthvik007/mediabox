@@ -6,7 +6,7 @@
 ![SEO](https://img.shields.io/badge/SEO-100-brightgreen)
 ![PWA](https://img.shields.io/badge/PWA-100-brightgreen)
 
-**View at:** [MediaBox App](https://pruthvik007.github.io/movies-and-series/)
+**View at:** [MediaBox App](https://pruthvik007.github.io/mediabox/)
 
 ## Description
 
@@ -45,11 +45,11 @@ To install and run MediaBox locally, follow these steps:
 
 1. Clone the repository:
    ```bash
-     git clone https://github.com/pruthvik007/movies-and-series.git
+     git clone https://github.com/pruthvik007/mediabox.git
    ```
 2. Navigate to the project directory:
    ```bash
-     cd movies-and-series
+     cd mediabox
    ```
 3. Install dependencies:
    ```bash
@@ -67,4 +67,4 @@ To install and run MediaBox locally, follow these steps:
 
 ## Usage
 
-Once the development server is running, you can access the application at http://localhost:5173/movies-and-series/ in your web browser. Browse through the media library, filter content, watch trailers, and enjoy the seamless experience provided by MediaBox.
+Once the development server is running, you can access the application at http://localhost:5173/mediabox/ in your web browser. Browse through the media library, filter content, watch trailers, and enjoy the seamless experience provided by MediaBox.

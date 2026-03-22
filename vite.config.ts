@@ -72,8 +72,8 @@ export default defineConfig({
         background_color: "#f8fcfe",
         display: "fullscreen",
         description: "View Information Of Movies and TV Shows.",
-        start_url: "/movies-and-series/",
-        scope: "/movies-and-series/",
+        start_url: "/mediabox/",
+        scope: "/mediabox/",
         icons: [
           {
             src: "pwa-64x64.png",
@@ -101,5 +101,5 @@ export default defineConfig({
       },
     }),
   ],
-  base: "/movies-and-series/",
+  base: "/mediabox/",
 });
