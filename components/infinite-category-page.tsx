@@ -27,7 +27,6 @@ export function InfiniteCategoryPage({
   const [totalPages, setTotalPages] = useState(initialTotalPages);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Build query string from URL search params (for filters)
   const filterQuery = searchParams.toString();
 
   const fetchPage = useCallback(
@@ -46,7 +45,6 @@ export function InfiniteCategoryPage({
         }
         setTotalPages(data.total_pages);
       } catch {
-        // Error handled silently
       } finally {
         setIsLoading(false);
       }
@@ -54,7 +52,6 @@ export function InfiniteCategoryPage({
     [mediaType, category, filterQuery]
   );
 
-  // Re-fetch when filters change (URL search params)
   useEffect(() => {
     if (filterQuery) {
       setPage(1);

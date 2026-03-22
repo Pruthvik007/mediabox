@@ -48,7 +48,6 @@ export function SampleCategoryMedia({
   return (
     <Section className="rounded-xl bg-card p-4">
       <div className="mb-4">
-        {/* Small screens: title on top, buttons below */}
         <div className="sm:hidden">
           <h2 className="text-base font-bold text-foreground mb-2">{title}</h2>
           <div className="flex items-center justify-between">
@@ -58,7 +57,6 @@ export function SampleCategoryMedia({
             </Link>
           </div>
         </div>
-        {/* Desktop: all in one row */}
         <div className="hidden sm:flex items-center gap-4">
           <h2 className="text-lg font-bold text-foreground">{title}</h2>
           <MediaSelector selected={mediaType} onSelect={setMediaType} />

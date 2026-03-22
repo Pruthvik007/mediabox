@@ -3,7 +3,6 @@ import { Providers } from "@/components/providers";
 import { Navbar } from "@/components/navbar";
 import { ModalOutlet } from "@/components/modal-outlet";
 import { ScrollToTopClient } from "@/components/scroll-to-top-client";
-import { ThemeScript } from "@/components/theme-script";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -13,9 +12,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning data-scroll-behavior="smooth">
+    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
-        <ThemeScript />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem("theme");if(t==="light"){document.documentElement.classList.remove("dark")}else{document.documentElement.classList.add("dark")}}catch(e){}})()`,
+          }}
+        />
       </head>
       <body>
         <Providers>

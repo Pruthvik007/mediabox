@@ -39,7 +39,6 @@ export default function SearchPage() {
       }
       setTotalPages(data.total_pages);
     } catch {
-      // Error handled silently
     } finally {
       setIsLoading(false);
     }
