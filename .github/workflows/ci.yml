@@ -25,10 +25,9 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          registry-url: https://npm.pkg.github.com
       - run: npm ci
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
+          PACKAGES_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
       - run: npm run build
         env:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
