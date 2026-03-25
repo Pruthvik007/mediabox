@@ -1,70 +1,73 @@
 # MediaBox
 
-![Performance](https://img.shields.io/badge/Performance-100-brightgreen)
-![Accessibility](https://img.shields.io/badge/Accessibility-100-brightgreen)
-![Best Practices](https://img.shields.io/badge/Best_Practices-100-brightgreen)
-![SEO](https://img.shields.io/badge/SEO-100-brightgreen)
-![PWA](https://img.shields.io/badge/PWA-100-brightgreen)
+Browse movies and TV shows. Built with Next.js 16, powered by TMDB API.
 
-**View at:** [MediaBox App](https://pruthvik007.github.io/mediabox/)
+## Tech Stack
 
-## Description
+| Tech | Version |
+|------|---------|
+| Next.js | 16 |
+| React | 19 |
+| TypeScript | 5.x |
+| Tailwind CSS | v4 |
+| UI Components | @pruthvik007/components |
+| Utilities | @pruthvik007/utils |
 
-MediaBox is an application designed for users to easily access information about movies and TV shows. With a sleek interface and user-friendly design, MediaBox allows users to browse through a vast library of movies and TV shows, view details, watch trailers, and even stream media directly within the app. Additionally, MediaBox allows users to perform advanced filtering of movies and shows based on genres, categories, and production companies.
+## Features
 
-## Technologies Used
+- Browse by category: Discover, Popular, Trending, Now Playing, Top Rated, Upcoming
+- Movie and TV show details with trailers, recommendations, cast
+- Search with debounce and infinite scroll
+- Advanced filtering by genre and sort order
+- Watchlist (localStorage)
+- Dark/light theme
+- TMDB API key hidden server-side (API routes proxy all TMDB calls)
 
-MediaBox is built using the following technologies:
+## Local Development
 
-- **React**: A powerful JavaScript library for building user interfaces.
-- **TypeScript**: A typed superset of JavaScript that enhances code quality and developer productivity.
-- **Vite**: A fast build tool that provides a lightning-fast development experience.
-- **Tailwind CSS**: A utility-first CSS framework for quickly styling applications.
-- **Daisy UI**: A component library built on top of Tailwind CSS for easy UI development.
-- **React Query**: A library for managing, caching, and syncing asynchronous data in React applications.
-- **TMDB API**: The Movie Database API, used to fetch movie and TV show data.
+```bash
+git clone git@github.com:Pruthvik007/mediabox.git
+cd mediabox
+npm install
+```
 
-## Key Features
+Create `.env.local`:
+```
+TMDB_API_KEY=your_tmdb_api_key
+```
 
-- **Responsive Design**: MediaBox is optimized for various devices, ensuring a seamless user experience across desktop, tablet, and mobile screens.
-- **Advanced Filtering**: Users can filter movies and shows based on genres, categories, and production companies for a more personalized browsing experience.
-- **Continuous Integration/Continuous Deployment (CI/CD)**: GitHub Actions are utilized for automated CI/CD pipelines, streamlining the development and deployment process.
-- **Reusable Components**: MediaBox follows best practices by implementing reusable components, promoting code reusability and maintainability.
-- **Caching with React Query**: Duplicate requests are avoided through efficient caching with React Query, enhancing performance and reducing server load.
-- **Customizable Themes**: Users can switch between two themes, allowing for personalized viewing experiences.
-- **Trailers and Media Playback**: MediaBox enables users to watch trailers and stream media directly within the application, providing a comprehensive entertainment experience.
-- **Lighthouse Ratings**: MediaBox has earned perfect Lighthouse scores in Performance, Accessibility, Best Practices, and SEO.
+```bash
+npm run dev    # http://localhost:3000
+```
 
-## LightHouse Results
+## Deployment
 
-![LightHouseScores](./lighthouse_scores.png)
+Deployed on **Vercel**. Connect the repo, set `TMDB_API_KEY` as an environment variable.
 
-## Installation
+Vercel auto-deploys on push to `main`.
 
-To install and run MediaBox locally, follow these steps:
+## CI/CD
 
-1. Clone the repository:
-   ```bash
-     git clone https://github.com/pruthvik007/mediabox.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-     cd mediabox
-   ```
-3. Install dependencies:
-   ```bash
-     npm install
-   ```
-4. Add your TMDB API Key:
-   Create a .env file in the root of the project and add your TMDB API key:
-   ```plaintext
-     VITE_TMDB_API_KEY=your_tmdb_api_key_here
-   ```
-5. Start the development server:
-   ```bash
-     npm run dev
-   ```
+Build check on every push to `main`. Vercel handles deployment.
 
-## Usage
+**Secrets needed:**
+- `PACKAGES_TOKEN` — for @pruthvik007 npm packages
+- `TMDB_API_KEY` — for build-time TMDB access (server components)
 
-Once the development server is running, you can access the application at http://localhost:5173/mediabox/ in your web browser. Browse through the media library, filter content, watch trailers, and enjoy the seamless experience provided by MediaBox.
+## Project Structure
+
+```
+app/
+├── page.tsx                    # Home — 6 category carousels
+├── movies/[category]/page.tsx  # Category with infinite scroll + filters
+├── shows/[category]/page.tsx   # Same for TV shows
+├── details/[type]/[id]/page.tsx # Media details + trailer + recommendations
+├── search/page.tsx             # Search with debounce
+├── watchlist/page.tsx          # Local watchlist
+└── api/tmdb/[...path]/route.ts # TMDB proxy (API key server-side)
+
+lib/tmdb/                       # Types, constants, helpers, server API client
+components/                     # All UI components
+context/                        # Watchlist + Modal providers
+hooks/                          # useWatchlist, useModal
+```
