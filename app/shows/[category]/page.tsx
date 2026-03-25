@@ -1,4 +1,4 @@
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 import { Container } from "@pruthvik007/components";
 import { getMediaByCategory } from "@/lib/tmdb/api";
