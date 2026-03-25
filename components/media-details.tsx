@@ -117,10 +117,10 @@ export function MediaDetails({
                   Watch Trailer
                 </Button>
               )}
-              <Button variant="secondary" onClick={handleWatchStream}>
+              {/* <Button variant="secondary" onClick={handleWatchStream}>
                 <Tv className="mr-2 h-4 w-4" />
                 {mediaType === "movies" ? "Watch Movie" : "Watch Show"}
-              </Button>
+              </Button> */}
             </div>
             <WatchlistButton media={details} mediaType={mediaType} />
           </div>
