@@ -3,18 +3,8 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   output: "standalone",
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "image.tmdb.org",
-        pathname: "/t/p/**",
-      },
-      {
-        protocol: "https",
-        hostname: "img.youtube.com",
-        pathname: "/vi/**",
-      },
-    ],
+    // TMDB and YouTube already serve pre-sized images; Vercel optimization only used up the Hobby quota
+    unoptimized: true,
   },
 };
 
