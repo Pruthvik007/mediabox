@@ -28,6 +28,7 @@ jobs:
       - run: npm ci
         env:
           PACKAGES_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
+      - run: npm run lint
       - run: npm run build
         env:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
