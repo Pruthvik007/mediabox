@@ -3,32 +3,18 @@ name: CI
 on:
   push:
     branches: [main]
-    paths-ignore:
-      - "*.md"
-      - "docs/**"
-      - ".gitignore"
-      - "LICENSE"
+    paths-ignore: ["**/*.md", "docs/**", ".gitignore", "LICENSE"]
   pull_request:
     branches: [main]
-    paths-ignore:
-      - "*.md"
-      - "docs/**"
-      - ".gitignore"
-      - "LICENSE"
+    paths-ignore: ["**/*.md", "docs/**", ".gitignore", "LICENSE"]
+
+permissions:
+  contents: read
+  packages: read
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 22
-          cache: npm
-      - run: npm ci
-        env:
-          PACKAGES_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
-      - run: npm run lint
-      - run: npm run build
-        env:
-          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+    uses: Pruthvik007/github-workflows/.github/workflows/node-app.yml@main
+    secrets:
+      PACKAGES_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
+      BUILD_ENV: TMDB_API_KEY=${{ secrets.TMDB_API_KEY }}
